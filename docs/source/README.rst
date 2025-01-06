@@ -1,3 +1,8 @@
+.. image:: https://github.com/jtamames/SqueezeM/blob/images/logo.svg
+  :width: 20%
+  :align: right
+  :alt: SqueezeMeta logo
+
 SqueezeMeta: a fully automated metagenomics pipeline, from reads to bins
 ========================================================================
 
