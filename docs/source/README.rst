@@ -60,14 +60,17 @@ the analysis:
 14) Binning with different methods
 15) Binning integration with DAS tool
 16) Taxonomic assignment of bins, and check for taxonomic disparities
-17) Checking of bins with CheckM
+17) Checking of bins with CheckM2 (and optionally classify them with
+    GTDB-Tk)
 18) Merging of previous results to obtain the bin table
 19) Merging of previous results to obtain the contig table
 20) Prediction of kegg and metacyc patwhays for each bin
 21) Final statistics for the run
+22) Generation of tables with aggregated taxonomic and functional
+    profiles
 
 Detailed information about the different steps of the pipeline can be
-found in the PDF manual.
+found in the manual.
 
 2. Installation
 ---------------
@@ -85,8 +88,7 @@ it’s better to first set up the libmamba solver with
 
 and then use conda to install SqueezeMeta
 
-``conda create -n SqueezeMeta -c conda-forge -c bioconda -c anaconda -c fpusan  squeezemeta=1.6 --no-channel-priority``
-
+``conda create -n SqueezeMeta -c conda-forge -c bioconda -c fpusan squeezemeta=1.7 --no-channel-priority --override-channels``
 This will create a new conda environment named SqueezeMeta, which must
 then be activated.
 
@@ -146,11 +148,6 @@ Two directories will be generated after running either
 ``/download/path/db``, which contains the actual databases. -
 ``/download/path/test``, which contains data for a test run of
 SqueezeMeta.
-
-If ``download_databases.pl`` or ``make_databases.pl`` can’t find our
-server, you can instead run ``make_databases_alt.pl`` (same syntax as
-``make_databases.pl``) which will try to download the data from an
-alternative site.
 
 If the SqueezeMeta databases are already built in another location in
 the system, a different copy of SqueezeMeta can be configured to use
@@ -278,18 +275,21 @@ all options as a single quoted string.
   name) \* *–norename*: Don’t rename contigs (Use at your own risk,
   characters like ’\_’ in contig names will make it crash)
 
-*Annotation* \* *-db* [file]: Specifies the location of a new taxonomy
-database (in Diamond format, .dmnd) \* *–nocog*: Skip COG assignment
-(Default: no) \* *–nokegg*: Skip KEGG assignment (Default: no) \*
-*–nopfam*: Skip Pfam assignment (Default: no) \* *–euk*: Drop identity
-filters for eukaryotic annotation (Default: no). This is recommended for
-analyses in which the eukaryotic population is relevant, as it will
-yield more annotations. See the manual for details \* *-consensus*
-[float]: Minimum percentage of genes for a taxon needed for contig
-consensus (Default: 50) \* *-extdb* [path]: List of additional
-user-provided databases for functional annotations. More information can
-be found in the manual \* *–D*\ \|\ *–doublepass*: Run BlastX ORF
-prediction in addition to Prodigal (Default: no)
+*Annotation* \* *-g* [int]: Number of targets for DIAMOND global ranking
+during taxonomic assignment (Default: 100) \* *-db* [file]: Specifies
+the location of a new taxonomy database (in DIAMOND format, .dmnd) \*
+*–nocog*: Skip COG assignment (Default: no) \* *–nokegg*: Skip KEGG
+assignment (Default: no) \* *–nopfam*: Skip Pfam assignment (Default:
+no) \* *–fastnr*: Run DIAMOND in –fast mode for taxonomic assignment
+(Default: no) \* *–euk*: Drop identity filters for eukaryotic annotation
+(Default: no). This is recommended for analyses in which the eukaryotic
+population is relevant, as it will yield more annotations. See the
+manual for details \* *-consensus* [float]: Minimum percentage of genes
+for a taxon needed for contig consensus (Default: 50) \* *-extdb*
+[path]: List of additional user-provided databases for functional
+annotations. More information can be found in the manual \*
+*–D*\ \|\ *–doublepass*: Run BlastX ORF prediction in addition to
+Prodigal (Default: no)
 
 *Mapping* \* *-map* [bowtie,bwa,minimap2-ont,minimap2-pb,minimap2-sr]:
 Read mapper (Default: bowtie) \* *-mapping_options* [string]: Extra
@@ -304,8 +304,12 @@ Comma-separated list with the binning programs to be used (available:
 maxbin, metabat2, concoct) (Default: concoct,metabat2) \* *-taxbinmode*
 [string]: Source of taxonomy annotation of bins (s: SqueezeMeta; c:
 CheckM; s+c: SqueezeMeta+CheckM; c+s: CheckM+SqueezeMeta; (Default: s)
-\* *–gtdbtk*: Run GTDB-Tk to classify the bins. Requires a working
-GTDB-Tk installation available in your environment \*
+\* *–nomarkers*: Skip retrieval of universal marker genes from bins.
+Note that, while this precludes recalculation of bin
+completeness/contamination in SQMtools for bin refining, you will still
+get completeness/contamination estimates of the original bins obtained
+in SqueezeMeta \* *–gtdbtk*: Run GTDB-Tk to classify the bins. Requires
+a working GTDB-Tk installation available in your environment \*
 *-gtdbtk_data_path* [path]: Path to the GTDB database, by default it is
 assumed to be present in ``/path/to/SqueezeMeta/db/gtdb`` \* *-extbins*
 [path]: Path to a directory containing external genomes/bins provided by
@@ -370,7 +374,13 @@ transcript abundance of the genes in the assembly. Similarly, an extra
 column with the ``nobinning`` value can be included in order to avoid
 using those samples for binning. Notice that a sample can have more than
 one set of paired reads. The sequence files can be in fastq or fasta
-format, and can be gzipped.
+format, and can be gzipped. If a sample contains paired libraries, it is
+the user’s responsability to make sure that the forward and reverse
+files are truly paired (i.e. they contain the same number of reads in
+the same order). Some quality filtering / trimming tools may produce
+unpaired filtered fastq files from paired input files (particularly if
+run without the right parameters). This may result in SqueezeMeta
+failing or producing incorrect results.
 
 Restart
 ~~~~~~~
@@ -525,6 +535,11 @@ and in the `wiki <https://github.com/jtamames/SqueezeMeta/wiki>`__.
 Briefly, the three main ways to analyze the output of SqueezeMeta are
 the following:
 
+.. image:: https://github.com/jtamames/SqueezeM/blob/images/Figure_1_readmeSQM.png
+   :width: 50%
+   :align: right
+   :alt: Downstream analysis of SqueezeMeta results
+
 **1) Integration with R:** We provide the *SQMtools* R package, which
 allows to easily load a whole SqueezeMeta project and expose the results
 into R. The package includes functions to select particular taxa or
@@ -635,6 +650,7 @@ SqueezeMeta redistributes the following third-party software: \*
 `CONCOCT <https://github.com/BinPro/CONCOCT>`__ \* `DAS
 tool <https://github.com/cmks/DAS_Tool>`__ \*
 `checkm <http://ecogenomics.github.io/CheckM>`__ \*
+`checkm2 <https://github.com/chklovski/CheckM2/>`__ \*
 `comparem <https://github.com/dparks1134/CompareM>`__ \*
 `MinPath <http://omics.informatics.indiana.edu/MinPath>`__ \* `RDP
 classifier <https://github.com/rdpstaff/classifier>`__ \*
