@@ -535,7 +535,7 @@ and in the `wiki <https://github.com/jtamames/SqueezeMeta/wiki>`__.
 Briefly, the three main ways to analyze the output of SqueezeMeta are
 the following:
 
-.. image:: https://github.com/jtamames/SqueezeM/blob/images/Figure_1_readmeSQM.png
+.. image:: https://github.com/jtamames/SqueezeM/blob/images/Figure_1_readmeSQM.svg
    :width: 50%
    :align: right
    :alt: Downstream analysis of SqueezeMeta results
