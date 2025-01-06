@@ -3,8 +3,9 @@
   :align: right
   :alt: SqueezeMeta logo
 
+************************************************************************
 SqueezeMeta: a fully automated metagenomics pipeline, from reads to bins
-========================================================================
+************************************************************************
 
 -  Find the SqueezeMeta paper at:
    https://www.frontiersin.org/articles/10.3389/fmicb.2018.03349/full
@@ -16,7 +17,7 @@ SqueezeMeta: a fully automated metagenomics pipeline, from reads to bins
    wiki! <https://github.com/jtamames/SqueezeMeta/wiki>`__
 
 1. What is SqueezeMeta?
------------------------
+=======================
 
 SqueezeMeta is a full automatic pipeline for
 metagenomics/metatranscriptomics, covering all steps of the analysis.
@@ -73,7 +74,7 @@ Detailed information about the different steps of the pipeline can be
 found in the manual.
 
 2. Installation
----------------
+===============
 
 SqueezeMeta is intended to be run in a x86-64 Linux OS (tested in Ubuntu
 and CentOS). The easiest way to install it is by using conda. The
@@ -115,7 +116,7 @@ required dependencies are available in your environment.
 ``/path/to/SqueezeMeta/utils/install_utils/test_install.pl``
 
 3. Downloading or building databases
-------------------------------------
+====================================
 
 SqueezeMeta uses several databases. GenBank nr for taxonomic assignment,
 and eggnog, KEGG and Pfam for functional assignment. The script
@@ -162,7 +163,7 @@ After configuring the databases, the ``test_install.pl`` can be run in
 order to check that SqueezeMeta is ready to work (see previous section).
 
 4. Choosing an assembly strategy
---------------------------------
+================================
 
 SqueezeMeta can be run in four different modes, depending of the type of
 multi-metagenome support. These modes are:
@@ -221,10 +222,10 @@ conjunction with *–assembly options* when one wants to fully customize
 the call to SPAdes, e.g. for assembling single cell genomes.
 
 5. Execution, restart and running scripts
------------------------------------------
+=========================================
 
 Scripts location
-~~~~~~~~~~~~~~~~
+----------------
 
 The scripts composing the SqueezeMeta pipeline can be found in the
 ``/path/to/SqueezeMeta/scripts`` directory. Other utility scripts can be
@@ -232,13 +233,16 @@ found in the ``/path/to/SqueezeMeta/utils`` directory. See the PDF
 manual for more information on utility scripts.
 
 Execution
-~~~~~~~~~
+---------
 
 The command for running SqueezeMeta has the following syntax:
 
 ``SqueezeMeta.pl -m <mode> -p <projectname> -s <equivfile> -f <raw fastq dir> <options>``
 
-**Arguments** *Mandatory parameters* \* *-m* <sequential, coassembly,
+Arguments
+^^^^^^^^^
+
+ *Mandatory parameters* \* *-m* <sequential, coassembly,
 merged, seqmerge>: Mode (REQUIRED) \* *-p* <string>: Project name
 (REQUIRED in coassembly and merged modes) \* *-s*\ \|\ *-samples*
 <path>: Samples file (REQUIRED) \* *-f*\ \|\ *-seq* <path>: Fastq read
@@ -341,8 +345,8 @@ name will be taken from the samples file instead. The -f parameter
 indicates the directory where the read files specified in the sample
 file are stored.
 
-The samples file:
-~~~~~~~~~~~~~~~~~
+The samples file
+----------------
 
 The samples file specifies the samples, the names of their corresponding
 raw read files and the sequencing pair represented in those files,
@@ -383,7 +387,7 @@ run without the right parameters). This may result in SqueezeMeta
 failing or producing incorrect results.
 
 Restart
-~~~~~~~
+-------
 
 Any interrupted SqueezeMeta run can be restarted using the program the
 flag ``--restart``. It has the syntax:
@@ -407,7 +411,7 @@ would restart the pipeline from the taxonomic assignment of genes. The
 different steps of the pipeline are listed in section 1.
 
 Running scripts
-~~~~~~~~~~~~~~~
+---------------
 
 Also, any individual script of the pipeline can be run using the same
 syntax:
@@ -417,21 +421,21 @@ syntax:
 project)
 
 6. Analizing an user-supplied assembly
---------------------------------------
+======================================
 
 An user-supplied assembly can be passed to SqueezeMeta with the flag
 *-extassembly <your_assembly.fasta>*. The contigs in that fasta file
 will be analyzed by the SqueezeMeta pipeline starting from step 2.
 
 7. Using external databases for functional annotation
------------------------------------------------------
+=====================================================
 
 Version 1.0 implements the possibility of using one or several
 user-provided databases for functional annotation. This is invoked using
 the *-extdb* option. Please refer to the manual for details.
 
 8. Extra sensitive detection of ORFs
-------------------------------------
+====================================
 
 Version 1.0 implements the *–D* option (*doublepass*), that attempts to
 provide a more sensitive ORF detection by combining the Prodigal
@@ -440,7 +444,7 @@ were predicted, or where predicted ORFs did not match anything in the
 taxonomic and functional databases.
 
 9. Testing SqueezeMeta
-----------------------
+======================
 
 The *download_databases.pl* and *make_databases.pl* scripts also
 download two datasets for testing that the program is running correctly.
@@ -458,7 +462,7 @@ A test run on those can be executed with
 ``SqueezeMeta.pl -m coassembly -p Hadza -s test.samples -f raw``
 
 10. Working with Oxford Nanopore MinION and PacBio reads
---------------------------------------------------------
+========================================================
 
 Since version 0.3.0, SqueezeMeta is able to seamlessly work with
 single-end reads. In order to obtain better mappings of MinION and
@@ -474,7 +478,7 @@ script, which will predict and annotate ORFs within individual long
 reads.
 
 11. Working in a low-memory environment
----------------------------------------
+=======================================
 
 In our experience, assembly and DIAMOND alignment against the nr
 database are the most memory-hungry parts of the pipeline. By default
@@ -497,7 +501,7 @@ SRA project
 less than 4 hours.
 
 12. Tips for working in a computing cluster
--------------------------------------------
+===========================================
 
 SqueezeMeta will work fine inside a computing cluster, but there are
 some extra things that must be taken into account. Here is a list in
@@ -519,7 +523,7 @@ use all the free memory in the node in which it is running. This is fine
 if you got a full node for yourself, but will lead to crashes otherwise.
 
 13. Updating SqueezeMeta
-------------------------
+========================
 
 Assuming your databases are not inside the SqueezeMeta directory, just
 remove it, download the new version and configure it with
@@ -527,7 +531,7 @@ remove it, download the new version and configure it with
 ``/path/to/SqueezeMeta/utils/install_utils/configure_nodb.pl /path/to/db``
 
 14. Downstream analysis of SqueezeMeta results
-----------------------------------------------
+==============================================
 
 SqueezeMeta comes with a variety of options to explore the results and
 generate different plots. These are fully described in the PDF manual
@@ -566,7 +570,7 @@ We also include utility scripts for generating
 `pavian <https://ccb.jhu.edu/software/pavian/>`__ -compatible outputs.
 
 15. Analyzing SqueezeMeta results in your desktop computer
-----------------------------------------------------------
+==========================================================
 
 Many users run SqueezeMeta remotely (e.g. in a computing cluster).
 However it is easier to explore the results interactively from your own
@@ -587,7 +591,7 @@ decompressing) with
 ``import(SQMtools); SQM = loadSQM("/path/to/my_project.zip")``.
 
 16. Alternative analysis modes
-------------------------------
+==============================
 
 In addition to the main SqueezeMeta pipeline, we provide two extra modes
 that enable the analysis of individual reads.
@@ -618,50 +622,51 @@ annotation for a set of genes, for instance these encoded in a genome
 (or sets of contigs).
 
 17. Adding new binners and assemblers
--------------------------------------
+=====================================
 
 With some extra scripting, you can integrate other assembly and binning
 programs into the SqueezeMeta pipeline. See the PDF manual for details.
 
 18. License and third-party software
-------------------------------------
+====================================
 
 SqueezeMeta is distributed under a GPL-3 license. Additionally,
-SqueezeMeta redistributes the following third-party software: \*
-`trimmomatic <http://www.usadellab.org/cms/?page=trimmomatic>`__ \*
-`Megahit <https://github.com/voutcn/megahit>`__ \*
-`Spades <http://cab.spbu.ru/software/spades>`__ \*
-`canu <https://github.com/marbl/canu>`__ \*
-`prinseq <http://prinseq.sourceforge.net>`__ \*
-`kmer-db <https://github.com/refresh-bio/kmer-db>`__ \*
-`cd-hit <https://github.com/weizhongli/cdhit>`__ \*
-`amos <http://www.cs.jhu.edu/~genomics/AMOS>`__ \*
-`mummer <https://github.com/mummer4/mummer>`__ \*
-`hmmer <http://hmmer.org/>`__ \*
-`barrnap <https://github.com/tseemann/barrnap>`__ \*
-`aragorn <http://130.235.244.92/ARAGORN/>`__ \*
-`prodigal <https://github.com/hyattpd/Prodigal>`__ \*
-`DIAMOND <https://github.com/bbuchfink/diamond>`__ \*
-`bwa <https://github.com/lh3/bwa>`__ \*
-`minimap2 <https://github.com/lh3/minimap2>`__ \*
-`bowtie2 <http://bowtie-bio.sourceforge.net/bowtie2/index.shtml>`__ \*
-`MaxBin <https://downloads.jbei.org/data/microbial_communities/MaxBin/MaxBin.html>`__
-\* `MetaBAT <https://bitbucket.org/berkeleylab/metabat>`__ \*
-`CONCOCT <https://github.com/BinPro/CONCOCT>`__ \* `DAS
-tool <https://github.com/cmks/DAS_Tool>`__ \*
-`checkm <http://ecogenomics.github.io/CheckM>`__ \*
-`checkm2 <https://github.com/chklovski/CheckM2/>`__ \*
-`comparem <https://github.com/dparks1134/CompareM>`__ \*
-`MinPath <http://omics.informatics.indiana.edu/MinPath>`__ \* `RDP
-classifier <https://github.com/rdpstaff/classifier>`__ \*
-`pullseq <https://github.com/bcthomas/pullseq>`__ \*
-`Short-Pair <https://sourceforge.net/projects/short-pair/>`__ \*
-`SAMtools <http://samtools.sourceforge.net/>`__ \*
-`Mothur <https://mothur.org/>`__ \*
-`Flye <https://github.com/fenderglass/Flye>`__
+SqueezeMeta redistributes the following third-party software:
+
+- `trimmomatic <http://www.usadellab.org/cms/?page=trimmomatic>`__
+- `Megahit <https://github.com/voutcn/megahit>`__
+- `Spades <http://cab.spbu.ru/software/spades>`__
+- `canu <https://github.com/marbl/canu>`__
+- `prinseq <http://prinseq.sourceforge.net>`__
+- `kmer-db <https://github.com/refresh-bio/kmer-db>`__
+- `cd-hit <https://github.com/weizhongli/cdhit>`__
+- `amos <http://www.cs.jhu.edu/~genomics/AMOS>`__
+- `mummer <https://github.com/mummer4/mummer>`__
+- `hmmer <http://hmmer.org/>`__
+- `barrnap <https://github.com/tseemann/barrnap>`__
+- `aragorn <http://130.235.244.92/ARAGORN/>`__
+- `prodigal <https://github.com/hyattpd/Prodigal>`__
+- `DIAMOND <https://github.com/bbuchfink/diamond>`__
+- `bwa <https://github.com/lh3/bwa>`__
+- `minimap2 <https://github.com/lh3/minimap2>`__
+- `bowtie2 <http://bowtie-bio.sourceforge.net/bowtie2/index.shtml>`__
+- `MaxBin <https://downloads.jbei.org/data/microbial_communities/MaxBin/MaxBin.html>`__
+- `MetaBAT <https://bitbucket.org/berkeleylab/metabat>`__
+- `CONCOCT <https://github.com/BinPro/CONCOCT>`__
+- `DAS tool <https://github.com/cmks/DAS_Tool>`__
+- `checkm <http://ecogenomics.github.io/CheckM>`__
+- `checkm2 <https://github.com/chklovski/CheckM2/>`__
+- `comparem <https://github.com/dparks1134/CompareM>`__
+- `MinPath <http://omics.informatics.indiana.edu/MinPath>`__
+- `RDP classifier <https://github.com/rdpstaff/classifier>`__
+- `pullseq <https://github.com/bcthomas/pullseq>`__
+- `Short-Pair <https://sourceforge.net/projects/short-pair/>`__
+- `SAMtools <http://samtools.sourceforge.net/>`__
+- `Mothur <https://mothur.org/>`__
+- `Flye <https://github.com/fenderglass/Flye>`__
 
 19. About
----------
+=========
 
 SqueezeMeta is developed by Javier Tamames and Fernando Puente-Sánchez.
 Feel free to contact us for support (jtamames@cnb.csic.es,
