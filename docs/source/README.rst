@@ -277,8 +277,8 @@ Filtering
     Filters with Trimmomatic (Default: no)
 
 [-cleaning_options <string>]
-    Options for Trimmomatic (default: ``“LEADING:8 TRAILING:8 SLIDINGWINDOW:10:15 MINLEN:30”``).
-    Please provide all options as a single quoted string.
+    Options for Trimmomatic (default: ``"LEADING:8 TRAILING:8 SLIDINGWINDOW:10:15 MINLEN:30"``).
+    Please provide all options as a single quoted string
 
 Assembly
 ^^^^^^^^
@@ -289,7 +289,7 @@ Assembly
 [-assembly_options <string>]
     Extra options for the assembler (refer to the manual of the specific assembler).
     Please provide all the extra options as a single quoted string
-    (e.g. ``-assembly_options “–opt1 foo –opt2 bar”``)
+    (e.g. ``-assembly_options "–opt1 foo –opt2 bar"``)
 
 [-c|-contiglen <int>]
     Minimum length of contigs (Default:200)
@@ -304,7 +304,7 @@ Assembly
     This overrides the assembly and binning steps
 
 [-–sq|-–singletons]
-    unassembled reads will be treated as contigs and
+    Unassembled reads will be treated as contigs and
     included in the contig fasta file resulting from the assembly. This
     will produce 100% mapping percentages, and will increase BY A LOT the
     number of contigs to process. Use with caution (Default: no)
@@ -317,21 +317,42 @@ Assembly
 
 Annotation
 ^^^^^^^^^^
-*-g* [int]: Number of targets for DIAMOND global ranking
-during taxonomic assignment (Default: 100) \* *-db* [file]: Specifies
-the location of a new taxonomy database (in DIAMOND format, .dmnd) \*
-*–nocog*: Skip COG assignment (Default: no) \* *–nokegg*: Skip KEGG
-assignment (Default: no) \* *–nopfam*: Skip Pfam assignment (Default:
-no) \* *–fastnr*: Run DIAMOND in –fast mode for taxonomic assignment
-(Default: no) \* *–euk*: Drop identity filters for eukaryotic annotation
-(Default: no). This is recommended for analyses in which the eukaryotic
-population is relevant, as it will yield more annotations. See the
-manual for details \* *-consensus* [float]: Minimum percentage of genes
-for a taxon needed for contig consensus (Default: 50) \* *-extdb*
-[path]: List of additional user-provided databases for functional
-annotations. More information can be found in the manual \*
-*–D*\ \|\ *–doublepass*: Run BlastX ORF prediction in addition to
-Prodigal (Default: no)
+
+[-g <int>]
+    Number of targets for DIAMOND global ranking during taxonomic assignment (Default: 100)
+
+[-db <path>]
+    Specifies the location of a new taxonomy database (in DIAMOND format, .dmnd)
+
+[–-nocog]
+    Skip COG assignment (Default: no)
+
+[-–nokegg]
+    Skip KEGG assignment (Default: no)
+
+[-–nopfam]
+    Skip Pfam assignment (Default: no)
+
+[-–fastnr]
+    Run DIAMOND in ``-–fast`` mode for taxonomic assignment (Default: no)
+
+[-–euk]
+    Drop identity filters for eukaryotic annotation (Default: no). This is recommended for analyses in which the eukaryotic
+    population is relevant, as it will yield more annotations (see the documentation for details).
+    Note that, regardless of whether this option is selected or not, that result will be available as part of the aggregated
+    taxonomy tables generated at the last step of the pipeline and also when loading the project into *SQMtools*
+    (see the documentation for ``sqm2tables.py`` and also for the ``loadSQM`` function in the *SQMtools* R package),
+    so this is only relevant if you are planning to use the intermediate files directly.
+
+[-consensus <float>]
+    Minimum percentage of genes assigned to a taxon in order to assign it as the consensus taxonomy
+    for that contig (Default: 50)
+
+[-extdb <path>]
+    File with a list of additional user-provided databases for functional annotations. See :ref:`Using external databases`
+
+[–D|–-doublepas]
+    Run BlastX ORF prediction in addition to Prodigal (Default: no)
 
 Mapping
 ^^^^^^^
@@ -470,6 +491,7 @@ An user-supplied assembly can be passed to SqueezeMeta with the flag
 *-extassembly <your_assembly.fasta>*. The contigs in that fasta file
 will be analyzed by the SqueezeMeta pipeline starting from step 2.
 
+.. _Using external databases:
 7. Using external databases for functional annotation
 =====================================================
 
