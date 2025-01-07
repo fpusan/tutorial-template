@@ -90,6 +90,7 @@ it’s better to first set up the libmamba solver with
 and then use conda to install SqueezeMeta
 
 ``conda create -n SqueezeMeta -c conda-forge -c bioconda -c fpusan squeezemeta=1.7 --no-channel-priority --override-channels``
+
 This will create a new conda environment named SqueezeMeta, which must
 then be activated.
 
@@ -145,10 +146,10 @@ The databases occupy 200Gb, but we recommend having at least 350Gb free
 disk space during the building process.
 
 Two directories will be generated after running either
-``make_databases.pl`` or ``download_databases.pl``. -
-``/download/path/db``, which contains the actual databases. -
-``/download/path/test``, which contains data for a test run of
-SqueezeMeta.
+``make_databases.pl`` or ``download_databases.pl``.
+
+- ``/download/path/db``, which contains the actual databases.
+- ``/download/path/test``, which contains data for a test run of SqueezeMeta.
 
 If the SqueezeMeta databases are already built in another location in
 the system, a different copy of SqueezeMeta can be configured to use
@@ -244,8 +245,9 @@ Arguments
 
 Mandatory parameters
 ^^^^^^^^^^^^^^^^^^^^
-[-m <sequential, coassembly, merged, seqmerge>]
-    Mode: :ref:`Assembly strategy` (REQUIRED)
+
+[-m <sequential|coassembly|merged|seqmerge>]
+    Mode: See section :ref:`Assembly strategy` (REQUIRED)
 
 [-p <string>]
     Project name (REQUIRED in coassembly and merged modes)
@@ -258,6 +260,7 @@ Mandatory parameters
 
 Restarting
 ^^^^^^^^^^
+
 [-–restart]
     Restarts the given project where it stopped (project must be speciefied with the ``-p`` option) (will NOT overwite previous results, unless ``-–force_overwrite`` is also provided)
 
@@ -270,30 +273,51 @@ Restarting
 Filtering
 ^^^^^^^^^
 
-*–cleaning*: Filters with Trimmomatic (Default: no) \*
-*-cleaning_options* [string]: Options for Trimmomatic (default:
-“LEADING:8 TRAILING:8 SLIDINGWINDOW:10:15 MINLEN:30”). Please provide
-all options as a single quoted string.
+[-–cleaning]
+    Filters with Trimmomatic (Default: no)
 
-| *Assembly*
-| \* *-a* [megahit,spades,rnaspades,spades-base,canu,flye]: assembler.
-  (default: megahit). \* *-assembly_options* [string]: Extra options for
-  the assembler (refer to the manual of the specific assembler). Please
-  provide all the extra options as a single quoted string
-  (e.g. *-assembly_options “–opt1 foo –opt2 bar”*) \*
-  *-c*\ \|\ *-contiglen* [number]: Minimum length of contigs
-  (Default:200) \* *-extassembly* [path]: Path to a file containing an
-  external assembly provided by the user. The file must contain contigs
-  in the fasta format. This overrides the assembly step of SqueezeMeta.
-  \* *–sq/–singletons*: unassembled reads will be treated as contigs and
-  included in the contig fasta file resulting from the assembly. This
-  will produce 100% mapping percentages, and will increase BY A LOT the
-  number of contigs to process. Use with caution (Default: no) \*
-  *-contigid* [string]: Nomenclature for contigs (Default: assembler´s
-  name) \* *–norename*: Don’t rename contigs (Use at your own risk,
-  characters like ’\_’ in contig names will make it crash)
+[-cleaning_options <string>]
+    Options for Trimmomatic (default: ``“LEADING:8 TRAILING:8 SLIDINGWINDOW:10:15 MINLEN:30”``).
+    Please provide all options as a single quoted string.
 
-*Annotation* \* *-g* [int]: Number of targets for DIAMOND global ranking
+Assembly
+^^^^^^^^
+
+[-a <megahit|spades|rnaspades|spades-base|canu|flye>]
+    assembler (default: megahit)
+
+[-assembly_options <string>]
+    Extra options for the assembler (refer to the manual of the specific assembler).
+    Please provide all the extra options as a single quoted string
+    (e.g. ``-assembly_options “–opt1 foo –opt2 bar”``)
+
+[-c|-contiglen <int>]
+    Minimum length of contigs (Default:200)
+
+[-extassembly <path>]
+    Path to a file containing an external assembly provided by the user. The file must contain contigs
+    in the fasta format. This overrides the assembly step of SqueezeMeta
+
+[-extbins <path>]
+    Path to a directory containing external genomes/bins provided by the user.
+    There must be one file per genome/bin, each containing contigs in the fasta format.
+    This overrides the assembly and binning steps
+
+[-–sq|-–singletons]
+    unassembled reads will be treated as contigs and
+    included in the contig fasta file resulting from the assembly. This
+    will produce 100% mapping percentages, and will increase BY A LOT the
+    number of contigs to process. Use with caution (Default: no)
+
+[-contigid <string>]
+    Prefix id for contigs (Default: assembler name)
+
+[–-norename]
+    Don't rename contigs (Use at your own risk, characters like ``-`` in contig names may make the pipeline crash)
+
+Annotation
+^^^^^^^^^^
+*-g* [int]: Number of targets for DIAMOND global ranking
 during taxonomic assignment (Default: 100) \* *-db* [file]: Specifies
 the location of a new taxonomy database (in DIAMOND format, .dmnd) \*
 *–nocog*: Skip COG assignment (Default: no) \* *–nokegg*: Skip KEGG
@@ -309,13 +333,18 @@ annotations. More information can be found in the manual \*
 *–D*\ \|\ *–doublepass*: Run BlastX ORF prediction in addition to
 Prodigal (Default: no)
 
-*Mapping* \* *-map* [bowtie,bwa,minimap2-ont,minimap2-pb,minimap2-sr]:
+Mapping
+^^^^^^^
+
+*-map* [bowtie,bwa,minimap2-ont,minimap2-pb,minimap2-sr]:
 Read mapper (Default: bowtie) \* *-mapping_options* [string]: Extra
 options for the mapper (refer to the manual of the specific mapper).
 Please provide all the extra options as a single quoted string
 (e.g. *-mapping_options “–opt1 foo –opt2 bar”*)
 
-*Binning* \* *–nobins*: Skip all binning (Default: no). Overrides
+Binning
+^^^^^^^
+ \* *–nobins*: Skip all binning (Default: no). Overrides
 -binners \* *–onlybins*: Run only assembly, binning and bin statistics
 (including GTDB-Tk if requested) (Default: no) \* *-binners* [string]:
 Comma-separated list with the binning programs to be used (available:
