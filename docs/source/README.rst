@@ -240,23 +240,31 @@ The command for running SqueezeMeta has the following syntax:
 ``SqueezeMeta.pl -m <mode> -p <projectname> -s <equivfile> -f <raw fastq dir> <options>``
 
 Arguments
+---------
+
+Mandatory parameters
+^^^^^^^^^^^^^^^^^^^^
+``-m <sequential, coassembly, merged, seqmerge>``: Mode (REQUIRED)
+``-p <string>``: Project name (REQUIRED in coassembly and merged modes)
+``-s|samples <path>``: Samples file (REQUIRED)
+``-f|-seq <path>``: Fastq read files’ directory (REQUIRED)
+
+Restarting
+^^^^^^^^^^
+[-–restart]
+    Restarts the given project where it stopped (project must be speciefied with -p option) (will NOT overwite previous
+results, unless –force_overwrite is also provided)
+
+[-step <int>]
+    In combination with [–-restart], restarts the project starting in the given step number (combine with [-–force_overwrite] to regenerate results)
+
+[-–force_overwrite]:
+    Do not check for previous results, and overwrite existing ones
+
+Filtering
 ^^^^^^^^^
 
- *Mandatory parameters* \* *-m* <sequential, coassembly,
-merged, seqmerge>: Mode (REQUIRED) \* *-p* <string>: Project name
-(REQUIRED in coassembly and merged modes) \* *-s*\ \|\ *-samples*
-<path>: Samples file (REQUIRED) \* *-f*\ \|\ *-seq* <path>: Fastq read
-files’ directory (REQUIRED)
-
-*Restarting* \* *–restart*: Restarts the given project where it stopped
-(project must be speciefied with -p option) (will NOT overwite previous
-results, unless –force_overwrite is also provided) \* *-step* [int]: In
-combination with *–restart*, restarts the project starting in the given
-step number (combine with –force_overwrite to regenerate results) \*
-*–force_overwrite*: Do not check for previous results, and overwrite
-existing ones
-
-*Filtering* \* *–cleaning*: Filters with Trimmomatic (Default: no) \*
+*–cleaning*: Filters with Trimmomatic (Default: no) \*
 *-cleaning_options* [string]: Options for Trimmomatic (default:
 “LEADING:8 TRAILING:8 SLIDINGWINDOW:10:15 MINLEN:30”). Please provide
 all options as a single quoted string.
@@ -544,7 +552,7 @@ the following:
    :align: right
    :alt: Downstream analysis of SqueezeMeta results
 
-**1) Integration with R:** We provide the *SQMtools* R package, which
+1) **Integration with R:** We provide the *SQMtools* R package, which
 allows to easily load a whole SqueezeMeta project and expose the results
 into R. The package includes functions to select particular taxa or
 functions and generate plots. The package also makes the different
@@ -557,7 +565,7 @@ examples
 run SqueezeMeta in your Linux server and then move the results to your
 own computer and analyze them there. See advice for this below.
 
-**2) Integration with the anvi’o analysis pipeline:** We provide a
+2) **Integration with the anvi’o analysis pipeline:** We provide a
 compatibility layer for loading SqueezeMeta results into the anvi’o
 analysis and visualization platform
 (http://merenlab.org/software/anvio/). This includes a built-in query
@@ -596,28 +604,28 @@ decompressing) with
 In addition to the main SqueezeMeta pipeline, we provide two extra modes
 that enable the analysis of individual reads.
 
-**1) sqm_reads.pl**: This script performs taxonomic and functional
+1) **sqm_reads.pl**: This script performs taxonomic and functional
 assignments on individual reads rather than contigs. This can be useful
 when the assembly quality is low, or when looking for low abundance
 functions that might not have enough coverage to be assembled.
 
-**2) sqm_longreads.pl**: This script performs taxonomic and functional
+2) **sqm_longreads.pl**: This script performs taxonomic and functional
 assignments on individual reads rather than contigs, assuming that more
 than one ORF can be found in the same read (e.g. as happens in PacBio or
 MinION reads).
 
-**3) sqm_hmm_reads.pl**: This script provides a wrapper to the
+3) **sqm_hmm_reads.pl**: This script provides a wrapper to the
 `Short-Pair <https://sourceforge.net/projects/short-pair/>`__ software,
 which allows to screen the reads for particular functions using an
 ultra-sensitive HMM algorithm.
 
-**4) sqm_mapper.pl**: This script maps reads to a given reference using
+4) **sqm_mapper.pl**: This script maps reads to a given reference using
 one of the included sequence aligners (Bowtie2, BWA), and provides
 estimation of the abundance of the contigs and ORFs in the reference.
 Alternatively, it can be used to filter out the reads mapping to a given
 reference.
 
-**5) sqm_annot.pl**: This script performs functional and taxonomic
+5) **sqm_annot.pl**: This script performs functional and taxonomic
 annotation for a set of genes, for instance these encoded in a genome
 (or sets of contigs).
 
