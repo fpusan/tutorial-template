@@ -310,7 +310,7 @@ Arguments
 [–-norename]
     Don't rename contigs (Use at your own risk, characters like ``-`` in contig names may make the pipeline crash)
 
-*Annotation*
+**Annotation**
 
 [-g <int>]
     Number of targets for DIAMOND global ranking during taxonomic assignment (Default: 100)
