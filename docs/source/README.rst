@@ -71,7 +71,7 @@ the analysis:
     profiles
 
 Detailed information about the different steps of the pipeline can be
-found in the manual.
+found in the documentation.
 
 2. Installation
 ===============
@@ -357,47 +357,92 @@ Annotation
 Mapping
 ^^^^^^^
 
-*-map* [bowtie,bwa,minimap2-ont,minimap2-pb,minimap2-sr]:
-Read mapper (Default: bowtie) \* *-mapping_options* [string]: Extra
-options for the mapper (refer to the manual of the specific mapper).
-Please provide all the extra options as a single quoted string
-(e.g. *-mapping_options “–opt1 foo –opt2 bar”*)
+[-map <bowtie|bwa|minimap2-ont|minimap2-pb|minimap2-sr>]
+    Read mapper (Default: bowtie)
+
+[-mapping_options <string>]
+    Extra options for the mapper (refer to the manual of the specific mapper).
+    Please provide all the extra options as a single quoted string
+    (e.g. ``-mapping_options "–opt1 foo –opt2 bar"``)
 
 Binning
 ^^^^^^^
- \* *–nobins*: Skip all binning (Default: no). Overrides
--binners \* *–onlybins*: Run only assembly, binning and bin statistics
-(including GTDB-Tk if requested) (Default: no) \* *-binners* [string]:
-Comma-separated list with the binning programs to be used (available:
-maxbin, metabat2, concoct) (Default: concoct,metabat2) \* *-taxbinmode*
-[string]: Source of taxonomy annotation of bins (s: SqueezeMeta; c:
-CheckM; s+c: SqueezeMeta+CheckM; c+s: CheckM+SqueezeMeta; (Default: s)
-\* *–nomarkers*: Skip retrieval of universal marker genes from bins.
-Note that, while this precludes recalculation of bin
-completeness/contamination in SQMtools for bin refining, you will still
-get completeness/contamination estimates of the original bins obtained
-in SqueezeMeta \* *–gtdbtk*: Run GTDB-Tk to classify the bins. Requires
-a working GTDB-Tk installation available in your environment \*
-*-gtdbtk_data_path* [path]: Path to the GTDB database, by default it is
-assumed to be present in ``/path/to/SqueezeMeta/db/gtdb`` \* *-extbins*
-[path]: Path to a directory containing external genomes/bins provided by
-the user. There must be one file per genome/bin, containing each contigs
-in the fasta format. This overrides the assembly and binning steps
 
-*Performance* \* *-t* [number]: Number of threads (Default:12) \*
-*-b*\ \|\ *-block-size* [number]: Block size for DIAMOND against the nr
-database (Default: calculate automatically) \* *-canumem* [number]:
-Memory for Canu in Gb (Default: 32) \* *–lowmem*: Run on less than 16 Gb
-of RAM memory (Default: no). Equivalent to: -b 3 -canumem 15
+[-binners <string>]
+    Comma-separated list with the binning programs to be used (available:
+    maxbin, metabat2, concoct) (Default: concoct,metabat2)
 
-*Other* \* *–minion*: Run on MinION reads (Default: no). Equivalent to
--a canu -map minimap2-ont \* *-test* [step]: For testing purposes, stops
-AFTER the given step number \* *–empty*: Creates an empty directory
-structure and configuration files. It does not run the pipeline
+[–-nobins]
+    Skip all binning (Default: no). Overrides ``-binners``
 
-*Information* \* *-v*: Version number \* *-h*: Display help
+[-–onlybins]
+    Run only assembly, binning and bin statistics
+    (including GTDB-Tk if requested) (Default: no)
 
-**Example SqueezeMeta call:**
+[-extbins <path>]
+    Path to a directory containing external genomes/bins provided by the user.
+    There must be one file per genome/bin, each containing contigs in the fasta format.
+    This overrides the assembly and binning steps
+
+[-–nomarkers]
+    Skip retrieval of universal marker genes from bins.
+    Note that, while this precludes recalculation of bin
+    completeness/contamination in SQMtools for bin refining, you will still
+    get completeness/contamination estimates of the original bins obtained
+    in SqueezeMeta
+
+[-–gtdbtk]
+    Run GTDB-Tk to classify the bins. Requires
+    a working GTDB-Tk installation available in your environment
+
+[-gtdbtk_data_path <path>]
+    Path to the GTDB database, by default it is assumed to be present in
+    ``/path/to/SqueezeMeta/db/gtdb``. Note that the GTDB database is NOT
+    included in the SqueezeMeta databases, and must be obtained separately
+
+Performance
+^^^^^^^^^^^
+
+[-t <integer>]
+    Number of threads (Default:12)
+
+[-b|-block-size <integer>]
+    Block size for DIAMOND against the nr database (Default: calculate automatically)
+
+[-canumem <float>]
+    Memory for Canu in Gb (Default: 32)
+
+[-–lowmem]
+    Attempt to run on less than 16 Gb of RAM memory (Default: no).
+    Equivalent to: ``-b 3 -canumem 15``. Note that assembly may still fail due to lack of memory
+
+Other
+^^^^^
+
+[-–minion]
+    Run on MinION reads (Default: no). Equivalent to
+    ``-a canu -map minimap2-ont``. If canu is not working for you consider using
+    ``-a flye -map minimap2-ont`` instead
+
+[-test <integer>]
+    For testing purposes, stops AFTER the given step number
+
+[-–empty]
+    Create an empty directory structure and configuration files WITHOUT
+    actually running the pipeline
+
+Information
+^^^^^^^^^^^
+
+[-v]
+    Display version number
+
+[-h]
+    Display help
+
+Example SqueezeMeta call
+------------------------
+
 ``SqueezeMeta.pl -m coassembly -p test -s test.samples -f mydir --nopfam -miniden 50``
 
 This will create a project “test” for co-assembling the samples
@@ -488,7 +533,7 @@ project)
 ======================================
 
 An user-supplied assembly can be passed to SqueezeMeta with the flag
-*-extassembly <your_assembly.fasta>*. The contigs in that fasta file
+``-extassembly <your_assembly.fasta>``. The contigs in that fasta file
 will be analyzed by the SqueezeMeta pipeline starting from step 2.
 
 .. _Using external databases:
@@ -497,12 +542,12 @@ will be analyzed by the SqueezeMeta pipeline starting from step 2.
 
 Version 1.0 implements the possibility of using one or several
 user-provided databases for functional annotation. This is invoked using
-the *-extdb* option. Please refer to the manual for details.
+the ``-extdb`` option. Please refer to the documentation for details.
 
 8. Extra sensitive detection of ORFs
 ====================================
 
-Version 1.0 implements the *–D* option (*doublepass*), that attempts to
+Version 1.0 implements the ``–D`` option (*doublepass*), that attempts to
 provide a more sensitive ORF detection by combining the Prodigal
 prediction with a BlastX search on parts of the contigs where no ORFs
 were predicted, or where predicted ORFs did not match anything in the
@@ -532,13 +577,13 @@ A test run on those can be executed with
 Since version 0.3.0, SqueezeMeta is able to seamlessly work with
 single-end reads. In order to obtain better mappings of MinION and
 PacBio reads against the assembly, we advise to use minimap2 for read
-counting, by including the *-map minimap2-ont* (MinION) or *-map
-minimap2-pb* (PacBio) flags when calling SqueezeMeta. We also include
+counting, by including the ``-map minimap2-ont`` (MinION) or ``-map
+minimap2-pb`` (PacBio) flags when calling SqueezeMeta. We also include
 the Canu and Flye assemblers, which are specially tailored to work with
-long, noisy reads. They can be selected by including the *-a canu* or
-*-a flye* flag when calling SqueezeMeta. As a shortcut, the *–minion*
+long, noisy reads. They can be selected by including the ``-a canu`` or
+``-a flye`` flag when calling SqueezeMeta. As a shortcut, the ``-–minion``
 flag will use both Canu and minimap2 for Oxford Nanopore MinION reads.
-As an alternative to assembly, we also provide the *sqm_longreads.pl*
+As an alternative to assembly, we also provide the ``sqm_longreads.pl``
 script, which will predict and annotate ORFs within individual long
 reads.
 
@@ -549,14 +594,14 @@ In our experience, assembly and DIAMOND alignment against the nr
 database are the most memory-hungry parts of the pipeline. By default
 SqueezeMeta will set up the right parameters for DIAMOND and the Canu
 assembler based on the available memory in the system. DIAMOND memory
-usage can be manually controlled via the *-b* parameter (DIAMOND will
+usage can be manually controlled via the ``-b`` parameter (DIAMOND will
 consume ~5\*\ *b* Gb of memory according to the documentation, but to be
-safe we set *-b* to *free_ram/8*). Assembly memory usage is trickier, as
+safe we set ``-b`` to *free_ram/8*). Assembly memory usage is trickier, as
 memory requirements increase with the number of reads in a sample. We
 have managed to run SqueezeMeta with as much as 42M 2x100 Illumina HiSeq
 pairs on a virtual machine with only 16Gb of memory. Conceivably, larger
 samples could be split an assembled in chunks using the merged mode. We
-include the shortcut flag *–lowmem*, which will set DIAMOND block size
+include the shortcut flag ``-–lowmem``, which will set DIAMOND block size
 to 3, and Canu memory usage to 15Gb. This is enough to make SqueezeMeta
 run on 16Gb of memory, and allows the *in situ* analysis of Oxford
 Nanopore MinION reads. Under such computational limitations, we have
@@ -570,22 +615,30 @@ less than 4 hours.
 
 SqueezeMeta will work fine inside a computing cluster, but there are
 some extra things that must be taken into account. Here is a list in
-progress based on frequent issues that have been reported. - Run
-``test_install.pl`` to make sure that everything is properly configured.
+progress based on frequent issues that have been reported.
+
+- Run ``test_install.pl`` to make sure that everything is properly configured
+
 - If using the conda environment, make sure that it is properly
-activated by your batch script. - If an administrator has set up
+activated by your batch script
+
+- If an administrator has set up
 SqueezeMeta for you (and you have no write privileges in the
 installation directory), make sure they have run ``make_databases.pl``,
 ``download_databases.pl`` or ``configure_nodb.pl`` according to the
 installation instructions. Once again, ``test_install.pl`` should tell
-you whether things seem to be ok. - Make sure to request enough memory.
+you whether things seem to be ok
+
+- Make sure to request enough memory.
 See the previous section for a rough guide on what is “enough”. If you
 get a crash during the assembly or during the annotation step, it will
-be likely because you ran out of memory. - Make sure to manually set the
+be likely because you ran out of memory
+
+- Make sure to manually set the
 ``-b`` parameter so that it matches the amount of memory that you
 requested divided by 8. Otherwise, SqueezeMeta will assume that it can
 use all the free memory in the node in which it is running. This is fine
-if you got a full node for yourself, but will lead to crashes otherwise.
+if you got a full node for yourself, but will lead to crashes otherwise
 
 13. Updating SqueezeMeta
 ========================
