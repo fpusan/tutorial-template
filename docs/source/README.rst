@@ -102,13 +102,13 @@ be available on ``$PATH``.
 Alternatively, you can download the latest release from the GitHub
 repository and uncompress the tarball in a suitable directory. The
 tarball includes the SqueezeMeta scripts as well as the third-party
-software redistributed with SqueezeMeta. The INSTALL files contain
+software redistributed with SqueezeMeta. The ``INSTALL`` files contain
 detailed installation instructions, including all the external libraries
 required to make SqueezeMeta run in a vanilla Ubuntu 20.04. Note that
 you may need different libraries and potentially recompiling some
 binaries from source in order for the manual install to work in other
 Ubuntu versions or other distributions. The conda method is now the
-recommended way to install SqueezeMeta, and we may not be able to
+recommended way to install SqueezeMeta, and we will no longer
 support issues regarding manual installation.
 
 The ``test_install.pl`` script can be run in order to check whether the
@@ -130,7 +130,7 @@ of all the databases required by SqueezeMeta.
 recommended option, but the files are hosted in our institutional
 server, which can at times be unreachable.
 
-Alternatively, the script *make_databases.pl* can be run to download
+Alternatively, the script ``make_databases.pl`` can be run to download
 from source and format the latest version of the databases.
 
 ``/path/to/SqueezeMeta/utils/install_utils/make_databases.pl /download/path``
@@ -577,8 +577,8 @@ A test run on those can be executed with
 Since version 0.3.0, SqueezeMeta is able to seamlessly work with
 single-end reads. In order to obtain better mappings of MinION and
 PacBio reads against the assembly, we advise to use minimap2 for read
-counting, by including the ``-map minimap2-ont`` (MinION) or ``-map
-minimap2-pb`` (PacBio) flags when calling SqueezeMeta. We also include
+counting, by including the ``-map minimap2-ont`` (MinION) or ``-map minimap2-pb``
+(PacBio) flags when calling SqueezeMeta. We also include
 the Canu and Flye assemblers, which are specially tailored to work with
 long, noisy reads. They can be selected by including the ``-a canu`` or
 ``-a flye`` flag when calling SqueezeMeta. As a shortcut, the ``-–minion``
@@ -619,18 +619,15 @@ progress based on frequent issues that have been reported.
 
 - Run ``test_install.pl`` to make sure that everything is properly configured
 
-- If using the conda environment, make sure that it is properly
-activated by your batch script
+- If using the conda environment, make sure that it is properly activated by your batch script
 
-- If an administrator has set up
-SqueezeMeta for you (and you have no write privileges in the
+- If an administrator has set up SqueezeMeta for you (and you have no write privileges in the
 installation directory), make sure they have run ``make_databases.pl``,
 ``download_databases.pl`` or ``configure_nodb.pl`` according to the
 installation instructions. Once again, ``test_install.pl`` should tell
 you whether things seem to be ok
 
-- Make sure to request enough memory.
-See the previous section for a rough guide on what is “enough”. If you
+- Make sure to request enough memory. See the previous section for a rough guide on what is “enough”. If you
 get a crash during the assembly or during the annotation step, it will
 be likely because you ran out of memory
 
