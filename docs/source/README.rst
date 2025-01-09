@@ -624,8 +624,7 @@ progress based on frequent issues that have been reported.
 
 - If an administrator has set up SqueezeMeta for you (and you have no write privileges in the installation directory), make sure they have run ``make_databases.pl``, ``download_databases.pl`` or ``configure_nodb.pl`` according to the installation instructions. Once again, ``test_install.pl`` should tell you whether things seem to be ok
 
-- Make sure to request enough memory. See the previous section for a rough guide on what is “enough”. If you
-get a crash during the assembly or during the annotation step, it will be likely because you ran out of memory
+- Make sure to request enough memory. See the previous section for a rough guide on what is “enough”. If you get a crash during the assembly or during the annotation step, it will be likely because you ran out of memory
 
 - Make sure to manually set the ``-b`` parameter so that it matches the amount of memory that you requested divided by 8. Otherwise, SqueezeMeta will assume that it can use all the free memory in the node in which it is running. This is fine if you got a full node for yourself, but will lead to crashes otherwise
 
