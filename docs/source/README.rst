@@ -16,6 +16,7 @@ SqueezeMeta: a fully automated metagenomics pipeline, from reads to bins
 -  Make sure to `check the
    wiki! <https://github.com/jtamames/SqueezeMeta/wiki>`__
 
+.. _What is SqueezeMeta:
 1. What is SqueezeMeta?
 =======================
 
@@ -148,7 +149,7 @@ disk space during the building process.
 Two directories will be generated after running either
 ``make_databases.pl`` or ``download_databases.pl``.
 
-- ``/download/path/db``, which contains the actual databases.
+- ``/download/path/db``, which contains the actua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l databases.
 - ``/download/path/test``, which contains data for a test run of SqueezeMeta.
 
 If the SqueezeMeta databases are already built in another location in
@@ -216,8 +217,8 @@ supports more analysis modes and produces slightly better assembly
 statistics. SqueezeMeta can call SPAdes in three different ways. The
 option ``-a spades`` is meant for metagenomic datasets, and will
 automatically add the flags ``–meta -k 21,33,55,77,99,127`` to the
-*spades.py* call. Conversely, ``-a rnaspades`` will add the flags ``–rna -k
-21,33,55,77,99,127``. Finally, the option ``-a spades_base`` will add no
+*spades.py* call. Conversely, ``-a rnaspades`` will add the flags
+``–rna -k 21,33,55,77,99,127``. Finally, the option ``-a spades_base`` will add no
 additional flags to the *spades.py* call. This can be used in
 conjunction with ``–assembly options`` when one wants to fully customize
 the call to SPAdes, e.g. for assembling single cell genomes.
@@ -448,9 +449,9 @@ Example SqueezeMeta call
 This will create a project “test” for co-assembling the samples
 specified in the file “test.samples”, using a minimum identity of 50%
 for taxonomic and functional assignment, and skipping Pfam annotation.
-The -p parameter indicates the name under which all results and data
+The ``-p`` parameter indicates the name under which all results and data
 files will be saved. This is not required for sequential mode, where the
-name will be taken from the samples file instead. The -f parameter
+name will be taken from the samples file instead. The ``-f`` parameter
 indicates the directory where the read files specified in the sample
 file are stored.
 
@@ -517,7 +518,7 @@ completed steps you must also provide the flag ``--force_overwrite``.
 
 e.g. ``SqueezeMeta.pl --restart -p <projectname> -step 6 --force_overwrite``
 would restart the pipeline from the taxonomic assignment of genes. The
-different steps of the pipeline are listed in section 1.
+different steps of the pipeline are listed in :ref:`What is SqueezeMeta`.
 
 Running scripts
 ---------------
@@ -621,21 +622,12 @@ progress based on frequent issues that have been reported.
 
 - If using the conda environment, make sure that it is properly activated by your batch script
 
-- If an administrator has set up SqueezeMeta for you (and you have no write privileges in the
-installation directory), make sure they have run ``make_databases.pl``,
-``download_databases.pl`` or ``configure_nodb.pl`` according to the
-installation instructions. Once again, ``test_install.pl`` should tell
-you whether things seem to be ok
+- If an administrator has set up SqueezeMeta for you (and you have no write privileges in the installation directory), make sure they have run ``make_databases.pl``, ``download_databases.pl`` or ``configure_nodb.pl`` according to the installation instructions. Once again, ``test_install.pl`` should tell you whether things seem to be ok
 
 - Make sure to request enough memory. See the previous section for a rough guide on what is “enough”. If you
-get a crash during the assembly or during the annotation step, it will
-be likely because you ran out of memory
+get a crash during the assembly or during the annotation step, it will be likely because you ran out of memory
 
-- Make sure to manually set the
-``-b`` parameter so that it matches the amount of memory that you
-requested divided by 8. Otherwise, SqueezeMeta will assume that it can
-use all the free memory in the node in which it is running. This is fine
-if you got a full node for yourself, but will lead to crashes otherwise
+- Make sure to manually set the ``-b`` parameter so that it matches the amount of memory that you requested divided by 8. Otherwise, SqueezeMeta will assume that it can use all the free memory in the node in which it is running. This is fine if you got a full node for yourself, but will lead to crashes otherwise
 
 13. Updating SqueezeMeta
 ========================
