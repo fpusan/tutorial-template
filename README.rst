@@ -242,7 +242,7 @@ The command for running SqueezeMeta has the following syntax:
 Arguments
 ---------
 
-*Mandatory parameters*
+**Mandatory parameters**
 
 [-m <sequential|coassembly|merged|seqmerge>]
     Mode: See *Section 4: Choosing an assembly strategy*. (REQUIRED)
@@ -256,7 +256,7 @@ Arguments
 [-f|-seq <path>]
     Fastq read files’ directory (REQUIRED)
 
-*Restarting*
+**Restarting**
 
 [-–restart]
     Restarts the given project where it stopped (project must be speciefied with the ``-p`` option) (will NOT overwite previous results, unless ``-–force_overwrite`` is also provided)
@@ -267,7 +267,7 @@ Arguments
 [-–force_overwrite]:
     Do not check for previous results, and overwrite existing ones
 
-*Filtering*
+**Filtering**
 
 [-–cleaning]
     Filters with Trimmomatic (Default: no)
@@ -276,7 +276,7 @@ Arguments
     Options for Trimmomatic (default: ``"LEADING:8 TRAILING:8 SLIDINGWINDOW:10:15 MINLEN:30"``).
     Please provide all options as a single quoted string
 
-*Assembly*
+**Assembly**
 
 [-a <megahit|spades|rnaspades|spades-base|canu|flye>]
     assembler (default: megahit)
@@ -348,7 +348,7 @@ Arguments
 [–D|–-doublepas]
     Run BlastX ORF prediction in addition to Prodigal (Default: no)
 
-*Mapping*
+**Mapping**
 
 [-map <bowtie|bwa|minimap2-ont|minimap2-pb|minimap2-sr>]
     Read mapper (Default: bowtie)
@@ -358,7 +358,7 @@ Arguments
     Please provide all the extra options as a single quoted string
     (e.g. ``-mapping_options "–opt1 foo –opt2 bar"``)
 
-*Binning*
+**Binning**
 
 [-binners <string>]
     Comma-separated list with the binning programs to be used (available:
@@ -392,7 +392,7 @@ Arguments
     ``/path/to/SqueezeMeta/db/gtdb``. Note that the GTDB database is NOT
     included in the SqueezeMeta databases, and must be obtained separately
 
-*Performance*
+**Performance**
 
 [-t <integer>]
     Number of threads (Default:12)
@@ -407,7 +407,7 @@ Arguments
     Attempt to run on less than 16 Gb of RAM memory (Default: no).
     Equivalent to: ``-b 3 -canumem 15``. Note that assembly may still fail due to lack of memory
 
-*Other*
+**Other**
 
 [-–minion]
     Run on MinION reads (Default: no). Equivalent to
@@ -421,7 +421,7 @@ Arguments
     Create an empty directory structure and configuration files WITHOUT
     actually running the pipeline
 
-*Information*
+**Information**
 
 [-v]
     Display version number
