@@ -1,3 +1,8 @@
+.. image:: ../images/logo.svg
+  :width: 20%
+  :align: right
+  :alt: SqueezeMeta logo
+
 Welcome to SqueezeMeta's documentation!
 ===================================
 
@@ -24,7 +29,7 @@ characteristics:
 SqueezeMeta supports different assembly strategies (co-assembly,
 sequential, assembly merging, and sequential-merging) and different
 assemblers (see below for details), as well as the analysis of pre-existing
-contigs or bins. Check out the doc:`use_cases` section for more information.
+contigs or bins. Check out the :doc:`use_cases` section for more information.
 
 SqueezeMeta uses a combination of custom scripts and external
 software packages for the different steps of the analysis:
@@ -55,7 +60,7 @@ software packages for the different steps of the analysis:
     profiles
 
 Detailed information about the different steps of the pipeline can be
-found in the doc:`scripts` section.
+found in the :doc:`scripts` section.
 
 
 .. note::

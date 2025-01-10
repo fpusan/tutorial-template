@@ -1,5 +1,5 @@
 *************************************
-SCRIPTS, OUTPUT FILES AND FILE FORMAT
+Scripts, output files and file format
 *************************************
 
 .. note::
