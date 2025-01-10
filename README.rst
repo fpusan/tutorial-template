@@ -518,12 +518,19 @@ syntax:
 ``04.rundiamond.pl <projectname>`` to repeat the DIAMOND run for the
 project)
 
-6. Analizing an user-supplied assembly
-======================================
+6. Analizing user-supplied assemblies or bins
+=============================================
 
 An user-supplied assembly can be passed to SqueezeMeta with the flag
 ``-extassembly <your_assembly.fasta>``. The contigs in that fasta file
 will be analyzed by the SqueezeMeta pipeline starting from step 2.
+With this, you will be able to annotate your assembly, estimate its
+abundance in your metagenomes/metatranscriptomes, and perform binning on it.
+
+Additionally, a set of pre-existing genomes and bins can be passed to
+SqueezeMeta with the flag ``-extbins <path_to_dir_with_bins>``. This will
+work similarly to ``-extassembly``, but SqueezeMeta will treat each fasta
+file in the input directory as an individual bin.
 
 7. Using external databases for functional annotation
 =====================================================
