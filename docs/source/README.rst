@@ -42,9 +42,9 @@ characteristics:
 
 SqueezeMeta supports different assembly strategies (co-assembly,
 sequential, assembly merging, and sequential-merging) and different
-assemblers (see below for details). SqueezeMeta uses a combination of
-custom scripts and external software packages for the different steps of
-the analysis:
+assemblers (see below for details), as well as the analysis of pre-existing
+contigs or bins. SqueezeMeta uses a combination of custom scripts and external
+software packages for the different steps of the analysis:
 
 1)  Assembly
 2)  RNA prediction and classification
