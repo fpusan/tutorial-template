@@ -169,15 +169,15 @@ order to check that SqueezeMeta is ready to work (see previous section).
 SqueezeMeta can be run in four different modes, depending of the type of
 multi-metagenome support. These modes are:
 
--  Sequential mode: All samples are treated individually and analysed
+-  **Sequential mode**: All samples are treated individually and analysed
    sequentially.
 
--  Coassembly mode: Reads from all samples are pooled and a single
+-  **Coassembly mode**: Reads from all samples are pooled and a single
    assembly is performed. Then reads from individual samples are mapped
    to the coassembly to obtain gene abundances in each sample. Binning
    methods allow to obtain genome bins.
 
--  Merged mode: if many big samples are available, co-assembly could
+-  **Merged mode**: if many big samples are available, co-assembly could
    crash because of memory requirements. This mode achieves a comparable
    resul with a procedure inspired by the one used by Benjamin Tully for
    analysing TARA Oceans data (https://dx.doi.org/10.17504/protocols.io.hfqb3mw).
@@ -188,7 +188,7 @@ multi-metagenome support. These modes are:
    contigs is higher. But it is a viable alternative in smaller computers in
    which standard co-assembly is not feasible.
 
--  Seqmerge mode: This is intended to work with more samples than the
+-  **Seqmerge mode**: This is intended to work with more samples than the
    merged mode. Instead of merging all individual assemblies in a single
    step, which can be very computationally demanding, seqmerge works
    sequentially. First, it assembles individually all samples, as in

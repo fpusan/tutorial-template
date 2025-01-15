@@ -43,7 +43,7 @@ required dependencies are available in your environment.
 ``/path/to/SqueezeMeta/utils/install_utils/test_install.pl``
 
 Downloading or building databases
-====================================
+=================================
 
 SqueezeMeta uses several databases. GenBank nr for taxonomic assignment,
 and eggnog, KEGG and Pfam for functional assignment. The script
