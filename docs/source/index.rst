@@ -4,7 +4,7 @@
   :alt: SqueezeMeta logo
 
 Welcome to SqueezeMeta's documentation!
-===================================
+=======================================
 
 **SqueezeMeta** is a full automatic pipeline for
 metagenomics/metatranscriptomics, covering all steps of the analysis.
@@ -74,5 +74,6 @@ Contents
 
    use_cases
    installation
-   scripts
    execution
+   adv_annotation
+   scripts

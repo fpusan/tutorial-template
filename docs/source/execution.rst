@@ -294,7 +294,7 @@ completed steps you must also provide the flag ``--force_overwrite``.
 
 e.g. ``SqueezeMeta.pl --restart -p <projectname> -step 6 --force_overwrite``
 would restart the pipeline from the taxonomic assignment of genes. The
-different steps of the pipeline are listed in :ref:`What is SqueezeMeta`.
+different steps of the pipeline are listed in :doc:`scripts`.
 
 Running scripts
 ===============

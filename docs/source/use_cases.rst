@@ -2,6 +2,7 @@
 Use cases
 *********
 
+.. _Assembly strategy:
 Choosing an assembly strategy
 =============================
 
