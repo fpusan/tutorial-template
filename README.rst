@@ -270,7 +270,7 @@ Arguments
 **Filtering**
 
 [-–cleaning]
-    Filters with Trimmomatic (Default: no)
+    Filters the input reads with Trimmomatic
 
 [-cleaning_options <string>]
     Options for Trimmomatic (default: ``"LEADING:8 TRAILING:8 SLIDINGWINDOW:10:15 MINLEN:30"``).
