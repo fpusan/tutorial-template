@@ -61,7 +61,7 @@ Assembly
 --------
 
 [-a <megahit|spades|rnaspades|spades-base|canu|flye>]
-    assembler (default: `megahit`)
+    assembler (default: ``megahit``)
 
 [-assembly_options <string>]
     Extra options for the assembler (refer to the manual of the specific assembler).
@@ -69,7 +69,7 @@ Assembly
     (e.g. ``-assembly_options "–opt1 foo –opt2 bar"``)
 
 [-c|-contiglen <int>]
-    Minimum length of contigs (default: `200`)
+    Minimum length of contigs (default: ``200``)
 
 [-extassembly <path>]
     Path to a file containing an external assembly provided by the user. The file must contain contigs
@@ -96,7 +96,7 @@ Annotation
 ----------
 
 [-g <int>]
-    Number of targets for DIAMOND global ranking during taxonomic assignment (default: `100`)
+    Number of targets for DIAMOND global ranking during taxonomic assignment (default: ``100``)
 
 [-db <path>]
     Specifies the location of a new taxonomy database (in DIAMOND format, .dmnd)
@@ -123,7 +123,7 @@ Annotation
 
 [-consensus <float>]
     Minimum percentage of genes assigned to a taxon in order to assign it as the consensus taxonomy
-    for that contig (default: `50`)
+    for that contig (default: ``50``)
 
 [-extdb <path>]
     File with a list of additional user-provided databases for functional annotations. See :ref:`Using external databases`
@@ -135,7 +135,7 @@ Mapping
 -------
 
 [-map <bowtie|bwa|minimap2-ont|minimap2-pb|minimap2-sr>]
-    Read mapper (default: `bowtie`)
+    Read mapper (default: ``bowtie``)
 
 [-mapping_options <string>]
     Extra options for the mapper (refer to the manual of the specific mapper).
@@ -147,7 +147,7 @@ Binning
 
 [-binners <string>]
     Comma-separated list with the binning programs to be used (available:
-    maxbin, metabat2, concoct) (default: `concoct,metabat2`)
+    maxbin, metabat2, concoct) (default: ``concoct,metabat2``)
 
 [–-nobins]
     Skip all binning (Default: no). Overrides ``-binners``
@@ -181,13 +181,13 @@ Performance
 -----------
 
 [-t <integer>]
-    Number of threads (default: `12`)
+    Number of threads (default: ``12``)
 
 [-b|-block-size <integer>]
     Block size for DIAMOND against the nr database (default: *calculate automatically*)
 
 [-canumem <float>]
-    Memory for Canu in Gb (default: `32`)
+    Memory for Canu in Gb (default: ``32``)
 
 [-–lowmem]
     Attempt to run on less than 16 Gb of RAM memory.
