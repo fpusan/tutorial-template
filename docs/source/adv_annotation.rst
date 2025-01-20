@@ -24,7 +24,7 @@ Then, the directory containing the new database must be specified to SqueezeMeta
 Using external databases for functional annotation
 ==================================================
 
-Version 1.0 of SqueezeMeta implements the possibility of using one or several external databases (user-provided) for functional annotation. This is invoked using the ``--extdb`` option. The argument must be a file (external database file) with the following format (tab-separated fields):
+Version 1.0 of SqueezeMeta implements the possibility of using one or several external databases (user-provided) for functional annotation. This is invoked using the ``-extdb`` option. The argument must be a file (external database file) with the following format (tab-separated fields):
 
 ::
 
@@ -37,7 +37,7 @@ For example, we can create the file mydb.list containing information of two data
  DB1    /path/to/my/database1    /path/to/annotations/database1
  DB2    /path/to/my/database2    /path/to/annotations/database2
 
-and give it to SqueezeMeta using ``--extdb mydb.list``.
+and give it to SqueezeMeta using ``-extdb mydb.list``.
 
 Each database must be a fasta file of amino acid sequences, in which the sequences must have a header in the format:
 
