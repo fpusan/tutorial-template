@@ -5,6 +5,7 @@ Utility scripts
 Compressing a SqueezeMeta project into a zip file
 =================================================
 
+.. _sqm2zip:
 sqm2zip.py
 ----------
 
@@ -26,14 +27,16 @@ combine-sqm-tables.py
 Mapping reads to a reference
 ============================
 
-sqm-mapper.pl
+.. _sqm_mapper:
+sqm_mapper.pl
 -------------
 
 
 Functional and taxonomic annotation of genes and genomes
 ========================================================
 
-sqm-annot.pl
+.. _sqm_annot:
+sqm_annot.pl
 ------------
 
 
