@@ -77,3 +77,8 @@ Contents
    execution
    adv_annotation
    scripts
+   alt_modes
+   SQMtools
+   new_binners
+   utils
+   alg_details

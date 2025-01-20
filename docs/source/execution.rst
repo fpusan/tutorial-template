@@ -7,7 +7,7 @@ Scripts location
 
 The scripts composing the SqueezeMeta pipeline can be found in the
 ``/path/to/SqueezeMeta/scripts`` directory. Other utility scripts can be
-found in the ``/path/to/SqueezeMeta/utils`` directory. See the documentation
+found in the ``/path/to/SqueezeMeta/utils`` directory. See :doc:`utils`
 for more information on utility scripts.
 
 Execution
@@ -33,26 +33,7 @@ Mandatory parameters
     Samples file (REQUIRED)
 
 [-f|-seq <path>]
-Version 1.0 of SqueezeMeta implements the possibility of using one or several external databases (user-provided) for functional annotation. This is invoked using the --extdb option. The argument must be a file (external database file) with the following format (tab-separated fields):
-<Database Name>	<Path to database>	<Functional annotation file>
-For example, we can create the file mydb.list containing information of two databases:
-DB1	/path/to/my/database1	/path/to/annotations/database1
-DB2	/path/to/my/database2	/path/to/annotations/database2	 
-and give it to SqueezeMeta using --extdb mydb.list.
-Each database must be a fasta file of amino acid sequences, in which the sequences must have a header in the format:
->ID|...|Function
-Where ID can be any identifier for the entry, and Function is the associated function that will be used for annotation. For example, a KEGG entry could be something like:
->WP_002852319.1|K02835
-MKEFILAKNEIKTMLQIMPKEGVVLQGDLASKTSLVQAWVKFLVLGLDRVDSTPTFSTQKYE...
-You can put anything you want between the first and last pipe, because these are the only fields that matter. For instance, the previous entry could also be:
->WP_002852319.1|KEGGDB|27/02/2019|K02835
-MKEFILAKNEIKTMLQIMPKEGVVLQGDLASKTSLVQAWVKFLVLGLDRVDSTPTFSTQKYE...
-Just remember not to put blank spaces, because they act as field separators in the fasta format.
-This database must be formatted for DIAMOND usage. For avoiding compatibility issues between different versions of DIAMOND, it is advisable that you use the DIAMOND that is shipped with SqueezeMeta, and is placed in the bin directory of SqueezeMeta distribution. You can do the formatting with the command:
-/path/to/SqueezeMeta/bin/diamond makedb -d /path/to/ext/db/dbname.dmnd --in /path/to/my/ext/dbname.fasta
-For each database, you can OPTIONALLY provide a file with functional annotations, such as the name of the enzyme or whatever you want. Its location must be specified in the last field of the external database file. It must have only two columns separated by tabulators, the first with the function, the second with the additional information. For instance:
-K02835	peptide chain release factor 1
-The ORF table will show both the database ID and the associated annotation for each external database you provided.    Fastq read files’ directory (REQUIRED)
+    Fastq read files’ directory (REQUIRED)
 
 Restarting
 ----------
@@ -134,10 +115,10 @@ Annotation
 
 [-–euk]
     Drop identity filters for eukaryotic annotation (Default: no). This is recommended for analyses in which the eukaryotic
-    population is relevant, as it will yield more annotations (see the documentation for details).
+    population is relevant, as it will yield more annotations.
     Note that, regardless of whether this option is selected or not, that result will be available as part of the aggregated
     taxonomy tables generated at the last step of the pipeline and also when loading the project into *SQMtools*
-    (see the documentation for ``sqm2tables.py`` and also for the ``loadSQM`` function in the *SQMtools* R package),
+    (see the documentation for :ref:`sqm2tables` and also for the ``loadSQM`` function in the *SQMtools* R package),
     so this is only relevant if you are planning to use the intermediate files directly.
 
 [-consensus <float>]

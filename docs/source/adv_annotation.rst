@@ -20,6 +20,7 @@ The script make_custom_taxdb.pl must be used to format this database for usage w
 
 Then, the directory containing the new database must be specified to SqueezeMeta.pl using the ``-db`` option. This will produce taxonomic annotations using the new database.
 
+
 .. _Using external function database:
 Using external databases for functional annotation
 ==================================================
@@ -68,7 +69,7 @@ For each database, you can OPTIONALLY provide a file with functional annotations
 
 ``K02835    peptide chain release factor 1``
 
-The ORF table (ADD LINK HERE!!) will show both the database ID and the associated annotation for each external database you provided.
+The ORF table (see :ref:`ORF table`) will show both the database ID and the associated annotation for each external database you provided.
 
 
 .. _Extra sensitive ORFs:
