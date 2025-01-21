@@ -231,6 +231,7 @@ name will be taken from the samples file instead. The ``-f`` parameter
 indicates the directory where the read files specified in the sample
 file are stored.
 
+
 :: _Samples file:
 The samples file
 ================
