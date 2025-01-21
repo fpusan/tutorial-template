@@ -82,3 +82,4 @@ The pros: This procedure is able to detect missing genes or correct errors in ge
 
 The con: Since it has to do an additional DIAMOND run (and using six frame-Blastx) it slows down the analysis, especially in the case of big and/or many metagenomes.
 
+For more details, see section :ref:`doublepass`.

@@ -3,7 +3,8 @@ Alternative analysis modes
 **************************
 
 Taxonomic and functional annotation of unassembled reads
-========================================================
+=======Arguments
+^^^^^^^^^=================================================
 
 .. _sqm_reads:
 sqm_reads.pl
@@ -47,8 +48,8 @@ Options
     population is relevant, as it will yield more annotations.
     Note that, regardless of whether this option is selected or not, that result will be available as part of the aggregated
     taxonomy tables generated at the last step of the pipeline and also when loading the project into *SQMtools*
-    (see the documentation for :ref:`sqmreads2tables.py <sqmreads2tables>` and also for the ``loadSQMlite`` function in the *SQMtools* R package),
-    so this is only relevant if you are planning to use the intermediate files directly.
+    (see the documentation for :ref:`sqmreads2tables.py <sqmreads2tables>` and also for the ``loadSQMlite`` function in the
+    *SQMtools* R package), so this is only relevant if you are planning to use the intermediate files directly.
 
 [-extdb <path>]
     File with a list of additional user-provided databases for functional annotations. See :ref:`Using external function databases`
@@ -63,6 +64,7 @@ Options
 [-miniden <float>]
     Identity percentage for discarding hits in DIAMOND run (default: *50*)
 
+.. _sqm_reads_output:
 Output
 ^^^^^^
 
@@ -99,14 +101,62 @@ samples_file    - Column 1: taxonomic rank for the taxon
     - Next to last column: KEGG function
     - Last column: KEGG functional class
 
+
 .. _sqm_longreads:
 sqm_longreads.pl
 ----------------
 
+This script works in the same way as SQM_reads.pl, that is, it attempts to produce taxonomic and functional assignments directly on the raw reads, not using an assembly. The difference is that this script assumes that more than one ORF can be found in the read. It performs Diamond Blastx searches against taxonomic and functional databases, and then identifies ORFs by collapsing the hits in the same region of the read. The ``--range-culling`` option of Diamond makes this possible, since it limits the number of hits to the same region of the sequence, making it possible to recover hits for all parts of the read.
+
+The script assigns taxa and functions to each ORF using the :ref:`lca <lca>` and :ref:`fun3 <fun3>` methods, as done by SqueezeMeta. In addition, it calculates a consensus taxonomic assignment for each read (see :ref:`consensus tax`). The taxon provided for the read is that consensus annotation.
+
+The usage of ``sqm_longreads.pl`` is the same than that of :ref:`sqm_reads.pl <sqm_reads>`:
+
+``sqm_longreads.pl -p <project name> -s <equiv file> -f <raw fastq dir> [options]``
+
+Arguments
+^^^^^^^^^
+
+Mandatory parameters
+""""""""""""""""""""
+[-p <string>]
+    Project name (REQUIRED)
+
+[-s|-samples]
+    Samples file, see :ref:`Samples file` (REQUIRED)
+
+[-f|-seq]
+    Fastq read files directory (REQUIRED)
+
+Options
+"""""""
+[–-nocog]                                                                                                                                Skip COG assignment
+
+[-–nokegg]                                                                                                                               Skip KEGG assignment
+
+[–-nodiamond]                                                                                                                            Assumes that Diamond output files are already in place (for instance, if you are redoing the analysis) and skips all Diamond run
+
+[-–euk]                                                                                                                                  Drop identity filters for eukaryotic annotation (Default: no). This is recommended for analyses in which the eukaryotic              population is relevant, as it will yield more annotations.                                                                           Note that, regardless of whether this option is selected or not, that result will be available as part of the aggregated             taxonomy tables generated at the last step of the pipeline and also when loading the project into *SQMtools*                         (see the documentation for :ref:`sqmreads2tables.py <sqmreads2tables>` and also for the ``loadSQMlite`` function in the              *SQMtools* R package), so this is only relevant if you are planning to use the intermediate files directly.                                                                                                                                                           [-extdb <path>]                                                                                                                          File with a list of additional user-provided databases for functional annotations. See :ref:`Using external function databases`                                                                                                                                       [-t <integer>]                                                                                                                           Number of threads (default: ``12``)                                                                                                                                                                                                                                   [-b|-block-size <integer>]                                                                                                               Block size for DIAMOND against the nr database (default: *calculate automatically*)                                                                                                                                                                                   [-e|-evalue <float]                                                                                                                      Max e-value for discarding hits in the DIAMOND run  (default: *1e-03*)                                                                                                                                                                                                [-miniden <float>]                                                                                                                       Identity percentage for discarding hits in DIAMOND run (default: *50*)
+
+[-n|-nopartialhits]
+    Ignore partial hits if they occur at the middle of a long read
+
+[--force_overwrite]
+    Overwrite previous results
+
+Output
+^^^^^^
+The output is similar to that of :ref:`sqm_reads.pl <sqm_reads_output>`. In addition, ``sqm_longreads.pl`` provides information about the consensus in the ``readconsensus.txt`` files placed in the output directories for each sample.
+
+Ignoring or not partial hits
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A truncated hit (one missing to find one, or both, extremes) often happens in the extremes of the long read (because the read is ending and so is the hit), but it is unexpected to find it in the middle of a long read. There you would expect to see a complete hit. Whatever the reasons for this, the hit is suspicious and can be excluded using the ``-n`` option. But beware, this probably will decrease significantly the number of detected ORFs.
+
 
 .. _sqm_hmm_reads:
-Fast screening unassembled short reads for a particular function
-================================================================
+Fast screening of unassembled short reads for a particular function
+===================================================================
 
 sqm_hmm_reads.pl
 ----------------
@@ -119,7 +169,7 @@ Mapping reads to a reference
 sqm_mapper.pl
 -------------
 
-: _sqm_annot:
+.. _sqm_annot:
 Functional and taxonomic annotation of genes and genomes
 ========================================================
 
