@@ -56,7 +56,7 @@ Files produced
 -
 
 
-.._lca script:
+.. _lca script:
 Step 6: Taxonomic assignment
 ============================
 
@@ -67,7 +67,7 @@ Files produced
 -
 
 
-.._fun3 script:
+.. _fun3 script:
 Step 7: Functional assignment
 =============================
 
