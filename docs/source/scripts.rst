@@ -95,7 +95,6 @@ Files produced
 --------------
 -
 
-.. _mappingstat:
 Step 10: Mapping of reads to contigs and calculation of abundance measures
 ==========================================================================
 

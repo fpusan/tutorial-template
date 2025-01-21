@@ -81,28 +81,28 @@ Alternative analysis modes
 In addition to the main SqueezeMeta pipeline, we provide two extra modes
 that enable the analysis of individual reads.
 
-1) :ref:`sqm_reads.pl <sqm_reads>`: This script performs taxonomic and functional
+1) `sqm_reads.pl`_: This script performs taxonomic and functional
 assignments on individual reads rather than contigs. This can be useful
 when the assembly quality is low, or when looking for low abundance
 functions that might not have enough coverage to be assembled.
 
-2) :ref:`sqm_longreads.pl <sqm_longreads>`: This script performs taxonomic and functional
+2) `sqm_longreads.pl`_: This script performs taxonomic and functional
 assignments on individual reads rather than contigs, assuming that more
 than one ORF can be found in the same read (e.g. as happens in PacBio or
 MinION reads).
 
-3) :ref:`sqm_hmm_reads.pl <sqm_hmm_reads>`: This script provides a wrapper to the
+3) `sqm_hmm_reads.pl`_: This script provides a wrapper to the
 `Short-Pair <https://sourceforge.net/projects/short-pair/>`__ software,
 which allows to screen the reads for particular functions using an
 ultra-sensitive HMM algorithm.
 
-4) :ref:`sqm_mapper.pl <sqm_mapper>`: This script maps reads to a given reference using
+4) `sqm_mapper.pl`_: This script maps reads to a given reference using
 one of the included sequence aligners (Bowtie2, BWA), and provides
 estimation of the abundance of the contigs and ORFs in the reference.
 Alternatively, it can be used to filter out the reads mapping to a given
 reference.
 
-5) :ref:`sqm_annot.pl <sqm_annot>`: This script performs functional and taxonomic
+5) `sqm_annot.pl`_: This script performs functional and taxonomic
 annotation for a set of genes, for instance these encoded in a genome
 (or sets of contigs).
 

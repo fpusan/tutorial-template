@@ -4,13 +4,13 @@ Alternative analysis modes
 
 Taxonomic and functional annotation of unassembled reads
 ========================================================
-.. _sqm_reads:
+
 sqm_reads.pl
 ------------
 
-This procedure performs taxonomic and functional assignments directly on the reads. This is useful when the assembly is not good, usually because of low sequencing depth, high diversity of the microbiome, or both. One indication that this is happening can be found in the :ref:`mappingstat <mappingstat>` file. Should you find there low mapping percentages (below 50%), it means that most of your reads are not represented in the assembly and can we can try to classify the reads instead of the genes/contigs.
+This procedure performs taxonomic and functional assignments directly on the reads. This is useful when the assembly is not good, usually because of low sequencing depth, high diversity of the microbiome, or both. One indication that this is happening can be found in the `Step 10: Mapping of reads to contigs and calculation of abundance measures <mappingstat>`_ file. Should you find there low mapping percentages (below 50%), it means that most of your reads are not represented in the assembly and can we can try to classify the reads instead of the genes/contigs.
 
-This script will do a DIAMOND Blastx alignment of reads agains the nr, COG and KEGG databases, and will assign taxa as functions using the :ref:`The LCA algorithm <lca>`_ and :ref:`The fun3 algorithm <fun3>`_ methods, as SqueezeMeta does. It will probably provide an increment in the number of annotations. But on the other hand, the annotations could be less precise (we are working with a smaller sequence) and you lose the capacity to map reads onto an assembly and thus comparing metagenomes using a common reference. Use this for Illumina reads. This method is less suited to analyze long MinION reads where more than one gene can be represented (see :ref:`sqm_longreads.pl <sqm_longreads>`_ in that case).  This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but if using conda it will be present in your PATH.
+This script will do a DIAMOND Blastx alignment of reads agains the nr, COG and KEGG databases, and will assign taxa as functions using the `The LCA algorithm <lca>`_ and `The fun3 algorithm <fun3>`_ methods, as SqueezeMeta does. It will probably provide an increment in the number of annotations. But on the other hand, the annotations could be less precise (we are working with a smaller sequence) and you lose the capacity to map reads onto an assembly and thus comparing metagenomes using a common reference. Use this for Illumina reads. This method is less suited to analyze long MinION reads where more than one gene can be represented (see `sqm_longreads.pl <sqm_longreads>`_ in that case).  This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but if using conda it will be present in your PATH.
 
 The usage of SQM_reads is very similar to that of SqueezeMeta:
 
@@ -102,7 +102,6 @@ sqm_longreads.pl
 ----------------
 
 
-.. _sqm_hmm_reads:
 Fast screening unassembled short reads for a particular function
 ================================================================
 
@@ -110,14 +109,12 @@ sqm_hmm_reads.pl
 ----------------
 
 
-.. _sqm_mapper:
 Mapping reads to a reference
 ============================
 
 sqm_mapper.pl
 -------------
 
-: _sqm_annot:
 Functional and taxonomic annotation of genes and genomes
 ========================================================
 
