@@ -81,7 +81,7 @@ Alternative analysis modes
 In addition to the main SqueezeMeta pipeline, we provide two extra modes
 that enable the analysis of individual reads.
 
-1) :ref:`sqm_reads`: This script performs taxonomic and functional
+1) :ref:`sqm_reads.pl <sqm_reads>`: This script performs taxonomic and functional
 assignments on individual reads rather than contigs. This can be useful
 when the assembly quality is low, or when looking for low abundance
 functions that might not have enough coverage to be assembled.

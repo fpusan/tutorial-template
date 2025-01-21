@@ -30,10 +30,10 @@ Mandatory parameters
     Project name (REQUIRED in coassembly and merged modes)
 
 [-s|samples <path>]
-    Samples file (REQUIRED)
+    Samples file, see :ref:`samples file` (REQUIRED)
 
 [-f|-seq <path>]
-    Fastq read files’ directory (REQUIRED)
+    Fastq read files directory (REQUIRED)
 
 Restarting
 ----------
@@ -231,6 +231,7 @@ name will be taken from the samples file instead. The ``-f`` parameter
 indicates the directory where the read files specified in the sample
 file are stored.
 
+:: _samples file:
 The samples file
 ================
 

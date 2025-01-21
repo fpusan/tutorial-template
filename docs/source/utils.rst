@@ -17,27 +17,13 @@ Generating summary tables
 sqm2tables.py
 -------------
 
+.. _sqmreads2tables:
 sqmreads2tables.py
 ------------------
 
 combine-sqm-tables.py
 ---------------------
 
-
-Mapping reads to a reference
-============================
-
-.. _sqm_mapper:
-sqm_mapper.pl
--------------
-
-
-Functional and taxonomic annotation of genes and genomes
-========================================================
-
-.. _sqm_annot:
-sqm_annot.pl
-------------
 
 
 Estimation of the sequence depth needed for a project
