@@ -83,7 +83,7 @@ The script produces the following files.
 
 
 - ``<project>.out.mcount``: abundance of all taxa. Format of the file:
-samples_file    - Column 1: taxonomic rank for the taxon
+    - Column 1: taxonomic rank for the taxon
     - Column 2: taxon
     - Column 3: accumulated read number (number of reads for that taxon in all samples)
     - Column 4 and beyond: number of reads for the taxon in the corresponding sample
@@ -224,7 +224,8 @@ Options
 Output
 """"""
 The output file follows the Short-Pair output format:
-- First column: read name (.1 for first pair, .2 for second pair) 
+
+- First column: read name (``.1`` for first pair, ``.2`` for second pair) 
 - Second column: Pfam domain family
 - Third column: alignment score
 - Fourth column: e-value
@@ -232,7 +233,7 @@ The output file follows the Short-Pair output format:
 - Sixth column: end position of alignment on the pfam domain model
 - Seventh column: start position of alignment on the read
 - Eighth column: end position of alignment on the read
-- Ninth column: strand (+ for forward, - for reverse)
+- Ninth column: strand (``+`` for forward, ``-`` for reverse)
 
 
 .. _sqm_mapper:
@@ -241,6 +242,25 @@ Mapping reads to a reference
 
 sqm_mapper.pl
 -------------
+This script maps reads to a given reference using one of the sequence aligners included in SqueezeMeta, and provides estimation of the abundance of the contigs and ORFs in the reference. In addition to the reads and reference files, it also needs a gff file specifying the positions of the genes in the contigs. It works in the same way than the mapping step of the main pipeline, and provides values for the coverage, TPM and RPKM of genes and contigs.
+
+A file including functional annotations for the genes can also be given. If so, the script will provide abundance estimations for functions as well.
+
+Usage
+^^^^^
+
+Arguments
+^^^^^^^^^
+
+Mandatory parameters
+""""""""""""""""""""
+
+Options
+"""""""
+
+Output
+^^^^^^
+
 
 .. _sqm_annot:
 Functional and taxonomic annotation of genes and genomes
@@ -248,3 +268,18 @@ Functional and taxonomic annotation of genes and genomes
 
 sqm_annot.pl
 ------------
+
+Usage
+^^^^^
+
+Arguments
+^^^^^^^^^
+
+Mandatory parameters
+""""""""""""""""""""
+
+Options
+"""""""
+
+Output
+^^^^^^
