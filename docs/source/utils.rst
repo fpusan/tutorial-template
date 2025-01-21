@@ -17,7 +17,6 @@ Generating summary tables
 sqm2tables.py
 -------------
 
-.. _sqmreads2tables:
 sqmreads2tables.py
 ------------------
 

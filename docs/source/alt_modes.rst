@@ -8,9 +8,9 @@ Taxonomic and functional annotation of unassembled reads
 sqm_reads.pl
 ------------
 
-This procedure performs taxonomic and functional assignments directly on the reads. This is useful when the assembly is not good, usually because of low sequencing depth, high diversity of the microbiome, or both. One indication that this is happening can be found in the `Step 10: Mapping of reads to contigs and calculation of abundance measures <mappingstat>`_ file. Should you find there low mapping percentages (below 50%), it means that most of your reads are not represented in the assembly and can we can try to classify the reads instead of the genes/contigs.
+This procedure performs taxonomic and functional assignments directly on the reads. This is useful when the assembly is not good, usually because of low sequencing depth, high diversity of the microbiome, or both. One indication that this is happening can be found in the :ref:`Step 10: Mapping of reads to contigs and calculation of abundance measures <mappingstat>` file. Should you find there low mapping percentages (below 50%), it means that most of your reads are not represented in the assembly and can we can try to classify the reads instead of the genes/contigs.
 
-This script will do a DIAMOND Blastx alignment of reads agains the nr, COG and KEGG databases, and will assign taxa as functions using the `The LCA algorithm <lca>`_ and `The fun3 algorithm <fun3>`_ methods, as SqueezeMeta does. It will probably provide an increment in the number of annotations. But on the other hand, the annotations could be less precise (we are working with a smaller sequence) and you lose the capacity to map reads onto an assembly and thus comparing metagenomes using a common reference. Use this for Illumina reads. This method is less suited to analyze long MinION reads where more than one gene can be represented (see `sqm_longreads.pl <sqm_longreads>`_ in that case).  This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but if using conda it will be present in your PATH.
+This script will do a DIAMOND Blastx alignment of reads agains the nr, COG and KEGG databases, and will assign taxa as functions using the :ref:`The LCA algorithm <lca>` and :ref:`The fun3 algorithm <fun3>` methods, as SqueezeMeta does. It will probably provide an increment in the number of annotations. But on the other hand, the annotations could be less precise (we are working with a smaller sequence) and you lose the capacity to map reads onto an assembly and thus comparing metagenomes using a common reference. Use this for Illumina reads. This method is less suited to analyze long MinION reads where more than one gene can be represented (see `sqm_longreads.pl`_ in that case).  This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but if using conda it will be present in your PATH.
 
 The usage of SQM_reads is very similar to that of SqueezeMeta:
 
@@ -46,7 +46,7 @@ Options
     population is relevant, as it will yield more annotations.
     Note that, regardless of whether this option is selected or not, that result will be available as part of the aggregated
     taxonomy tables generated at the last step of the pipeline and also when loading the project into *SQMtools*
-    (see the documentation for :ref:`sqmreads2tables` and also for the ``loadSQMlite`` function in the *SQMtools* R package),
+    (see the documentation for `sqmreads2tables.py`_ and also for the ``loadSQMlite`` function in the *SQMtools* R package),
     so this is only relevant if you are planning to use the intermediate files directly.
 
 [-extdb <path>]
@@ -66,7 +66,7 @@ Output
 ^^^^^^
 
 .. note::
-    The most straightforward way to analyze the results from this script is not to use its output files directly, but rather to produce summary tables for taxonomy and function with :ref:`sqmreads2tables` and optionally load them into R using the ``loadSQMlite`` function from the SQMtools package for further exploration. However, we list the output files here for completeness.
+    The most straightforward way to analyze the results from this script is not to use its output files directly, but rather to produce summary tables for taxonomy and function with `sqmreads2tables.py`_ and optionally load them into R using the ``loadSQMlite`` function from the SQMtools package for further exploration. However, we list the output files here for completeness.
 
 The script produces the following files.
 
