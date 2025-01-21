@@ -136,11 +136,15 @@ Mandatory parameters
 
 Options
 """""""
-[–-nocog]                                                                                                                                Skip COG assignment
 
-[-–nokegg]                                                                                                                               Skip KEGG assignment
+[–-nocog]
+    Skip COG assignment
 
-[–-nodiamond]                                                                                                                            Assumes that Diamond output files are already in place (for instance, if you are redoing the analysis) and skips all Diamond run
+[-–nokegg]
+    Skip KEGG assignment
+
+[–-nodiamond]
+    Assumes that Diamond output files are already in place (for instance, if you are redoing the analysis) and skips all Diamond run
 
 [-–euk]
     Drop identity filters for eukaryotic annotation (Default: no). This is recommended for analyses in which the eukaryotic
@@ -248,19 +252,69 @@ A file including functional annotations for the genes can also be given. If so, 
 
 Usage
 ^^^^^
+``sqm_mapper.pl -r <reference> -s <sample file> -f <reads directory>  -g <gff file> -o <output directory> [options]``
 
 Arguments
 ^^^^^^^^^
 
 Mandatory parameters
 """"""""""""""""""""
+[-r]
+    Reference sequence, the one reads will be mapped to. This can be a fasta file containing contigs, or even a single sequence coming from a complete genome (REQUIRED)
+
+[-s]
+    Samples file, see :ref:`Samples file` (REQUIRED)
+
+[-f]
+    Fastq read files directory (REQUIRED)
+
+[-g]
+    GFF file specifying the genomic features in the reference. This can be downloaded for genomes, or created using a gene predictor (REQUIRED unless ``--filter`` is also passed). See `GFF file format`_ below to know about the proper definition of this file
+
+[-o]
+    Output directory for storing results (REQUIRED)
 
 Options
 """""""
+[-t <int>]
+   Number of threads (default: ``12``)
+
+[-m <bowtie|bwa>]
+    Aligner to use (default: ``bowtie``)
+
+[--filter]
+    Use to remove reads mapping to a reference genome
+
+[-n|-name <str>]
+    Prefix name for the results (default: ``sqm``)
+
+[-fun]
+   File containing functional annotations for the genes in the reference
+   This is a two-column file. First column indicate the name of the gene, Second column corresponds to the function (or gene name).
+   For instance:
+   ::
+
+     gene1    COG0735
+     gene2    recA
 
 Output
 ^^^^^^
+The script will produce:
 
+- A ``mappingstat`` file (see :ref:`mappingstat`) , indicating the number of reads and percentage of alignment
+- A ``contigcov`` file, (see :ref:`mappingstat`), with the abundance measures for each of the contigs in the reference
+- A ``mapcount`` file (see :ref:`mappingstat`), with the abundance measures for each ORF in the gff file corresponding to the reference
+- If a functional file was specified with the ``-fun`` option, it will also produce a ``mapcount.fun`` file, with the abundance measures for each of the functions.
+
+GFF file format
+^^^^^^^^^^^^^^^
+The gff file (tab separated), should contain a tag ``ID`` in its ninth field, with the id being the contigname and, separated by ``_``, the initial and final positions of the gene (separated by ``-``), and a final semicolon. Something like:
+
+``ID=contig1_1-580;``
+
+an example of a full line in the GFF file would be:
+
+``contig1	samplename	CDS	1	580	.	+	1	ID=contig1_1-580;``
 
 .. _sqm_annot:
 Functional and taxonomic annotation of genes and genomes

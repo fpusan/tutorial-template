@@ -35,8 +35,8 @@ For example, we can create the file mydb.list containing information of two data
 
 ::
  
- DB1    /path/to/my/database1    /path/to/annotations/database1
- DB2    /path/to/my/database2    /path/to/annotations/database2
+ DB1	/path/to/my/database1	/path/to/annotations/database1
+ DB2	/path/to/my/database2	/path/to/annotations/database2
 
 and give it to SqueezeMeta using ``-extdb mydb.list``.
 
@@ -67,7 +67,7 @@ This database must be formatted for DIAMOND usage. For avoiding compatibility is
 
 For each database, you can OPTIONALLY provide a file with functional annotations, such as the name of the enzyme or whatever you want. Its location must be specified in the last field of the external database file. It must have only two columns separated by tabulators, the first with the function, the second with the additional information. For instance:
 
-``K02835    peptide chain release factor 1``
+``K02835	peptide chain release factor 1``
 
 The ORF table (see :ref:`ORF table`) will show both the database ID and the associated annotation for each external database you provided.
 
