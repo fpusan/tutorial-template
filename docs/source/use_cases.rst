@@ -208,7 +208,7 @@ Many users run SqueezeMeta remotely (e.g. in a computing cluster).
 However it is easier to explore the results interactively from your own
 computer. Since version 1.6.2, we provide an easy way to achieve this.
 1) In the system in which you ran SqueezeMeta, run the utility script
-:ref:`sqm2zip` with ``sqm2zip.py /path/to/my_project /output/dir``, where
+`sqm2zip.py`_ with ``sqm2zip.py /path/to/my_project /output/dir``, where
 ``/path/to/my_project`` is the path to the output of SqueezeMeta, and
 ``/output/dir`` an arbitrary output directory. 2) This will generate a
 file in ``/output/dir`` named ``my_project.zip``, which contains the

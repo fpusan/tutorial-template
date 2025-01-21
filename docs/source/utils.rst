@@ -5,7 +5,6 @@ Utility scripts
 Compressing a SqueezeMeta project into a zip file
 =================================================
 
-.. _sqm2zip:
 sqm2zip.py
 ----------
 
@@ -13,7 +12,6 @@ sqm2zip.py
 Generating summary tables
 =========================
 
-.. _sqm2tables:
 sqm2tables.py
 -------------
 
