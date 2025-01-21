@@ -28,10 +28,10 @@ Mandatory parameters
 [-p <string>]
     Project name (REQUIRED)
 
-[-s|-samples]
+[-s|-samples <path>]
     Samples file, see :ref:`Samples file` (REQUIRED)
 
-[-f|-seq]
+[-f|-seq <path>]
     Fastq read files directory (REQUIRED)
 
 Options
@@ -57,7 +57,7 @@ Options
     File with a list of additional user-provided databases for functional annotations. See :ref:`Using external function databases`
 
 [-t <integer>]
-    Number of threads (default: ``12``)                                                                                                                                                                                                                                   [-b|-block-size <integer>]
+    Number of threads (default: ``12``)                                                                                                                                                                                                                                   [-b|-block-size <float>]
     Block size for DIAMOND against the nr database (default: *calculate automatically*)
 
 [-e|-evalue <float]
@@ -128,10 +128,10 @@ Mandatory parameters
 [-p <string>]
     Project name (REQUIRED)
 
-[-s|-samples]
+[-s|-samples <path>]
     Samples file, see :ref:`Samples file` (REQUIRED)
 
-[-f|-seq]
+[-f|-seq <path>]
     Fastq read files directory (REQUIRED)
 
 Options
@@ -160,7 +160,7 @@ Options
 [-t <integer>]
     Number of threads (default: ``12``)
 
-[-b|-block-size <integer>]
+[-b|-block-size <float>]
     Block size for DIAMOND against the nr database (default: *calculate automatically*)
 
 [-e|-evalue <float]
@@ -259,19 +259,19 @@ Arguments
 
 Mandatory parameters
 """"""""""""""""""""
-[-r]
+[-r <path>]
     Reference sequence, the one reads will be mapped to. This can be a fasta file containing contigs, or even a single sequence coming from a complete genome (REQUIRED)
 
-[-s]
+[-s <path>]
     Samples file, see :ref:`Samples file` (REQUIRED)
 
-[-f]
+[-f <path>]
     Fastq read files directory (REQUIRED)
 
-[-g]
+[-g <path>]
     GFF file specifying the genomic features in the reference. This can be downloaded for genomes, or created using a gene predictor (REQUIRED unless ``--filter`` is also passed). See `GFF file format`_ below to know about the proper definition of this file
 
-[-o]
+[-o <string>]
     Output directory for storing results (REQUIRED)
 
 Options
@@ -288,7 +288,7 @@ Options
 [-n|-name <str>]
     Prefix name for the results (default: ``sqm``)
 
-[-fun]
+[-fun <path>]
    File containing functional annotations for the genes in the reference
    This is a two-column file. First column indicate the name of the gene, Second column corresponds to the function (or gene name).
    For instance:
@@ -322,18 +322,70 @@ Functional and taxonomic annotation of genes and genomes
 
 sqm_annot.pl
 ------------
+This script performs functional and taxonomic annotation for a set of genes or genomes. Genomes must be nucleotide sequences, while gene sequences can be either nucleotides or amino acids. All sequence files must be in fasta format.
+
+For a genome, the script will call SqueezeMeta to predict RNAs and CDS, and then proceeds to run Diamond searches against the usual taxonomic (GenBank nr) and functional (COGs and KEGG) databases and annotate the genes according the same procedures used in the main SqueezeMeta pipeline (LCA for taxa, best hit/best average for functions. Please refer to :doc:`alg_details` for details). For gene sequences, it is assumed that each sequence corresponds to an already identified ORF, and then RNA and CDS prediction is skipped.
+Diamond searches are automatically set to “blastp” for amino acids, and “blastx” for nucleotides.
+
+The scripts needs a sample file following the format:
+
+```<sample name>	<fasta file name>	<genome|aa|nt>```
+
+The first field corresponds to the project name. The script will create a project directory with that name, where all results will be placed. The second field is the name of the genome, amino acid or nucleotide fasta file containing the sequences. And the third field specifies the type of data: genome, aa or nt. As explained above, genome will trigger gene prediction and run Diamond blastp on the predicted peptides, aa will run Diamond blastp for the provided sequences, and nt will run Diamond blastx for the provided sequences.
 
 Usage
 ^^^^^
+``sqm_annot.pl -s <samples file> -f <sequence file directory> [options]``
 
 Arguments
 ^^^^^^^^^
 
 Mandatory parameters
 """"""""""""""""""""
+[-f <path>]
+    Directory in which the sequence files specified in the samples file are located (REQUIRED). The sequence files MUST be in FASTA format.
+
+[-s <path>]
+    Samples file (REQUIRED)
 
 Options
 """""""
+[-t]
+    Number of threads (default: `12`)
+
+[--notax]
+    Skips taxonomic annotation
+
+[--nocog]
+    Skips COGs annotation
+
+[--nokegg]
+    Skips KEGG annotation
+
+[-extdb <path>]
+    File with a list of additional user-provided databases for functional annotations. See :ref:`Using external function databases`
+ 
+[-b <float>]
+    Block size for DIAMOND against the nr database. Lower values reduce RAM memory usage. Set it to 3 or below for running in a desktop computer (default: ``8``)
 
 Output
 ^^^^^^
+This scripts takes advantage of the standard SqueezeMeta machinery, therefore the output files are these obtained in steps :ref:`6 <lca script>` and :ref:`7 <fun3 script>` of the pipeline:
+
+- Files coming from :ref:`lca script`
+    - ``06.<project>.fun3.tax.wranks``: taxonomic assignments for each ORF, including taxonomic ranks
+    - ``06.<project>.fun3.tax.noidfilter.wranks``: same as above, but assignment was done not considering identity filters (refer to the explanation of :ref:`lca`)
+- Files coming from :ref:`fun3 script>`
+    - ``07.<sample>.fun3.cog``: COG functional assignment for each ORF
+    - ``07.<sample>.fun3.kegg``: KEGG functional assignment for each ORF
+- Summary files
+    - ``COG.summary``: Counts and functions for each COG
+    - ``KEGG.summary``: Counts and functions for each KEGG
+    - Format of these files:
+        - Column 1: COG/KEGG ID
+        - Column 2: Abundance (number of assignments)
+        - Column 3: Name of the gene
+        - Column 4: Function of the gene
+        - Column 5: Functional class or pathway
+        - Column 6: ORFs belonging to current COG/KEGG
+

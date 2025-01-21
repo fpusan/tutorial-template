@@ -126,7 +126,7 @@ Annotation
     for that contig (default: ``50``)
 
 [-extdb <path>]
-    File with a list of additional user-provided databases for functional annotations. See :ref:`Using external function databases`
+    File with a list of additional user-provided databases for functional annotation. See :ref:`Using external function databases`
 
 [–D|–-doublepas]
     Run BlastX ORF prediction in addition to Prodigal. See :ref:`Extra sensitive ORFs`
@@ -183,7 +183,7 @@ Performance
 [-t <integer>]
     Number of threads (default: ``12``)
 
-[-b|-block-size <integer>]
+[-b|-block-size <float>]
     Block size for DIAMOND against the nr database (default: *calculate automatically*)
 
 [-canumem <float>]
