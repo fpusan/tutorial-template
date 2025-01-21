@@ -118,7 +118,7 @@ Annotation
     population is relevant, as it will yield more annotations.
     Note that, regardless of whether this option is selected or not, that result will be available as part of the aggregated
     taxonomy tables generated at the last step of the pipeline and also when loading the project into *SQMtools*
-    (see the documentation for `sqm2tables.py`_ and also for the ``loadSQM`` function in the *SQMtools* R package),
+    (see the documentation for :ref:`sqm2tables` and also for the ``loadSQM`` function in the *SQMtools* R package),
     so this is only relevant if you are planning to use the intermediate files directly.
 
 [-consensus <float>]
