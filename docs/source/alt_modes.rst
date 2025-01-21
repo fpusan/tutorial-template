@@ -47,7 +47,7 @@ Options
     population is relevant, as it will yield more annotations.
     Note that, regardless of whether this option is selected or not, that result will be available as part of the aggregated
     taxonomy tables generated at the last step of the pipeline and also when loading the project into *SQMtools*
-    (see the documentation for :ref:`sqmreads2tables` and also for the ``loadSQMlite`` function in the *SQMtools* R package),
+    (see the documentation for :ref:`sqmreads2tables.py <sqmreads2tables>` and also for the ``loadSQMlite`` function in the *SQMtools* R package),
     so this is only relevant if you are planning to use the intermediate files directly.
 
 [-extdb <path>]
@@ -67,7 +67,7 @@ Output
 ^^^^^^
 
 .. note::
-    The most straightforward way to analyze the results from this script is not to use its output files directly, but rather to produce summary tables for taxonomy and function with :ref:`sqmreads2tables.py` and optionally load them into R using the ``loadSQMlite`` function from the SQMtools package for further exploration. However, we list the output files here for completeness.
+    The most straightforward way to analyze the results from this script is not to use its output files directly, but rather to produce summary tables for taxonomy and function with :ref:`sqmreads2tables.py <sqmreads2tables>` and optionally load them into R using the ``loadSQMlite`` function from the SQMtools package for further exploration. However, we list the output files here for completeness.
 
 The script produces the following files.
 
@@ -79,7 +79,7 @@ The script produces the following files.
 
 
 - ``<project>.out.mcount``: abundance of all taxa. Format of the file:
-    - Column 1: taxonomic rank for the taxon
+samples_file    - Column 1: taxonomic rank for the taxon
     - Column 2: taxon
     - Column 3: accumulated read number (number of reads for that taxon in all samples)
     - Column 4 and beyond: number of reads for the taxon in the corresponding sample
