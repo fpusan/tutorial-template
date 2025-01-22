@@ -218,7 +218,7 @@ Files produced
 --------------
 -
 
-
+.. _sqm2tables in pipeline:
 Step 22: Calculation of summary tables for the project
 ======================================================
 

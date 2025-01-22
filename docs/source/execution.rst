@@ -117,9 +117,8 @@ Annotation
     Drop identity filters for eukaryotic annotation (Default: no). This is recommended for analyses in which the eukaryotic
     population is relevant, as it will yield more annotations.
     Note that, regardless of whether this option is selected or not, that result will be available as part of the aggregated
-    taxonomy tables generated at the last step of the pipeline and also when loading the project into *SQMtools*
-    (see the documentation for :ref:`sqm2tables` and also for the ``loadSQM`` function in the *SQMtools* R package),
-    so this is only relevant if you are planning to use the intermediate files directly.
+    taxonomy tables generated at the last step of the pipeline and also when loading the project into :doc:`SQMtools`
+    (see :ref:`euk annot` for more information), so this is only relevant if you are planning to use the intermediate files directly
 
 [-consensus <float>]
     Minimum percentage of genes assigned to a taxon in order to assign it as the consensus taxonomy
