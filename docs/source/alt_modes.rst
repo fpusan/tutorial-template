@@ -70,7 +70,7 @@ Output
 ^^^^^^
 
 .. note::
-    The most straightforward way to analyze the results from this script is not to use its output files directly, but rather to produce summary tables for taxonomy and function with :ref:`sqmreads2tables.py <sqmreads2tables>` and optionally load them into R using the ``loadSQMlite`` function from the SQMtools package for further exploration. However, we list the output files here for completeness.
+    The most straightforward way to analyze the results from this script is not to use its output files directly, but rather to produce summary tables for taxonomy and function with :ref:`sqmreads2tables.py <sqmreads2tables>` and optionally load them into R using the ``loadSQMlite`` function from :doc:`SQMtools` for further exploration. However, we list the output files here for completeness.
 
 The script produces the following files.
 
@@ -174,7 +174,7 @@ Options
 
 Output
 ^^^^^^
-.. note::                                                                                                                                The most straightforward way to analyze the results from this script is not to use its output files directly, but rather to produce summary tables for taxonomy and function with :ref:`sqmreads2tables.py <sqmreads2tables>` and optionally load them into R using the ``loadSQMlite`` function from the SQMtools package for further exploration. However, we list the output files here for completeness.
+.. note::                                                                                                                                The most straightforward way to analyze the results from this script is not to use its output files directly, but rather to produce summary tables for taxonomy and function with :ref:`sqmreads2tables.py <sqmreads2tables>` and optionally load them into R using the ``loadSQMlite`` function from :doc:`SQMtools` for further exploration. However, we list the output files here for completeness.
 
 The output is similar to that of :ref:`sqm_reads.pl <sqm_reads_output>`. In addition, ``sqm_longreads.pl`` provides information about the consensus in the ``readconsensus.txt`` files placed in the output directories for each sample.
 
