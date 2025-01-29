@@ -19,12 +19,12 @@ Usage
 Arguments
 ^^^^^^^^^
 
-Mandatory parameters
-""""""""""""""""""""
-[project_path]
+Mandatory parameters (positional)
+"""""""""""""""""""""""""""""""""
+[project_path <path>]
     Path to the SqueezeMeta run
 
-[output_dir]
+[output_dir <path>
     Output directory
 
 Options
@@ -33,7 +33,7 @@ Options
     Include only ORFs with highly trusted KEGG and COG assignments in aggregated functional tables. This will be ignored if the ``/path/to/project/results/tables`` directory already exists
 
 [--ignore-unclassified]
-    Ignore reads with no functional classification when aggregating abundances for functional categories (KO, COG, PFAM). This will be ignored if the ``/path/to/project/results/tables`` directory already exists
+    Ignore reads without assigned functions for TPM calculation (KO, COG, PFAM). This will be ignored if the ``/path/to/project/results/tables`` directory already exists
 
 [--force-overwrite]
     Write results even if the output file already exists
@@ -66,12 +66,12 @@ Usage
 Arguments
 ^^^^^^^^^
 
-Mandatory parameters
-""""""""""""""""""""
-[project_path]
+Mandatory parameters (positional)
+"""""""""""""""""""""""""""""""""
+[project_path <path>]
     Path to the SqueezeMeta run
 
-[output_dir]
+[output_dir <path>]
     Output directory
 
 Options
@@ -80,7 +80,7 @@ Options
     Include only ORFs with highly trusted KEGG and COG assignments in aggregated functional tables
 
 [--ignore-unclassified]
-    Ignore reads with no functional classification when aggregating abundances for functional categories (KO, COG, PFAM)
+    Ignore reads without assigned functions for TPM calculation
 
 [--force-overwrite]
     Write results even if the output file already exists
@@ -141,25 +141,22 @@ Usage
 Arguments
 ^^^^^^^^^
 
-Mandatory parameters
-""""""""""""""""""""
-[project_path]
+Mandatory parameters (positional)
+"""""""""""""""""""""""""""""""""
+[project_path <path>]
     Path to the SqueezeMeta run
 
-[output_dir]
+[output_dir <path>]
     Output directory
 
 Options
 """""""
 
-[-q/—query]
+[-q/—query <string>]
     Filter the results based on the provided query in order to create tables containing only certain taxa or functions. See :ref:`query syntax`
 
 [--trusted-functions]
-    Include only ORFs with highly trusted KEGG and COG assignments in aggregated functional tables. This will be ignored if the ``/path/to/project/results/tables`` directory already exists
-
-[--ignore-unclassified]
-    Ignore reads with no functional classification when aggregating abundances for functional categories (KO, COG, PFAM). This will be ignored if the ``/path/to/project/results/tables`` directory already exists
+    Include only ORFs with highly trusted KEGG and COG assignments in aggregated functional tables
 
 [--force-overwrite]
     Write results even if the output file already exists
@@ -182,10 +179,8 @@ Output
 Query syntax
 ^^^^^^^^^^^^
 
-.. note::                                                                                                                              This syntax is used by two different scripts
-
-  - :ref:`sqmreads2tables.py <sqmreads2tables>` script, in order to filter reads annotated with :ref:`sqm_reads_pl <sqm_reads>` or :ref:`sqm_longreads.pl <sqm_longreads>
-
+.. note::                                                                                                                              This syntax is used by two different scripts:
+  - :ref:`sqmreads2tables.py <sqmreads2tables>` script, in order to filter reads annotated with :ref:`sqm_reads_pl <sqm_reads>` or :ref:`sqm_longreads.pl <sqm_longreads>`
   - :ref:`anvi-filter-sqm.py <anvi-filter-sqm>` script, in order to filter an anvi'o database obtained after running :ref:`anvi-load-sqm.py <anvi-load-sqm>` on a SqueezeMeta project
 
 - Please enclose query strings within double brackets.
@@ -213,12 +208,134 @@ Query syntax
 
 combine-sqm-tables.py
 ---------------------
+Combine tabular outputs from different projects generated either with SqueezeMeta or *sqm_(long)reads* (but not both at the same time). If the directory ``/path/to/project/results/tables`` is not present, it will also run :ref:`sqm2tables.py <sqm2tables>` or :ref:`sqmreads2tables.py <sqmreads2tables>` to generate the required tables.
 
-Estimation of the sequence depth needed for a project
+This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but if using conda it will be present in your PATH.
+
+.. note::
+  The recommended way of doing is is now using :doc:`SQMtools`
+  - The ``loadSQM`` function accepts an arbitrary number of SqueezeMeta projects, loading them into a single SQM object
+  - The ``combineSQMlite`` fucntion can be used to combine previously loaded SqueezeMeta and *sqm_(long)reads* projects into a single object. An advantage of this over ``combine-sqm-tables.py`` is that it can be used to combine projects coming from **both** SqueezeMeta and *sqm_(long)reads* at the same time. 
+
+Usage
+^^^^^
+``combine-sqm-tables.py [options] <project_paths>``
+
+Arguments
+^^^^^^^^^
+
+Mandatory parameters (positional)
+"""""""""""""""""""""""""""""""""
+[project_paths <paths>]
+    A space-separated list of paths
+
+Options
+"""""""
+[-f|--paths-file <path>]
+   File containing the paths of the SqueezeMeta projects to combine, one path per line
+
+[-o|--output-dir <path>]
+    Output directory (default: ``"combined"``)
+
+[-p|--output-prefix]
+    Prefix for the output files (default: ``"combined"``)
+
+[--trusted-functions]
+   Include only ORFs with highly trusted KEGG and COG assignments in aggregated functional tables. This will be ignored if the ``/path/to/project/results/tables`` directory already exists
+
+[--ignore-unclassified]
+    Ignore reads without assigned functions for TPM calculation. This will be ignored if the ``/path/to/project/results/tables`` directory already exists or if ``--sqm-reads`` is passed
+
+[--sqm-reads]
+    Projects were generated using :ref:`sqm_reads.pl <sqm_reads>` or :ref:`sqm_longreads.pl <sqm_longreads>`
+
+[--force-overwrite]
+    Write results even if the output directory already exists
+
+[--doc]
+    Print the documentation
+
+Example calls
+"""""""""""""
+- Combine projects  ``/path/to/proj1`` and ``/path/to/proj2`` and store output in a directory named ``"outputDir"``
+    - ``combine-sqm-tables.py /path/to/proj1 /path/to/proj2 -o output_dir``
+- Combine a list of projects contained in a file, use default output dir
+    - ``combine-sqm-tables.py -f project_list.txt``
+
+Output
+^^^^^^
+Tables containing aggregated counts and feature names for the different functional hierarchies and taxonomic levels for each sample contained in the different projects that were combined. Tables with the TPM and copy number of functions will also be generated for SqueezeMeta runs, but not for *sqm_(long)reads* runs.
+
+Estimation of the sequencing depth needed for a project
 =====================================================
 
 cover.pl
 --------
+
+COVER intends to help in the experimental design of metagenomics by addressing the unavoidable question: How much should I sequence to get good results? Or the other way around: I can spend this much money, would it be worth to use it in sequencing the metagenome?
+
+To answer these questions, COVER allows the estimation of the amount of sequencing needed to achieve a particular objective, being this the coverage attained for the most abundant N members of the microbiome. For instance, how much sequence is needed to reach 5x coverage for the four most abundant members (from now on, OTUs). COVER was first published in 2012 (Tamames *et al.*, 2012, Environ Microbiol Rep. 4:335-41), but we are using a different version of the algorithm described there. Details on this implementation can be found in :ref:`COVER`.
+
+COVER needs information on the composition of the microbiome, and that must be provided as a file containing 16S rRNA sequences obtained by amplicon sequencing of the target microbiome. If you don't have that, you can look for a similar sample already sequenced (for instance, in NCBI's SRA).
+
+Usage
+^^^^^
+``cover.pl -i <input file> [options]``
+
+Arguments
+^^^^^^^^^
+
+Mandatory parameters
+""""""""""""""""""""
+[-i <path>]
+    FASTA file containing 16S rRNA amplicons
+
+Options
+"""""""
+[-idcluster <float>]
+    Identity threshold for collapsing OTUs (default: ``0.98``)
+
+[-c|-coverage <float>]
+    Target coverage (default: ``5``)
+
+[-r|-rank <integer>]
+    Rank of target OTU (default: ``4``)
+
+.. note::
+   Default values imply looking for 5x coverage for the 4th most abundant 98% OTU
+
+[-cl|-classifier <mothur|rdp>]
+    Classifier to use (RDP or Mothur) (default: ``mothur``)
+
+[-d|-dir]
+    Output directory (default: ``cover``)
+
+[-t]
+    Number of threads (default: ``4``)
+
+  (Default values imply looking for 5 x coverage for the 4 th most abundant OTU)
+
+Output
+""""""
+The output is a table that first lists the amount of sequencing needed, both uncorrected and corrected by the Good’s estimator:
+
+::
+  
+  Needed 4775627706 bases, uncorrected
+  Correcting by unobserved: 6693800053 bases
+
+And then lists the information and coverages for each OTU, with the following columns:
+
+- OTU: Name of the OTU
+- Size: Inferred genomic size of the OTU
+- Raw abundance: Number of sequences in the OTU
+- Copy number: Inferred 16S rRNA copy number
+- Corrected abundance: Abundance n / Σn Abundance
+- Pi : Probability of sequencing a base of this OTU
+- %Genome sequenced: Percentage of the genome that will be sequenced for that OTU
+- Coverage: Coverage that will be obtained for that OTU
+- Taxon: Deepest taxonomic annotation for the OTU
+
 
 
 Adding new databases to an existing project

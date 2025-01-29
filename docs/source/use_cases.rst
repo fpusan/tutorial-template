@@ -39,13 +39,14 @@ multi-metagenome support. These modes are:
    way until all metagenomes have been merged in one. Therefore, for n
    metagenomes, it will need n-1 merging steps.
 
-Note that the *merged* and *seqmerge* modes work well as a substitute of
-coassembly for running small datasets in computers with low memory
-(e.g. 16 Gb) but are very slow for analising large datasets (>10
-samples) even in workstations with plenty of resources. Still, setting
-``-contiglen`` to 1000 or higher can make *seqmerge* a viable strategy
-even in those cases. Otherwise, we recommend to use either the
-sequential or the co-assembly modes.
+.. note::
+  Note that the *merged* and *seqmerge* modes work well as a substitute of
+  coassembly for running small datasets in computers with low memory
+  (e.g. 16 Gb) but are very slow for analising large datasets (>10
+  samples) even in workstations with plenty of resources. Still, setting
+  ``-contiglen`` to 1000 or higher can make *seqmerge* a viable strategy
+  even in those cases. Otherwise, we recommend to use either the
+  sequential or the co-assembly modes.
 
 Regarding the choice of assembler, MEGAHIT and SPAdes work better with
 short Illumina reads, while Canu and Flye support long reads from PacBio

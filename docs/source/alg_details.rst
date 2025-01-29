@@ -85,3 +85,7 @@ Doublepass: blastx on contig gaps
 .. _disparity:
 Disparity calculation
 =====================
+
+.. _COVER:
+The COVER algorithm
+===================
