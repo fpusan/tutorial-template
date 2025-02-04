@@ -89,3 +89,94 @@ Disparity calculation
 .. _COVER:
 The COVER algorithm
 ===================
+COVER (used by the :ref:`cover.pl <COVER_script>`) intends to help in the experimental design of metagenomics by addressing the unavoidable question: How much should I sequence to get good results? Or the other way around: I can spend this much money, would it be worth to use it in sequencing the metagenome?
+
+To answer these questions, COVER allows the estimation of the amount of sequencing needed to achieve a particular objective, being this the coverage attained for the most abundant N members of the microbiome. For instance, how much sequence is needed to reach 5x coverage for the four most abundant members (from now on, OTUs). COVER was first published in 2012 (Tamames *et al.*, 2012, *Environ Microbiol Rep.* **4**:335-41), but we are using a different version of the algorithm described there.
+
+COVER needs information on the composition of the microbiome, and that must be
+provided as a file containing 16S rRNA sequences obtained by amplicon sequencing of
+the target microbiome. If you don’t have that, you can look for a similar sample already
+sequenced (for instance, in NCBI's SRA, see below).
+
+The first step is clustering the sequences at the desired identity level (default: 98%) to
+produce OTUs. COVER uses cd-hit (Schmieder *et al.*, 2011, *Bioinformatics* **27**:863-4) for
+doing this. The abundance of each OTU is also obtained in this step (the number of
+sequences in each OTU). Then, a taxonomic annotation step must be done for inferring
+genomic size and 16S rRNA copy number for each of the OTUs. This annotation can be
+done using the RDP classifier (Wang *et al.*, 2007, *Appl Environ Microbiol* **73**:5261-7), or
+Mothur (Schloss *et al.*, 2009, *Appl Environ Microbiol* **75**:7537-41) alignment against the
+SILVA database. The latter is the default option. It is slower but provides more accurate
+results.
+
+The taxonomic annotation allows to infer the approximate genomic size by comparison
+with the size of already sequenced genomes from the same taxon (we've got this
+information from NCBI's genome database). In the same way, we inferred the expected
+copy number by comparison to the rrnDB database (Stoddard *et al.*, 2014, *Nucleic Acids
+Research* doi: 10.1093/nar/gku1201; https://rrndb.umms.med.umich.edu). Obviously,
+the most accurate the annotation, the most precise this estimation will be. In case that
+the OTU could not be annotated, COVER uses default values of 4 Mb genomic size and 1
+for copy number. These values can be greatly inaccurate and affect the results.
+Therefore, it is strongly advised that the taxonomic annotation is as good as possible.
+
+In the next step, COVER calculates the probability of sequencing a base for each of the
+OTUs. First, the abundance of each OTU is divided by its copy number:
+
+::
+  Abundance_n = Raw_abundance_n / Copy_number_n
+
+Then, all abundances are summed, and individual abundances are normalized by this
+total abundance.
+
+::
+  Corr_abundance_n = Abundance_n / Σn Abundances
+
+The fraction of the microbiome occupied by each OTU, f, is the product of its abundance
+by its genomic size
+
+::
+  f_n = Corr_abundance_n * Size_n
+
+and the total size of the microbiome is the sum of all individual fractions
+
+::
+  F = Σn f_n
+
+Then, the probability of sequencing one base of a particular OTU is the ratio between its
+fraction and the total size:
+
+::
+  p_n = f_n / F
+
+And the amount of sequence needed (S) to attain coverage C for genome n is then:
+
+::
+  S = C * Size_n / p_n
+
+COVER calculates this value of S for the n-th OTU, as specified by the user. Then,
+coverages for all other OTUs are also calculated using the last equation and this value of
+S:
+
+::
+  C_n = S * p_n / Size_n
+
+in the previous calculation, we have assumed that we can calculate abundances for all
+members of the microbiome. Obviously this is not true, because there will be a fraction
+of unobserved (rare) OTUs that were not sequenced in our 16S. The size of that fraction
+will depend on the completeness of our 16S sequencing, which is influenced by the
+diversity of the microbiome and by the sequencing depth. This unobserved fraction can
+bias greatly the results. Luckily, there is a way to estimate it by means of the Good’s
+estimator of sample coverage (Chao & Shen 2003 Environ Ecol Stat 10: 429–443), that
+supposses that the fraction of sequence reads corresponding to unobserved OTUs is
+approximately equal to the fraction of observed singletons (OTUs with just one
+sequence):
+
+::
+  U = f_1 / N_OTUs
+
+Both f_1 and N_OTUs are obtained in the OTU clustering step. Then, we just need to correct
+the value of S by this value:
+
+::
+  S_corrected = S / (1-U)
+
+

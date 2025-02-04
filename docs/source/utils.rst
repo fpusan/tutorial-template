@@ -8,7 +8,7 @@ Compressing a SqueezeMeta project into a zip file
 .. _sqm2zip:
 sqm2zip.py
 ----------
-This script generates a compressed zip file with all the essential information needed to load a project into SQMtools. If the directory ``/path/to/project/results/tables`` is not present, it will also run :ref:`sqm2tables.py <sqm2tables>` to generate the required tables (see below).
+This script generates a compressed zip file with all the essential information needed to load a :doc:`SqueezeMeta <execution>` project into :doc:`SQMtools`. If the directory ``/path/to/project/results/tables`` is not present, it will also run :ref:`sqm2tables.py <sqm2tables>` to generate the required tables (see below).
 
 This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but if using conda it will be present in your PATH.
 
@@ -269,12 +269,13 @@ Tables containing aggregated counts and feature names for the different function
 Estimation of the sequencing depth needed for a project
 =====================================================
 
+.. _COVER_script:
 cover.pl
 --------
 
 COVER intends to help in the experimental design of metagenomics by addressing the unavoidable question: How much should I sequence to get good results? Or the other way around: I can spend this much money, would it be worth to use it in sequencing the metagenome?
 
-To answer these questions, COVER allows the estimation of the amount of sequencing needed to achieve a particular objective, being this the coverage attained for the most abundant N members of the microbiome. For instance, how much sequence is needed to reach 5x coverage for the four most abundant members (from now on, OTUs). COVER was first published in 2012 (Tamames *et al.*, 2012, Environ Microbiol Rep. 4:335-41), but we are using a different version of the algorithm described there. Details on this implementation can be found in :ref:`COVER`.
+To answer these questions, COVER allows the estimation of the amount of sequencing needed to achieve a particular objective, being this the coverage attained for the most abundant N members of the microbiome. For instance, how much sequence is needed to reach 5x coverage for the four most abundant members (from now on, OTUs). COVER was first published in 2012 (Tamames *et al.*, 2012, *Environ Microbiol Rep.* **4**:335-41), but we are using a different version of the algorithm described there. Details on this implementation can be found in :ref:`COVER`.
 
 COVER needs information on the composition of the microbiome, and that must be provided as a file containing 16S rRNA sequences obtained by amplicon sequencing of the target microbiome. If you don't have that, you can look for a similar sample already sequenced (for instance, in NCBI's SRA).
 
@@ -427,6 +428,9 @@ Usage
 """""
 ``sqm2ipath.pl <project_path> [options]``
 
+Arguments
+"""""""""
+
 Mandatory parameters (positional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [project_path <path>]
@@ -470,30 +474,199 @@ Integration with pavian
 
 sqm2pavian.pl
 ^^^^^^^^^^^^^
+This script produces output files containing abundance of taxa that can be plotted using
+the Pavian tool (https://github.com/fbreitwieser/pavian). It works with projects generated with :doc:`SqueezeMeta.pl <execution>`, :ref:`sqm_reads.pl <sqm_reads>` or :ref:`sqm_longreads.pl <sqm_longreads>`. It can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but if using conda it will be present in your PATH.
+
+
+Usage
+"""""
+``sqm2pavian.pl <project_path> [mode]``
+
+Arguments
+"""""""""
+
+Mandatory parameters (positional)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[project_path <path>]
+    Path to the SqueezeMeta run
+
+Options (positional)
+~~~~~~~~~~~~~~~~~~~~
+[mode <reads|bases>]
+    Count abundances in reads or bases (default: ``reads``)
+
+Output
+""""""
+A file named ``<project>.pavian`` that can be uploaded in the pavian app (https://fbreitwieser.shinyapps.io/pavian) or in the pavian R package.
 
 Integration with anvi`o
 -----------------------
 
-sqm2anvio.pl
-^^^^^^^^^^^^
-
 .. _anvi-load-sqm:
 anvi-load-sqm.py
 ^^^^^^^^^^^^^^^^
+This script creates an anvi’o database from a SqueezeMeta project. The database can then be filtered and visually explored using the :ref:`anvi-filter-sqm.py <anvi-filter-sqm>` script. This script can be found in the ``/path/to/SqueezeMeta/utils/anvio_utils`` directory, but if using conda it will be present in your PATH. For this script to work, anvi’o must be installed and present in your PATH.
+
+.. note::
+  This has been tested using anvi’o versions 6 and 7. Support is only for released versions, the master/develop branches of anvi’o might (and will likely) not work.
+
+Usage
+"""""
+``anvi-load-sqm.py -p <project> -o <output> [options]``
+
+Arguments
+"""""""""
+
+Mandatory parameters
+~~~~~~~~~~~~~~~~~~~~
+[-p|-project <path>]
+    Path to the SqueezeMeta run
+
+[-o|--output <path>]
+    Output directory
+
+Options
+~~~~~~~
+[--num-threads <int>]
+    Number of threads (default: ``12``)
+
+[--run-HMMS]
+    Run the ``anvi-run-hmms`` command from anvi’o for identifying single-copy core genes
+
+[--run-scg-taxonomy]
+    Run the ``anvi-run-scg-taxonomy`` command from anvi’o for assigning taxonomy based on single-copy core genes
+
+[--min-contigs-length <int>]
+    Minimum length of contigs (default: ``0``)
+
+[--min-mean-coverage <float>]
+    Minimum mean coverage for contigs (default: ``0``)
+
+[--skip-SNV-profiling]
+    Skip the profiling of single nucleotide variants
+
+[--profile-SCVs]
+    Perform characterization of codon frequencies in genes
+
+[--force-overwrite]
+    Force overwrite if the output directory already exists
+
+[--doc]
+    Print the documentation
+
+Output
+""""""
+- ``CONTIGS.db``, ``PROFILE.db``, ``AUXILIARY-DATA.db``: anvi’o databases
+- ``<project_name>_anvio_contig_taxonomy.txt``: contig taxonomy to be loaded by :ref:`anvi.filter-sqm.py <anvi-filter-sqm>`
 
 .. _anvi-filter-sqm:
 anvi-filter-sqm.py
 ^^^^^^^^^^^^^^^^^^
+This script filters the results of a SqueezeMeta project (previously loaded into to an anvi’o database by the :ref:`anvi-load-sqm.py <anvi-load-sqm>` script) and opens an anvi’o interactive interface to examine them. Filtering criteria can be specified by using
+a simple query syntax.  This script can be found in the ``/path/to/SqueezeMeta/utils/anvio_utils`` directory, but if using conda it will be present in your PATH. For this script to work, anvi’o must be installed and present in your PATH.
+
+.. note::                                                                                                                              This has been tested using anvi’o versions 6 and 7. Support is only for released versions, the master/develop branches of anvi’o might (and will likely) not work.
+
+Usage
+"""""
+``anvi-filter-sqm.py -p <profile db> -c <contigs db> -t <contigs taxonomy file> -q <query> [options]``
+
+Arguments
+"""""""""
+
+Mandatory parameters
+~~~~~~~~~~~~~~~~~~~~
+[-p|--profile-db <path>]
+    anvi’o profile db, as generated by :ref:`anvi-load-sqm.py <anvi-load-sqm>`
+
+[-c|--contigs-db <path>]
+    anvi’o contigs db, as generated by :ref:`anvi-load-sqm.py <anvi-load-sqm>`
+
+[-t|--taxonomy <path>]
+    Contigs taxonomy, as generated by :ref:`anvi-load-sqm.py <anvi-load-sqm>`
+
+[-q/—query <string>]
+    Filter the results based on the provided query in order to visualize only certain taxa or functions at certain abundances. See :ref:`query syntax`
+
+Options
+~~~~~~~
+[-o/--output_dir <path>]
+    Output directory for the filtered anvi’o databases (default: ``filteredDB``)
+
+[-m|--max-splits <int>]
+    Maximum number of splits to be loaded into anvi'o. If the provided query returns a higher number of splits, the program will stop. By default it is set to ``25,000``, larger values may make the anvi’o interface to respond slowly. Setting ``--max-splits`` to ``0`` will allow an arbitrarily large number of splits to be loaded
+
+[--enforce-clustering]
+    Make anvi’o perform an additional clustering based on abundances across samples and sequence composition
+
+[--extra-anvio-args]
+    Extra arguments for anvi-interactive, surrounded by quotes (e.g. ``--extra-anvio-args "--taxonomic-level t_phylum --title Parrot"``
+
+[-s <yolo|safe>]
+    By default, the script uses an in-house method to subset the anvi’o databases. It's ~5x quicker than using ``anvi-split`` in anvi’o5, and works well for us. However, the night is dark and full of bugs, so if you feel that your anvi’o view is missing some information, you can call the script with ``-s safe`` parameter. This will call ``anvi-split`` which should be much safer than our hacky solution (default: ``yolo``)
+
+[--doc]
+    Print the documentation
+
+Output
+""""""
+The script will produce a subsetted anvi’o database, and call ``anvi-interactive`` to open a browser visualization.
 
 Binning refinement
 ------------------
 
 .. note::
-    THIS CAN NOW BE DONE WITH SQMTOOLS
+    A similar functionality has been included in :doc:`SQMtools` from version 1.7.0 onwards.
 
 remove_duplicate_markers.pl
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+This script attempts to reduce the contamination of bins by identifying duplicated
+markers (conserved genes for the given taxa that are expected to be single copy but are
+found to have more than one) in them. Then, it optimizes the removal of contigs
+containing these duplicated markers so that only one copy of the gene is left, and no
+other markers are removed.
+
+This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but if using conda it will be present in your PATH.
+
+Usage
+"""""
+``remove_duplicate_markers.pl <project name> [bin name]``
+
+If no bin name is provided, the script will run the analysis for ALL bins in the project.
+
+Output
+""""""
+The scripts produces a new fasta file for the bin with the name ``refined`` in the binning
+directory (usually in ``<project>/results/bins/bins``). It also runs CheckM
+again to redo the statistics for the bin(s). The result of that CheckM run is stored in
+``<project>/temp/checkm_nodupl.txt``
 
 find_missing_markers.pl
 ^^^^^^^^^^^^^^^^^^^^^^^
+This script intends to improve the completeness of the bin, using the CheckM analysis to
+find contigs from the same taxa of the bin that contain missing markers (those that were
+not found in any contig of the bin). The user can then decide whether or not including
+these contigs in the bin.
+
+This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but if using conda it will be present in your PATH.
+
+Usage
+"""""
+``find_missing_markers.pl <project name> [bin name]``
+
+If no bin name is provided, the script will run the analysis for ALL bins in the project.
+
+The script also sets the variable $mode that affects the selection of contigs. Mode
+``relaxed`` will consider contigs from all taxa not contradicting the taxonomy of the bin,
+including these that belong to higher-rank taxa (for instance, if the bin is annotated as
+*Escherichia* (genus), the script will consider also contigs classified as
+*Enterobacteriaceae* (family), *Gammaproteobacteria* (class), or even "Bacteria"
+(superkingdom), since these assignments are not incompatible with the one of the bin).
+Mode ``strict`` will only consider contigs belonging to the same taxa of the bin (in the
+example above, only these classified as genus *Escherichia*).
+
+Output
+""""""
+The script produces a list of contigs containing missing markers for the bin, sorted by the
+abundance of markers.
 
