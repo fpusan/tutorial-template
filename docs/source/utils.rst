@@ -660,7 +660,7 @@ The script also sets the variable $mode that affects the selection of contigs. M
 ``relaxed`` will consider contigs from all taxa not contradicting the taxonomy of the bin,
 including these that belong to higher-rank taxa (for instance, if the bin is annotated as
 *Escherichia* (genus), the script will consider also contigs classified as
-*Enterobacteriaceae* (family), *Gammaproteobacteria* (class), or even "Bacteria"
+*Enterobacteriaceae* (family), *Gammaproteobacteria* (class), or even Bacteria
 (superkingdom), since these assignments are not incompatible with the one of the bin).
 Mode ``strict`` will only consider contigs belonging to the same taxa of the bin (in the
 example above, only these classified as genus *Escherichia*).
