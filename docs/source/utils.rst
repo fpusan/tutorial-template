@@ -120,7 +120,7 @@ Output
 
 - For each functional classification system (KO, COG, PFAM, and any external database provided by the user) the script will produce the following files:
     - ``<project_name>.<classification>.names.tsv``: extended description of the functional categories in that classification system. For KO and COG the file will contain three fields: ID, Name and Path within the functional hierarchy. For external databases, it will contain only ID and Name.
-    - ``<project_name>.<classification>.abunds.tsv``: raw read counts of each functional category in the different samples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
+    - ``<project_name>.<classification>.abunds.tsv``: raw read counts of each functional category in the different samples
     - ``<project_name>.<classification>.bases.tsv``: raw base counts of each functional category in the different samples
     - ``<project_name>.<classification>.copyNumber.tsv``: average copy numbers per genome of each functional category in the different samples. Copy numbers are obtained by dividing the aggregate coverage of each function in each sample by the coverage of RecA (COG0468) in each sample.
     - ``<project_name>.<classification>.tpm.tsv``: normalized (TPM) abundances of each functional category in the different samples. This normalization takes into account both sequencing depth and gene length
@@ -130,7 +130,7 @@ Output
 .. _sqmreads2tables:
 sqmreads2tables.py
 ------------------
-This script generates tabular outputs from a sqm_reads.pl or sqm_longreads.pl run. It will aggregate the abundances of the ORFs assigned to the same feature (be it a given taxon or a given function) and produce tables with features in rows and samples in columns.  It can optionally accept a query argument to generate tables containing only certain taxa and functions.
+This script generates tabular outputs from a sqm_reads.pl or sqm_longreads.pl run. It will aggregate the abundances of the ORFs assigned to the same feature (be it a given taxon or a given function) and produce tables with features in rows and samples in columns. It can optionally accept a query argument to generate tables containing only certain taxa and functions.
 
 This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but if using conda it will be present in your PATH.
 
