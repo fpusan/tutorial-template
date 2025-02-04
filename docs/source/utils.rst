@@ -14,7 +14,7 @@ This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but i
 
 Usage
 ^^^^^
-``sqm2tables.py [options] <project_path> <output_dir>``
+``sqm2zip.py <project_path> <output_dir> [options]``
 
 Arguments
 ^^^^^^^^^
@@ -24,7 +24,7 @@ Mandatory parameters (positional)
 [project_path <path>]
     Path to the SqueezeMeta run
 
-[output_dir <path>
+[output_dir] <path>
     Output directory
 
 Options
@@ -61,7 +61,7 @@ This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but i
 
 Usage
 ^^^^^
-``sqm2tables.py [options] <project_path> <output_dir>``
+``sqm2tables.py <project_path> <output_dir> [options]``
 
 Arguments
 ^^^^^^^^^
@@ -136,7 +136,7 @@ This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but i
 
 Usage
 ^^^^^
-``sqmreads2tables.py [options] <project_path> <output_dir>``
+``sqmreads2tables.py <project_path> <output_dir> [options]``
 
 Arguments
 ^^^^^^^^^
@@ -219,7 +219,7 @@ This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but i
 
 Usage
 ^^^^^
-``combine-sqm-tables.py [options] <project_paths>``
+``combine-sqm-tables.py <project_paths> [options]``
 
 Arguments
 ^^^^^^^^^
@@ -278,9 +278,11 @@ To answer these questions, COVER allows the estimation of the amount of sequenci
 
 COVER needs information on the composition of the microbiome, and that must be provided as a file containing 16S rRNA sequences obtained by amplicon sequencing of the target microbiome. If you don't have that, you can look for a similar sample already sequenced (for instance, in NCBI's SRA).
 
+This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but if using conda it will be present in your PATH.
+
 Usage
 ^^^^^
-``cover.pl -i <input file> [options]``
+``cover.pl -i <input_file> [options]``
 
 Arguments
 ^^^^^^^^^
@@ -336,14 +338,35 @@ And then lists the information and coverages for each OTU, with the following co
 - Coverage: Coverage that will be obtained for that OTU
 - Taxon: Deepest taxonomic annotation for the OTU
 
-
-
 Adding new databases to an existing project
 ===========================================
 
 add_database.pl
 ---------------
+This script adds one or several new databases to the results of an existing project. The list of databases must be provided in an external database file as specified in :ref:`Using external function database`. It must be a tab-delimited file with the following format:
 
+::
+
+   <Database Name>	<Path to database>	<Functional annotation file>
+
+The databases to add must also be formatted in DIAMOND format. See :ref:`Using external function database` for details. If the external database file already exists (because you already used some external databases when running SqueezeMeta), DO NOT create a new one. Instead add the new entries to the existing database file.
+
+The script will run Diamond searches for the new databases, and then will re-run several SqueezeMeta scripts to include the new database(s) to the existing results. The following scripts will be invoked:
+
+- :ref:`fun3 script`
+- :ref:`funcover`
+- :ref:`ORF table`
+- :ref:`stats`
+- :ref:`_sqm2tables in pipeline`
+
+The outputs of these programs will be regenerated (but all files corresponding to other databases will remain untouched).
+
+This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but if using conda it will be present in your PATH.
+
+Usage
+^^^^^
+
+``add_database.pl <project_path> <database_file>``
 
 Integration with external tools
 ===============================
@@ -354,11 +377,93 @@ Integration with itol
 sqm2itol.pl
 ^^^^^^^^^^^
 
+This script generates the files for creating a radial plot of abundances using iTOL (https://itol.embl.de/). It can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but if using conda it will be present in your PATH.
+
+Usage
+"""""
+
+``sqm2itol.pl <project_path> [options]``
+
+Arguments
+"""""""""
+
+Mandatory parameters (positional)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[project_path <path>]
+    Path to the SqueezeMeta run
+
+Options
+~~~~~~~
+[-completion <float>]
+    Select only bins with percent completion above that threshold (default: ``30``)
+
+[-contamination <float>]
+    Select only bins with percent contamination below that threshold (default: ``100``)
+
+[-classification <metacyc|kegg>]
+    Functional classification to use (default: ``metacyc``)
+
+[-functions <path>]
+    File containing the name of the functions to be considered (for functional plots). For example:
+    ::
+
+     arabinose degradation
+     galactose degradation
+     glucose degradation
+
+Output
+""""""
+The script will generate several datafiles that you must upload to https://itol.embl.de/ to produce the figure.
+
 Integration with ipath
 ----------------------
 
 sqm2ipath.pl
 ^^^^^^^^^^^^
+This script creates data on  the existence of enzymatic reactions that can be plotted in the interactive pathway mapper iPath (http://pathways.embl.de). It can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but if using conda it will be present in your PATH.
+
+Usage
+"""""
+``sqm2ipath.pl <project_path> [options]``
+
+Mandatory parameters (positional)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[project_path <path>]
+    Path to the SqueezeMeta run
+
+Options
+~~~~~~~
+[-taxon <string>]
+    Taxon to be plotted  (default: *plot all taxa*)
+
+[-color <string>]
+    RGB color to be used in the plot (default: ``red``)
+
+[-c|classification <cog|kegg>]
+    Functional classification to use (default: ``kegg``)
+
+[-functions <file>]
+    File containing the COG/KEGG identifiers of the functions to be considered. For example:
+    ::
+
+     K00036
+     K00038
+     K00040
+     K00052  #ff0000
+     K00053
+
+    A second argument following the identifier selects the RGB color to be associated to that ID in the plot
+
+    .. note::
+    The plotting colors can be specified by the -color option, or by associating values to each of the IDs in the functions file. In that case, several colors can be used in the same plot. If no color is specified, the default is red.
+
+[-o|out <path>]
+    Name of the output file (default: ``ipath.out``)
+
+Output
+""""""
+A file suitable to be uploaded to http://pathways.embl.de. Several output files can be combined, for instance using different colors for different taxa.
 
 Integration with pavian
 -----------------------

@@ -117,7 +117,7 @@ Files produced
 --------------
 -
 
-
+.. _funcover:
 Step 12: Calculation of the abundance of all functions
 ======================================================
 
@@ -208,7 +208,7 @@ Files produced
 --------------
 -
 
-
+.. _stats:
 Step 21: Final statistics for the run
 =====================================
 
