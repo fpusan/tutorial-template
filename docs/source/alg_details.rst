@@ -122,34 +122,40 @@ In the next step, COVER calculates the probability of sequencing a base for each
 OTUs. First, the abundance of each OTU is divided by its copy number:
 
 ::
+
   Abundance_n = Raw_abundance_n / Copy_number_n
 
 Then, all abundances are summed, and individual abundances are normalized by this
 total abundance.
 
 ::
+
   Corr_abundance_n = Abundance_n / Σn Abundances
 
 The fraction of the microbiome occupied by each OTU, f, is the product of its abundance
 by its genomic size
 
 ::
+
   f_n = Corr_abundance_n * Size_n
 
 and the total size of the microbiome is the sum of all individual fractions
 
 ::
+
   F = Σn f_n
 
 Then, the probability of sequencing one base of a particular OTU is the ratio between its
 fraction and the total size:
 
 ::
+
   p_n = f_n / F
 
 And the amount of sequence needed (S) to attain coverage C for genome n is then:
 
 ::
+
   S = C * Size_n / p_n
 
 COVER calculates this value of S for the n-th OTU, as specified by the user. Then,
@@ -157,6 +163,7 @@ coverages for all other OTUs are also calculated using the last equation and thi
 S:
 
 ::
+
   C_n = S * p_n / Size_n
 
 in the previous calculation, we have assumed that we can calculate abundances for all
@@ -171,12 +178,14 @@ approximately equal to the fraction of observed singletons (OTUs with just one
 sequence):
 
 ::
+
   U = f_1 / N_OTUs
 
 Both f_1 and N_OTUs are obtained in the OTU clustering step. Then, we just need to correct
 the value of S by this value:
 
 ::
+
   S_corrected = S / (1-U)
 
 

@@ -120,12 +120,12 @@ Output
 
 - For each functional classification system (KO, COG, PFAM, and any external database provided by the user) the script will produce the following files:
     - ``<project_name>.<classification>.names.tsv``: extended description of the functional categories in that classification system. For KO and COG the file will contain three fields: ID, Name and Path within the functional hierarchy. For external databases, it will contain only ID and Name.
-    - ``<project_name>.<classification>.abunds.tsv``: raw read counts of each functional category in the different samples
+    - ``<project_name>.<classification>.abunds.tsv``: raw read counts of each functional category in the different samples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
     - ``<project_name>.<classification>.bases.tsv``: raw base counts of each functional category in the different samples
     - ``<project_name>.<classification>.copyNumber.tsv``: average copy numbers per genome of each functional category in the different samples. Copy numbers are obtained by dividing the aggregate coverage of each function in each sample by the coverage of RecA (COG0468) in each sample.
     - ``<project_name>.<classification>.tpm.tsv``: normalized (TPM) abundances of each functional category in the different samples. This normalization takes into account both sequencing depth and gene length
 .. note::
-  The --ignore_unclassified flag can be used to control whether unclassified ORFs are counted towards the total for TPM normalization
+  The ``--ignore_unclassified`` flag can be used to control whether unclassified ORFs are counted towards the total for TPM normalization
 
 .. _sqmreads2tables:
 sqmreads2tables.py
@@ -358,7 +358,7 @@ The script will run Diamond searches for the new databases, and then will re-run
 - :ref:`funcover`
 - :ref:`ORF table`
 - :ref:`stats`
-- :ref:`_sqm2tables in pipeline`
+- :ref:`sqm2tables in pipeline`
 
 The outputs of these programs will be regenerated (but all files corresponding to other databases will remain untouched).
 
@@ -616,7 +616,7 @@ Binning refinement
 ------------------
 
 .. note::
-    A similar functionality has been included in :doc:`SQMtools` from version 1.7.0 onwards.
+    Some binning refinement functions are also available in :doc:`SQMtools`
 
 remove_duplicate_markers.pl
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
