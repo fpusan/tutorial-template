@@ -244,9 +244,9 @@ Options
    Include only ORFs with highly trusted KEGG and COG assignments in aggregated functional tables. This will be ignored if the ``/path/to/project/results/tables`` directory already exists
 
 [--ignore-unclassified]
-    Ignore reads without assigned functions for TPM calculation. This will be ignored if the ``/path/to/project/results/tables`` directory already exists or if ``--sqm-reads`` is passed
+    Ignore reads without assigned functions for TPM calculation. This will be ignored if the ``/path/to/project/results/tables`` directory already exists or if ``--sqmreads`` is passed
 
-[--sqm-reads]
+[--sqmreads]
     Projects were generated using :ref:`sqm_reads.pl <sqm_reads>` or :ref:`sqm_longreads.pl <sqm_longreads>`
 
 [--force-overwrite]

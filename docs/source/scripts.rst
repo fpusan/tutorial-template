@@ -31,8 +31,7 @@ Files produced
 --------------
 - ``<project>/results/02.<project>.rnas``: FASTA file containing all rRNAs and tRNAs found in the assembly
 - ``<project>/results/02.<project>.16S``: Assignment (RDP classifier) for the 16S rRNAs sequences
-- ``<project>/intermediate/02.<project>.maskedrna.fasta``: Fasta file containing the contigs resulting from the
-assembly, masking the positions where a rRNA/tRNA was found.
+- ``<project>/intermediate/02.<project>.maskedrna.fasta``: Fasta file containing the contigs resulting from the assembly, masking the positions where a rRNA/tRNA was found.
 
 Step 3: Gene prediction
 =======================
@@ -98,6 +97,7 @@ Files produced
 - ``<project>/results/07.<project>.fun3.kegg``: PFAM functional assignment for each ORF
 
 Format of these files:
+
 - Column 1: Name of the ORF
 - Column 2: Best hit assignment
 - Column 3: Best average assignment (see :ref:`fun3`)
@@ -117,6 +117,7 @@ This script will only be executed if the ``-D`` option was selected.
 
 Files produced
 --------------
+
 - ``<project>/results/08.<project>.gff``: features and position in contigs for each of the Prodigal and BlastX ORFs
 Blastx 
 - ``<project>/results/08.<project>.fun3.tax.wranks``: taxonomic assignment for the mix of Prodigal and BlastX ORFs, including taxonomic ranks
