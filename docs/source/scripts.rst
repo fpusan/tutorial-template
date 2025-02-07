@@ -118,10 +118,9 @@ This script will only be executed if the ``-D`` option was selected.
 Files produced
 --------------
 
-- ``<project>/results/08.<project>.gff``: features and position in contigs for each of the Prodigal and BlastX ORFs
-Blastx 
+- ``<project>/results/08.<project>.gff``: features and position in contigs for each of the Prodigal and BlastX ORFs Blastx 
 - ``<project>/results/08.<project>.fun3.tax.wranks``: taxonomic assignment for the mix of Prodigal and BlastX ORFs, including taxonomic ranks
-- ``<project>/results/08.<project>.fun3.tax.noidfilter.wranks``: same as above, but the assignment is done without considering identity filters (see :ref:`lca`)
+ - ``<project>/results/08.<project>.fun3.tax.noidfilter.wranks``: same as above, but the assignment is done without considering identity filters (see :ref:`lca`)
 - ``<project>/results/08.<project>.fun3.cog``: COG functional assignment for the mix of Prodigal and BlastX ORFs
 - ``<project>/results/08.<project>.fun3.kegg``: KEGG functional assignment for the mix of Prodigal and BlastX ORFs 
 - ``<project>/intermediate/blastx.fna``: nucleotide sequences for BlastX ORFs 
