@@ -127,65 +127,10 @@ deepest taxon fulfilling the criteria above.
 
 For instance, consider the following example for a contig with 6 genes:
 
-.. list-table::
+.. csv-table:: Table title
+   :file: ../resources/consensus_example_1.csv
    :widths: 5 10 10 15 15 15 15 15
    :header-rows: 1
-   * - Gene
-     - Superkingdom
-     - Phylum
-     - Class
-     - Order
-     - Family
-     - Genus
-     - Species
-   * - Gene1
-     - Bacteria
-     - Pseudomonadota
-     - Gamma-Proteobacteria
-     - Enterobacteriales
-     - Enterobacteriaceae
-     - Escherichia
-     - Escherichia coli
-   * - Gene2
-     - Bacteria
-     - Pseudomonadota
-     - Gamma-Proteobacteria
-     - Enterobacteriales
-     - Enterobacteriaceae
-     - Escherichia
-     -
-   * - Gene3
-     - Bacteria
-     - Pseudomonadota
-     - Gamma-Proteobacteria
-     - Enterobacteriales
-     - Enterobacteriaceae
-     - Escherichia
-     -
-   * - Gene4
-     - Bacteria
-     - Bacillota
-     - Gamma-Proteobacteria
-     - Enterobacteriales
-     - Enterobacteriaceae
-     -
-     -
-   * - Gene5
-     - Unclassified
-     -
-     -
-     -
-     -
-     -
-     -
-   * - Gene6
-     - Bacteria
-     - Bacillota
-     -
-     -
-     -
-     -
-     -
 
 In this case, the contig will be assigned to
 the *Enterobacteriaceae*, family, which is the deepest taxon found in ``50%`` or more of all the genes
