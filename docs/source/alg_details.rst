@@ -20,7 +20,10 @@ hits to the LCA taxa can be set.
 
 An example is shown in the next table:
 
-INSERT TABLE HERE!!!
+.. csv-table::
+   :file: ../resources/lca_example_1.csv
+   :widths: 10 10 60 10 10
+   :header-rows: 1
 
 In this case, the four first hits are the valid ones. Hit 5 does not make the identity and
 e-value thresholds. The LCA for the four valid hits is Family: *Flavobacteriaceae*, that
