@@ -27,10 +27,22 @@ e-value thresholds. The LCA for the four valid hits is Family: *Flavobacteriacea
 would be the reported result.
 
 Our LCA algorithm includes strict cut-off identity values for different taxonomic ranks,
-according to `Luo et al. (2014) <https://pmc.ncbi.nlm.nih.gov/articles/PMC4005636/>` *Nucleic Acids Research* **42**:e73. This means that hits must pass a minimum (aminoacid) identity level in order to be used for assigning particular
-taxonomic ranks. These thresholds are ``85``, ``60``, ``55``, ``50``, ``46``, ``42`` and ``40%``
-for the species, genus, family, order, class, phylum and superkingdom ranks, respectively. Hits below these
-levels cannot be used to make assignments for the corresponding rank. For instance, a
+according to `Luo et al. (2014) <https://pmc.ncbi.nlm.nih.gov/articles/PMC4005636/>`_ *Nucleic Acids Research* **42**:e73. This means that hits must pass a minimum (aminoacid) identity level in order to be used for assigning particular
+taxonomic ranks. These thresholds are:
+
+============  ======
+Rank          Cutoff
+============  ======
+Superkingdom  40
+Phylum        42
+Class         46
+Order         50
+Family        55
+Genus         60
+Species       85
+============  ======
+
+Hits below these levels cannot be used to make assignments for the corresponding rank. For instance, a
 protein will not be assigned to species level if it has no hits above 85% identity. Also, a
 protein will remain unclassified if it has no hits above 40% identity. The inclusion of
 these thresholds guarantees that no assignments are done based on weak, inconclusive
@@ -116,6 +128,7 @@ deepest taxon fulfilling the criteria above.
 For instance, consider the following example for a contig with 6 genes:
 
 .. list-table::
+   :header-rows: 1
    * - Gene
      - Superkingdom
      - Phylum
