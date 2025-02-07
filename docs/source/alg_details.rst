@@ -20,10 +20,13 @@ hits to the LCA taxa can be set.
 
 An example is shown in the next table:
 
-.. csv-table::
-   :file: ../resources/lca_example_1.csv
-   :widths: 10 10 60 10 10
-   :header-rows: 1
++---------+--------+---------------------------+----------+---------+
+| Gene_ID | Hit_ID |        Hit_Taxonomy       | Identity | e_value |
++=========+========+===========================+==========+=========+
+|         |        | Genus:  Polaribacter      |          |         |
+|  Gene1  |  Hit1  | Family: Flavobacteriaceae |   75.2   |  1e-94  |
+|         |        | Order:  Flavobacteriales  |          |         |
++---------+--------+---------------------------+----------+---------+
 
 In this case, the four first hits are the valid ones. Hit 5 does not make the identity and
 e-value thresholds. The LCA for the four valid hits is Family: *Flavobacteriaceae*, that
