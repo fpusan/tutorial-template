@@ -120,7 +120,7 @@ Files produced
 
 - ``<project>/results/08.<project>.gff``: features and position in contigs for each of the Prodigal and BlastX ORFs Blastx 
 - ``<project>/results/08.<project>.fun3.tax.wranks``: taxonomic assignment for the mix of Prodigal and BlastX ORFs, including taxonomic ranks
- - ``<project>/results/08.<project>.fun3.tax.noidfilter.wranks``: same as above, but the assignment is done without considering identity filters (see :ref:`lca`)
+- ``<project>/results/08.<project>.fun3.tax.noidfilter.wranks``: same as above, but the assignment is done without considering identity filters (see :ref:`lca`)
 - ``<project>/results/08.<project>.fun3.cog``: COG functional assignment for the mix of Prodigal and BlastX ORFs
 - ``<project>/results/08.<project>.fun3.kegg``: KEGG functional assignment for the mix of Prodigal and BlastX ORFs 
 - ``<project>/intermediate/blastx.fna``: nucleotide sequences for BlastX ORFs 
@@ -135,7 +135,15 @@ Step 9: Taxonomic assignment of contigs
 
 Files produced
 --------------
--  
+- ``<project>/intermediate/09.<project>.contiglog``: consensus taxonomic assignment for the contigs (see :ref:`consensus tax`).
+
+Format of the file:
+
+- Column 1: name of the contig
+- Column 2: taxonomic assignment, with ranks
+- Column 3: lower rank of the assignment
+- Column 4: disparity value (see :ref:`disparity`)
+- Column 5: number of genes in the contig
 
 .. _mappingstat:
 Step 10: Mapping of reads to contigs and calculation of abundance measures
