@@ -56,6 +56,7 @@ Files produced
 - ``<project>/intermediate/04.<project>.nr.diamond``: result of the homology search against the nr database
 - ``<project>/intermediate/04.<project>.kegg.diamond``: result of the homology search against the KEGG database
 - ``<project>/intermediate/04.<project>.eggnog.diamond``: result of the homology search against the eggNOG database
+- ``<project>/intermediate/DB_BUILD_DATE``: date at which the SqueezeMeta database was originally created
 
 .. note::
 

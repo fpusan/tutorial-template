@@ -170,9 +170,8 @@ common taxonomic origin of the rest. This can be due to misassembly resulting in
 chimerism, or other causes such as a recent LCA transfer or a wrong annotation for the
 gene. The disparity index attempts to measure this effect, so that the contigs can be
 flagged accordingly (for instance, we could decide not trusting contigs with high
-disparity).
-
-
+disparity). It is defined as the fraction of classified ORFs in a contig whose taxonomy
+differs from the consensus taxonomy of that contig (see :ref:`consensus tax`). 
 
 For calculating the disparity of bins, the procedure is the same, just using the
 annotations for the corresponding contigs.
@@ -216,14 +215,15 @@ functionally, are queried against the databases using blastx. This method allows
 recover putative ORFs missed by Prodigal, or to correct wrongly predicted ORFs. The
 following figure illustrates the steps of the doublepass procedure:
 
-MISSING FIGURE!!!!
+.. image:: ../resources/doublepass.svg
+  :alt: The doublepass procedure
 
 .. _COVER:
 The COVER algorithm
 ===================
 COVER (used by the :ref:`cover.pl <COVER_script>`) intends to help in the experimental design of metagenomics by addressing the unavoidable question: How much should I sequence to get good results? Or the other way around: I can spend this much money, would it be worth to use it in sequencing the metagenome?
 
-To answer these questions, COVER allows the estimation of the amount of sequencing needed to achieve a particular objective, being this the coverage attained for the most abundant N members of the microbiome. For instance, how much sequence is needed to reach 5x coverage for the four most abundant members (from now on, OTUs). COVER was first published in `Tamames *et al.* (2012) <https://doi.org/10.1111/j.1758-2229.2012.00338.x>`_, *Environ Microbiol Rep.* **4**:335-41), but we are using a different version of the algorithm described there.
+To answer these questions, COVER allows the estimation of the amount of sequencing needed to achieve a particular objective, being this the coverage attained for the most abundant N members of the microbiome. For instance, how much sequence is needed to reach 5x coverage for the four most abundant members (from now on, OTUs). COVER was first published in `Tamames et al. (2012) <https://doi.org/10.1111/j.1758-2229.2012.00338.x>`_, *Environ Microbiol Rep.* **4**:335-41), but we are using a different version of the algorithm described there.
 
 COVER needs information on the composition of the microbiome, and that must be
 provided as a file containing 16S rRNA sequences obtained by amplicon sequencing of
@@ -231,14 +231,14 @@ the target microbiome. If you don’t have that, you can look for a similar samp
 sequenced (for instance, in NCBI's SRA, see below).
 
 The first step is clustering the sequences at the desired identity level (default: 98%) to
-produce OTUs. COVER uses CD-HIT (`Fu *et al.*, 2012 <https://doi.org/10.1093/bioinformatics/bts565>`_
+produce OTUs. COVER uses CD-HIT (`Fu et al., 2012 <https://doi.org/10.1093/bioinformatics/bts565>`_
 *Bioinformatics* **23**:3150-2) for doing this.
 The abundance of each OTU is also obtained in this step (the number of
 sequences in each OTU). Then, a taxonomic annotation step must be done for inferring
 genomic size and 16S rRNA copy number for each of the OTUs. This annotation can be
-done using the RDP classifier (`Wang *et al.*, 2007 <https://doi.org/10.1128/AEM.00062-07>`_,
+done using the RDP classifier (`Wang et al., 2007 <https://doi.org/10.1128/AEM.00062-07>`_,
 *Appl Environ Microbiol* **73**:5261-7), or
-Mothur (`Schloss *et al.*, 2009 <https://doi.org/10.1128/AEM.01541-09>`_,
+Mothur (`Schloss et al., 2009 <https://doi.org/10.1128/AEM.01541-09>`_,
 *Appl Environ Microbiol* **75**:7537-41) alignment against the
 SILVA database. The latter is the default option. It is slower but provides more accurate
 results.
@@ -247,7 +247,7 @@ The taxonomic annotation allows to infer the approximate genomic size by compari
 with the size of already sequenced genomes from the same taxon (we've got this
 information from NCBI's genome database). In the same way, we inferred the expected
 copy number by comparison to the `rrnDB <https://rrndb.umms.med.umich.edu>`_ database
-(`Stoddard *et al.*, 2015 <https://doi.org/10.1093/nar/gku1201>`_, *Nucleic Acids
+(`Stoddard et al., 2015 <https://doi.org/10.1093/nar/gku1201>`_, *Nucleic Acids
 Research* **43**:D593-8). Obviously, the most accurate the annotation, the most precise this estimation will be.
 In case that the OTU could not be annotated, COVER uses default values of 4 Mb genomic size and 1
 for copy number. These values can be greatly inaccurate and affect the results.
@@ -307,10 +307,9 @@ of unobserved (rare) OTUs that were not sequenced in our 16S. The size of that f
 will depend on the completeness of our 16S sequencing, which is influenced by the
 diversity of the microbiome and by the sequencing depth. This unobserved fraction can
 bias greatly the results. Luckily, there is a way to estimate it by means of the Good’s
-estimator of sample coverage (Chao & Shen 2003 Environ Ecol Stat 10: 429–443), that
-supposses that the fraction of sequence reads corresponding to unobserved OTUs is
-approximately equal to the fraction of observed singletons (OTUs with just one
-sequence):
+estimator of sample coverage, that  supposses that the fraction of sequence reads corresponding
+to unobserved OTUs is approximately equal to the fraction of observed singletons (OTUs with
+just one sequence):
 
 ::
 
