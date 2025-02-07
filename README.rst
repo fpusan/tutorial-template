@@ -1,4 +1,4 @@
-.. image:: https://github.com/jtamames/SqueezeM/blob/images/logo.svg
+.. image:: https://github.com/jtamames/SqueezeMeta/blob/images/logo.svg
   :width: 20%
   :align: right
   :alt: SqueezeMeta logo

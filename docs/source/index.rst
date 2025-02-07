@@ -1,4 +1,4 @@
-.. image:: ../images/logo.svg
+.. image:: ../resources/logo.svg
   :width: 20%
   :align: right
   :alt: SqueezeMeta logo
