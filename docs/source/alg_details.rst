@@ -127,7 +127,7 @@ deepest taxon fulfilling the criteria above.
 
 For instance, consider the following example for a contig with 6 genes:
 
-.. csv-table:: Table title
+.. csv-table:: 
    :file: ../resources/consensus_example_1.csv
    :widths: 5 10 10 15 15 15 15 15
    :header-rows: 1
