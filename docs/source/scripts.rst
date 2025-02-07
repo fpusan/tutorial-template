@@ -13,7 +13,13 @@ Step 1: Assembly
 
 Files produced
 --------------
-- 
+- ``<project>/results/01.<project>.fasta``: FASTA file containing the contigs resulting from the assembly 
+- ``<project>/intermediate/01.<project>.lon``: Length of the contigs
+- ``<project>/intermediate/01.<project>.stats``: Some statistics on the assembly (N50, N90, number of reads)
+
+.. note::
+  
+  The merged/seqmerge modes will also produce a .fasta and a .lon file for each sample)
 
 
 Step 2: RNA finding
@@ -23,8 +29,10 @@ Step 2: RNA finding
 
 Files produced
 --------------
-- 
-
+- ``<project>/results/02.<project>.rnas``: FASTA file containing all rRNAs and tRNAs found in the assembly
+- ``<project>/results/02.<project>.16S``: Assignment (RDP classifier) for the 16S rRNAs sequences
+- ``<project>/intermediate/02.<project>.maskedrna.fasta``: Fasta file containing the contigs resulting from the
+assembly, masking the positions where a rRNA/tRNA was found.
 
 Step 3: Gene prediction
 =======================
@@ -33,7 +41,9 @@ Step 3: Gene prediction
 
 Files produced
 --------------
--
+- ``<project>/results/03.<project>.fna``: Nucleotide sequences for predicted ORF
+- ``<project>/results/03.<project>.faa``: Aminoacid sequences for predicted ORF
+- ``<project>/results/03.<project>.gff``: Features and position in contigs for each of the predicted genes (this file will be moved to the ``intermediate`` directory if the ``-D`` option is selected)
 
 
 Step 4: Homology searching against taxonomic (nr) and functional (COG, KEGG) databases
@@ -43,8 +53,13 @@ Step 4: Homology searching against taxonomic (nr) and functional (COG, KEGG) dat
 
 Files produced
 --------------
--
+- ``<project>/intermediate/04.<project>.nr.diamond``: result of the homology search against the nr database
+- ``<project>/intermediate/04.<project>.kegg.diamond``: result of the homology search against the KEGG database
+- ``<project>/intermediate/04.<project>.eggnog.diamond``: result of the homology search against the eggNOG database
 
+.. note::
+
+  If additional databases were provided using the ``-optdb`` option, this script will create additional diamond result files for each database
 
 Step 5: HMM search for Pfam database
 ====================================
@@ -53,7 +68,7 @@ Step 5: HMM search for Pfam database
 
 Files produced
 --------------
--
+- ``<project>/intermediate/05.<project>.pfam.hmm``: results of the HMM search against the Pfam database
 
 
 .. _lca script:
@@ -64,8 +79,11 @@ Step 6: Taxonomic assignment
 
 Files produced
 --------------
--
+- ``<project>/results/06.<project>.fun3.tax.wranks``: taxonomic assignments for each ORF, including taxonomic ranks
+- ``<project>/results/06.<project>.fun3.tax.noidfilter.wranks``: same as above, but the assignment is done without considering identity filters (see :ref:`lca`)
 
+.. note::
+  These files will be moved to the ``intermediate`` directory if the ``-D`` option is selected
 
 .. _fun3 script:
 Step 7: Functional assignment
@@ -75,18 +93,39 @@ Step 7: Functional assignment
 
 Files produced
 --------------
--
+- ``<project>/results/07.<project>.fun3.cog``: PFAM functional assignment for each ORF
+- ``<project>/results/07.<project>.fun3.kegg``: PFAM functional assignment for each ORF
 
+Format of these files:
+- Column 1: Name of the ORF
+- Column 2: Best hit assignment
+- Column 3: Best average assignment (see :ref:`fun3`)
+
+.. note::
+  - These files will be moved to the ``intermediate`` directory if the ``-D`` option is selected
+  - If additional databases were provided using the ``-optdb`` option, this script will create additional result files for each database
+
+- ``<project>/results/07.<project>.pfam``: PFAM functional assignment for each ORF
 
 Step 8: Blastx on parts of the contigs without gene prediction or without hits
 ==============================================================================
 
 **Script:** *08.blastx.pl*
 
+This script will only be executed if the ``-D`` option was selected.
+
 Files produced
 --------------
--
+- ``<project>/results/08.<project>.gff``: features and position in contigs for each of the Prodigal and BlastX ORFs
+Blastx 
+- ``<project>/results/08.<project>.fun3.tax.wranks``: taxonomic assignment for the mix of Prodigal and BlastX ORFs, including taxonomic ranks
+- ``<project>/results/08.<project>.fun3.tax.noidfilter.wranks``: same as above, but the assignment is done without considering identity filters (see :ref:`lca`)
+- ``<project>/results/08.<project>.fun3.cog``: COG functional assignment for the mix of Prodigal and BlastX ORFs
+- ``<project>/results/08.<project>.fun3.kegg``: KEGG functional assignment for the mix of Prodigal and BlastX ORFs 
+- ``<project>/intermediate/blastx.fna``: nucleotide sequences for BlastX ORFs 
 
+.. note::
+  If additional databases were provided using the ``-optdb`` option, this script will create additional result files for each database
 
 Step 9: Taxonomic assignment of contigs
 =======================================
@@ -95,7 +134,7 @@ Step 9: Taxonomic assignment of contigs
 
 Files produced
 --------------
--
+-  
 
 .. _mappingstat:
 Step 10: Mapping of reads to contigs and calculation of abundance measures
@@ -125,7 +164,6 @@ Step 12: Calculation of the abundance of all functions
 
 Files produced
 --------------
--
 
 
 .. _ORF table:
