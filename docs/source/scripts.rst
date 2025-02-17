@@ -209,24 +209,22 @@ Files produced
 --------------
 
 Files produced:
-- ``<project>/ext_tables/12.<project>.cog.stamp``: COG function table for `STAMP <http://kiwi.cs.dal.ca/Software/STAMP>`_
 
-Format of the file:
+- ``<project>/ext_tables/12.<project>.cog.stamp``: COG function table for `STAMP <http://kiwi.cs.dal.ca/Software/STAMP>`_
+  Format of the file:
 
     - Column 1: functional class for the COG
     - Column 2: COG ID and function name
     - Column 3 and above: abundance of reads for that COG in the corresponding sample
 
 - ``<project>/ext_tables/12.<project>.kegg.stamp``: KEGG function table for `STAMP <http://kiwi.cs.dal.ca/Software/STAMP>`_
-
-Format of the file:
+  Format of the file:
 
     - Column 1: KEGG ID and function name
     - Column 2 and above: abundance of reads for that KEGG in the corresponding sample
 
-- ``<project>/results/12.<project>.cog.funcover``: Several measurements of the abundance and distribution of each COG
-	
-Format of the file:
+- ``<project>/results/12.<project>.cog.funcover``: Several measurements of the abundance and distribution of each COG	
+  Format of the file:
 
     - Column 1: COG ID
     - Column 2: sample name
@@ -238,9 +236,8 @@ Format of the file:
     - Column 9: number of the different taxa per rank (k: kingdom, p: phylum; c: class; o: order; f: family; g: genus; s: species) in which this COG has been found
     - Column 10: function of the COG
 
-``<project>/results/12.<project>.kegg.funcover``: several measurements of the abundance and distribution of each KEGG
-
-Format of the file: Same format than previous one but replacing COGs by KEGGs. Additionally, the function of the KEGG will be present in column 11, while column 10 will contain the name of the KEGG.
+- ``<project>/results/12.<project>.kegg.funcover``: several measurements of the abundance and distribution of each KEGG
+  Format of the file: Same format than previous one but replacing COGs by KEGGs. Additionally, the function of the KEGG will be present in column 11, while column 10 will contain the name of the KEGG
 
 .. note::
   If additional databases were provided using the ``-extdb`` option, this script will create additional result files for each database
