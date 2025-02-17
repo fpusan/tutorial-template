@@ -297,6 +297,13 @@ e.g. ``SqueezeMeta.pl --restart -p <projectname> -step 6 --force_overwrite``
 would restart the pipeline from the taxonomic assignment of genes. The
 different steps of the pipeline are listed in :doc:`scripts`.
 
+.. note::
+
+  When calling SqueezeMeta with ``--restart``, other parameters will be ignored.
+  If you want to change the configuration of your run, you will need to edit the
+  ``/path/to/project/SqueezeMeta_conf.pl`` and change them there before calling
+  ``SqueezeMeta.pl --restart -p <projectname>``.
+
 Running scripts
 ===============
 

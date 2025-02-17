@@ -59,7 +59,7 @@ Files produced
 
 .. note::
 
-  If additional databases were provided using the ``-optdb`` option, this script will create additional diamond result files for each database
+  If additional databases were provided using the ``-extdb`` option, this script will create additional diamond result files for each database
 
 Step 5: HMM search for Pfam database
 ====================================
@@ -153,7 +153,33 @@ Step 10: Mapping of reads to contigs and calculation of abundance measures
 
 Files produced
 --------------
--
+- ``<project>/results/10.<project>.mappingstat``:
+
+- ``<project>/intermediate/10.<project>.mapcount``: several measurements regarding mapping of reads to ORFs
+
+Format of the file:
+
+    - Column 1: ORF name
+    - Column 2: ORF length (nucleotides)
+    - Column 3: number of reads mapped to that ORF
+    - Column 4: number of bases mapped to that ORF
+    - Column 5: RPKM value for the ORF
+    - Column 6: coverage value for the ORF (Bases mapped / ORF length)
+    - Column 7: TPM value for the ORF
+    - Column 8: sample to which these abundance values correspond
+
+- ``<project>/intermediate/10.<project>.contigcov``: several measurements regarding mapping of reads to contigs
+
+Format of the file:
+
+    - Column 1: ORF name
+    - Column 2: coverage value for the contig
+    - Column 3: RPKM value for the contig
+    - Column 4: TPM value for the contig
+    - Column 5: contig length (nucleotides)
+    - Column 6: number of reads mapped to that contig
+    - Column 7: number of bases mapped to that contig
+    - Column 8: sample to which these abundance values correspond
 
 
 Step 11: Calculation of the abundance of all taxa
@@ -163,7 +189,15 @@ Step 11: Calculation of the abundance of all taxa
 
 Files produced
 --------------
--
+- ``<project>/results/11.<project>.mcount``
+
+Format of the file:
+
+    - Column 1: taxonomic rank for the taxon
+    - Column 2: taxon
+    - Column 3: accumulated contig size: Sum of the length of all contigs for that taxon
+    - Column 4 (and all even columns from this one): number of reads mapping to the taxon in the corresponding sample
+    - Column 5 (and all odd columns from this one): number of bases mapping to the taxon in the corresponding sample
 
 .. _funcover:
 Step 12: Calculation of the abundance of all functions
@@ -174,6 +208,42 @@ Step 12: Calculation of the abundance of all functions
 Files produced
 --------------
 
+Files produced:
+- ``<project>/ext_tables/12.<project>.cog.stamp``: COG function table for `STAMP <http://kiwi.cs.dal.ca/Software/STAMP>`_
+
+Format of the file:
+
+    - Column 1: functional class for the COG
+    - Column 2: COG ID and function name
+    - Column 3 and above: abundance of reads for that COG in the corresponding sample
+
+- ``<project>/ext_tables/12.<project>.kegg.stamp``: KEGG function table for `STAMP <http://kiwi.cs.dal.ca/Software/STAMP>`_
+
+Format of the file:
+
+    - Column 1: KEGG ID and function name
+    - Column 2 and above: abundance of reads for that KEGG in the corresponding sample
+
+- ``<project>/results/12.<project>.cog.funcover``: Several measurements of the abundance and distribution of each COG
+	
+Format of the file:
+
+    - Column 1: COG ID
+    - Column 2: sample name
+    - Column 3: number of different ORFs of this function in the corresponding sample (copy number)
+    - Column 4: sum of the length of all ORFs of this function in the corresponding sample (Total length)
+    - Column 5: sum of the bases mapped to all ORFs of this function in the corresponding sample (Total bases)
+    - Column 6: coverage of the function (Total bases / Total length)
+    - Column 7: TPM value for the function
+    - Column 9: number of the different taxa per rank (k: kingdom, p: phylum; c: class; o: order; f: family; g: genus; s: species) in which this COG has been found
+    - Column 10: function of the COG
+
+``<project>/results/12.<project>.kegg.funcover``: several measurements of the abundance and distribution of each KEGG
+
+Format of the file: Same format than previous one but replacing COGs by KEGGs. Additionally, the function of the KEGG will be present in column 11, while column 10 will contain the name of the KEGG.
+
+.. note::
+  If additional databases were provided using the ``-extdb`` option, this script will create additional result files for each database
 
 .. _ORF table:
 Step 13: Creation of the ORF table
