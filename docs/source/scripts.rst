@@ -3,7 +3,7 @@ Scripts, output files and file format
 *************************************
 
 .. note::
-    YOU SHOULD BE USING SQM2TABLES OR SQMTOOLS
+    Most of the information contained in the output files listed below can be more easily explored through :doc:`SQMtools`.
 
 
 Step 1: Assembly
@@ -135,7 +135,7 @@ Step 9: Taxonomic assignment of contigs
 
 Files produced
 --------------
-- ``<project>/intermediate/09.<project>.contiglog``: consensus taxonomic assignment for the contigs (see :ref:`consensus tax`).
+- ``<project>/intermediate/09.<project>.contiglog``: consensus taxonomic assignment for the contigs (see :ref:`consensus tax`)
 
 Format of the file:
 
@@ -208,23 +208,18 @@ Step 12: Calculation of the abundance of all functions
 Files produced
 --------------
 
-Files produced:
-
 - ``<project>/ext_tables/12.<project>.cog.stamp``: COG function table for `STAMP <http://kiwi.cs.dal.ca/Software/STAMP>`_
-  Format of the file:
 
     - Column 1: functional class for the COG
     - Column 2: COG ID and function name
     - Column 3 and above: abundance of reads for that COG in the corresponding sample
 
 - ``<project>/ext_tables/12.<project>.kegg.stamp``: KEGG function table for `STAMP <http://kiwi.cs.dal.ca/Software/STAMP>`_
-  Format of the file:
 
     - Column 1: KEGG ID and function name
     - Column 2 and above: abundance of reads for that KEGG in the corresponding sample
 
 - ``<project>/results/12.<project>.cog.funcover``: Several measurements of the abundance and distribution of each COG	
-  Format of the file:
 
     - Column 1: COG ID
     - Column 2: sample name
@@ -236,8 +231,7 @@ Files produced:
     - Column 9: number of the different taxa per rank (k: kingdom, p: phylum; c: class; o: order; f: family; g: genus; s: species) in which this COG has been found
     - Column 10: function of the COG
 
-- ``<project>/results/12.<project>.kegg.funcover``: several measurements of the abundance and distribution of each KEGG
-  Format of the file: Same format than previous one but replacing COGs by KEGGs. Additionally, the function of the KEGG will be present in column 11, while column 10 will contain the name of the KEGG
+- ``<project>/results/12.<project>.kegg.funcover``: several measurements of the abundance and distribution of each KEGG. This has the same format as the ``cog.funcover`` file but replacing COGs by KEGGs. Additionally, the function of the KEGG will be present in column 11, while column 10 will contain the name of the KEGG
 
 .. note::
   If additional databases were provided using the ``-extdb`` option, this script will create additional result files for each database
@@ -250,8 +244,27 @@ Step 13: Creation of the ORF table
 
 Files produced
 --------------
--
+- ``<project>/results/13.<project>.orftable``
+    - Column 1: ORF name
+    - Column 2: Contig name
+    - Column 3: molecule (CDS or RNA)
+    - Column 4: method of ORF prediction (prodigal, barrnap, blastx)
+    - Column 5: ORF length (nucleotides)
+    - Column 6: ORF length (amino acids)
+    - Column 7: GC percentage for the ORF
+    - Column 8: Gene name
+    - Column 9: Taxonomy for the ORF
+    - Column 10: KEGG ID for the ORF (If a ``*`` sign is shown here, it means that the functional assignment was done by both best hit and best average scores, therefore is more reliable. Otherwise, the assignment was done using just the best hit, but there is evidence of a conflicting annotation)
+    - Column 11: KEGG function
+    - Column 12: KEGG functional class
+    - Column 13: COG ID for the ORF (If a * sign is shown here, it means that the functional assignment was done by both best hit and best average scores, therefore is more reliable. Otherwise, the assignment was done using just the best hit, but there is evidence of a conflicting annotation)
+    - Column 14: COG function
+    - Column 15: COG functional class
+    - Column 16: function in the external database provided
+    - Column 17: Pfam annotation
+    - Column 18 and beyond: TPM, coverage, read count and base count for the ORF in the different samples
 
+.. note::                                                                                                                              If additional databases were provided using the ``-extdb`` option, functions and functional classes will be shown for each of them after column 15
 
 Step 14: Binning
 ================
@@ -260,7 +273,10 @@ Step 14: Binning
 
 Files produced
 --------------
--
+
+- ``<project>/intermediate/binners/maxbin``: directory containing fasta files with the contigs assigned to each bin by MaxBin (if selected)
+- ``<project>/intermediate/binners/metabat``: directory containing fasta files with the contigs assigned to each bin by MetaBAT 2 (if selected)
+- ``<project>/intermediate/binners/concoct``: directory containing fasta files with the contigs assigned to each bin by CONCOCT (if selected)
 
 
 Step 15: Merging bins with DAS Tool
@@ -270,7 +286,7 @@ Step 15: Merging bins with DAS Tool
 
 Files produced
 --------------
--
+- ``<project>/results/bins``: directory containing fasta files with the contigs associated to each bin after integrating the results for all binners with DAS Tool. If only one binner was selected, DAS Tool will not be run and the directory will instead contain the results for that binner
 
 
 Step 16: Taxonomic assignment of bins
@@ -280,9 +296,18 @@ Step 16: Taxonomic assignment of bins
 
 Files produced
 --------------
--
+- One taxonomy file for each fasta in the ``<project>/results/bins`` directory
+- ``<project>/intermediate/16.<project>.bintax``: consensus taxonomic assignment for the bins (see :ref:`consensus tax`)
+    - Column 1: binning method
+    - Column 2: name of the bin
+    - Column 3: taxonomic assignment for the bin, with ranks
+    - Column 4: size of the bin (accumulated sum of contig lengths)
+    - Column 5: disparity of the bin (see :ref:`disparity`)
 
+.. note::
+  Note that the taxonomy generated here is the consensus from the individual taxonomic assignments for each contig in the bin, not a GTDB-Tk taxonomy (which would be more precise). That can be achieved by adding the `--gtdbtk` flag, and is obtained during :ref:`bin annot`. 
 
+.. _bin annot:
 Step 17: Running CheckM2 and optionally GTDB-Tk on bins
 =======================================================
 
@@ -290,17 +315,40 @@ Step 17: Running CheckM2 and optionally GTDB-Tk on bins
 
 Files produced
 --------------
--
-
+- ``<project>/intermediate/17.<project>.checkM``: Raw output from CheckM2
+- If ``--gtdbtk`` is specified when running SqueezeMeta, also:
+    - ``<project>/intermediate/17.<project>.gtdbtk``: GTDB-Tk output for archaeal and bacterial bins combined
 
 Step 18: Creation of the bin table
 ==================================
 
-**Script:** *17.getbins.pl*
+**Script:** *18.getbins.pl*
 
 Files produced
 --------------
--
+
+- ``<project>/intermediate/18.<project>.bincov``: coverage and TPM values for each bin
+    - Column 1: bin name
+    - Column 2: binning method
+    - Column 3: coverage of the bin in the corresponding sample (Sum of bases from reads in the sample mapped to contigs in the bin / Sum of length of contigs in the bin)
+    - Column 4: TPM for the bin in the corresponding sample (Sum of reads from the corresponding sample mapping to contigs in the bin x 10^6 /  Sum of length of contigs in the bin x Total number of reads)
+    - Column 5: sample name
+
+- ``<project>/results/18.<project>.bintable``: compilation of all data for bins
+    - Column 1: bin name
+    - Column 2: binning method
+    - Column 3: taxonomic annotation (from the annotations of the contigs)
+    - Column 4: taxonomy for the 16S rRNAs if the bin (if any)
+    - Column 5: bin size (sum of length of the contigs)
+    - Column 6: GC percentage for the bin
+    - Column 7: number of contigs in the bin
+    - Column 8: disparity of the bin
+    - Column 9: completeness of the bin (CheckM2)
+    - Column 10: contamination of the bin (CheckM2)
+    - Column 11: strain heterogeneity of the bin (checkM)
+    - Column 12 and beyond: coverage and TPM values for the bin in each sample.
+
+.. note::                                                                                                                              If GTDB-Tk was run to classify the bins by adding the ``-gtdbtk`` option, an additional column named ``Tax GTDB-Tk`` will be present after column 4 in the file ``<project>/results/18.<project>.bintable``.
 
 
 Step 19: Creation of the contig table
@@ -310,8 +358,18 @@ Step 19: Creation of the contig table
 
 Files produced
 --------------
--
 
+- ``<project>/intermediate/19.<project>.contigsinbins``: list of contigs and corresponding bins
+
+- ``<project>/results/19.<project>.contigtable``: compilation of data for contigs
+    - Column 1: contig name
+    - Column 2: taxonomic annotation for the contig (from the annotations of the ORFs)
+    - Column 3: disparity of the contig
+    - Column 4: GC percentage for the contig
+    - Column 5: contig length
+    - Column 6: number of genes in the contig
+    - Column 7: bin to which the contig belong (if any)
+    - Column 8 and beyond: values of coverage, TPM and number of mapped reads for the contig in each sample
 
 Step 20: Prediction of pathway presence in bins using MinPath
 =============================================================
@@ -320,7 +378,14 @@ Step 20: Prediction of pathway presence in bins using MinPath
 
 Files produced
 --------------
--
+
+- ``<project>/results/20.<project>.kegg.pathways``: prediction of KEGG pathways in bins
+    - Column 1: bin name
+    - Column 2: taxonomic annotation for the bin
+    - Column 3: number of KEGG pathways found
+    - Column 4 and beyond: NF indicates that the pathway was not predicted. A number shows that the pathway was predicted to be present, and correspond to the number of enzymes of that pathway that were found.
+
+- ``<project>/results/20.<project>.metacyc.pathways``: prediction of Metacyc pathways in bins. Format is similar as for the file above
 
 .. _stats:
 Step 21: Final statistics for the run
@@ -330,7 +395,7 @@ Step 21: Final statistics for the run
 
 Files produced
 --------------
--
+- ``<project>/results/21.<project>.stats``: several statistics regarding ORFs, contigs and bins 
 
 .. _sqm2tables in pipeline:
 Step 22: Calculation of summary tables for the project
@@ -340,4 +405,4 @@ Step 22: Calculation of summary tables for the project
 
 Files produced
 --------------
--
+This script is executed with default parameters at the end of a SqueezeMeta run, and its results are placed in the ``<project>/results/tables`` directory. You may still want to run it on your own if you want to use non-default parameters. A list of output files can be found :ref:`here <sqm2tables output>This script is executed with default parameters at the end of a SqueezeMeta run, and its results are placed in the ``<project>/results/tables`` directory. You may still want to run it on your own if you want to use non-default parameters. A list of output files can be found :ref:`here <sqm2tables output>`.

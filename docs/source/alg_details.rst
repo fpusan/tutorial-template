@@ -162,6 +162,9 @@ belong to it, which is below the cutoff threshold.
 For annotating the consensus of bins, the procedure is the same, but using the
 annotations of the corresponding contigs instead.
 
+.. note::
+  The consensus annotation for each bin is derived from the individual annotation of its constituent contigs (itself derived from the annotation of individual ORFs), and thus it will have a limited taxonomic resolution. This is unavoidable for short contigs, but when working with reasonably complete bins a much better taxonomic annotation can be obtained with `GTDB-Tk <https://academic.oup.com/bioinformatics/article/38/23/5315/6758240>`_. Adding the ``--gtdbtk`` flag while calling SqueezeMeta will produce a GTDB-Tk taxonomy for each bin, in addition to the consensus taxonomy described here.
+
 .. _disparity:
 Disparity calculation
 ---------------------

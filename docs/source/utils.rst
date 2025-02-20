@@ -88,6 +88,7 @@ Options
 [--doc]
     Print the documentation
 
+.. _sqm2tables output:
 Output
 ^^^^^^
 - ``<project_name>.orfs.sequences.tsv``: ORF sequences
@@ -99,6 +100,10 @@ Output
 - ``<project_name>.orf.tax.prokfilter.tsv``: taxonomy of each ORF at the different taxonomic levels. Minimum identity cutoffs for taxonomic assignment are applied to bacteria and archaea, but not to eukaryotes
 
 - ``<project_name>.orf.tax.nofilter.tsv``: taxonomy of each ORF at the different taxonomic levels. No identity cutoffs for taxonomic assignment are applied
+
+- ``<project_name>.orf.marker.genes.tsv``: CheckM1 marker genes present in each ORF
+
+- ``<project_name>.orf.16S.tsv``: RDP taxonomy of the ORFs containing a 16S rRNA gene according to barrnap
 
 - ``<project_name>.contig.tax.allfilter.tsv``: consensus taxonomy of each contig at the different taxonomic levels, based on the taxonomy of their constituent ORFs (applying minimum identity cutoffs to all taxa)
 
