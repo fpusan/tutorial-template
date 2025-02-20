@@ -305,7 +305,7 @@ Files produced
     - Column 5: disparity of the bin (see :ref:`disparity`)
 
 .. note::
-  Note that the taxonomy generated here is the consensus from the individual taxonomic assignments for each contig in the bin, not a GTDB-Tk taxonomy (which would be more precise). That can be achieved by adding the `--gtdbtk` flag, and is obtained during :ref:`bin annot`. 
+  Note that the taxonomy generated here is the consensus from the individual taxonomic assignments for each contig in the bin, not a GTDB-Tk taxonomy (which would be more precise). That can be achieved by adding the `--gtdbtk` flag, and is obtained during :ref:`bin annot` 
 
 .. _bin annot:
 Step 17: Running CheckM2 and optionally GTDB-Tk on bins
@@ -348,7 +348,7 @@ Files produced
     - Column 11: strain heterogeneity of the bin (checkM)
     - Column 12 and beyond: coverage and TPM values for the bin in each sample.
 
-.. note::                                                                                                                              If GTDB-Tk was run to classify the bins by adding the ``-gtdbtk`` option, an additional column named ``Tax GTDB-Tk`` will be present after column 4 in the file ``<project>/results/18.<project>.bintable``.
+.. note::                                                                                                                              If GTDB-Tk was run to classify the bins by adding the ``-gtdbtk`` option, an additional column named ``Tax GTDB-Tk`` will be present after column 4 in the file ``<project>/results/18.<project>.bintable``
 
 
 Step 19: Creation of the contig table
