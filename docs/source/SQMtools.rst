@@ -41,6 +41,9 @@ XXXXX NORMALIZATION / COPY NUMBERS1i
 
 SQM_READS
 
+List of functions and documentation
+===================================
+
 .. toctree::
    :glob:
 
