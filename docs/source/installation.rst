@@ -68,7 +68,7 @@ database. Always run ``test_install.pl`` to check that the database was
 properly created. Otherwise, you can try re-running
 ``make_databases.pl``, or just run ``download_databases.pl`` instead.
 
-The databases occupy 200Gb, but we recommend having at least 350Gb free
+The databases occupy 470Gb, but we recommend having at least 700Gb free
 disk space during the building process.
 
 Two directories will be generated after running either

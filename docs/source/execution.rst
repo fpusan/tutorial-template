@@ -245,14 +245,14 @@ An example would be
 
 ::
 
-   Sample1	readfileA_1.fastq	pair1
-   Sample1	readfileA_2.fastq	pair2
-   Sample1	readfileB_1.fastq	pair1
-   Sample1	readfileB_2.fastq	pair2
-   Sample2	readfileC_1.fastq.gz	pair1
-   Sample2	readfileC_2.fastq.gz	pair2
-   Sample3	readfileD_1.fastq	pair1	noassembly
-   Sample3	readfileD_2.fastq	pair2	noassembly
+   Sample1 readfileA_1.fastq   pair1
+   Sample1 readfileA_2.fastq   pair2
+   Sample1 readfileB_1.fastq   pair1
+   Sample1 readfileB_2.fastq   pair2
+   Sample2 readfileC_1.fastq.gz    pair1
+   Sample2 readfileC_2.fastq.gz    pair2
+   Sample3 readfileD_1.fastq   pair1   noassembly
+   Sample3 readfileD_2.fastq   pair2   noassembly
 
 The first column indicates the sample id (this will be the project name
 in sequential mode), the second contains the file names of the

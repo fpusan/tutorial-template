@@ -132,6 +132,9 @@ Output
 .. note::
   The ``--ignore_unclassified`` flag can be used to control whether unclassified ORFs are counted towards the total for TPM normalization
 
+.. note::
+  There are more advanced ways of calculating copy numbers than normalizing by RecA coverage. These can be accessed through :doc:`SQMtools`
+
 .. _sqmreads2tables:
 sqmreads2tables.py
 ------------------
