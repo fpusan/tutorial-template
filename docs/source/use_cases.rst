@@ -86,7 +86,7 @@ Regarding the choice of assembler, we have obtained good results with rnaSPAdes
 (``-a rnaspades``) although your mileage may vary.
 
 If you have a pre-existing reference assembly or collection of genomes/bins you can
-use the ``--extassembly`` or ``-extbins`` flags and skip de-novo assembly,
+use the ``-extassembly`` or ``-extbins`` flags and skip de-novo assembly,
 and instead just map the metatranscriptomic reads back to the reference to
 quantify gene expression.
 

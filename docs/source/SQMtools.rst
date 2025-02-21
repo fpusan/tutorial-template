@@ -11,6 +11,9 @@ Design philosophy
 =================
 
 SQMtools aims to simplify the analysis of complex metagenomic 
+
+see :doc:`SQMtools/loadSQM`
+
 One or more SqueezeMeta projects can be r
 Once SqueezeMeta has finished running, just go into R and load the project.
 library(SQMtools)
@@ -40,6 +43,10 @@ The resulting SQM object contains all the relevant information, organized in nes
 Creating subsets of your data
 =============================
 
+Data renormalization on subsetting
+----------------------------------
+
+TABLE WITH THE RECALCULATE STUFF
 Creating plots and exporting data
 =================================
 
