@@ -71,6 +71,7 @@ Contents
 --------
 
 .. toctree::
+   :maxdepth: 2
 
    use_cases
    installation
