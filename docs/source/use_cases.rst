@@ -76,11 +76,53 @@ SqueezeMeta with the flag ``-extbins <path_to_dir_with_bins>``. This will
 work similarly to ``-extassembly``, but SqueezeMeta will treat each fasta
 file in the input directory as an individual bin.
 
+Analyzing metatranscriptomes
+============================
+
+SqueezeMeta can be used for de-novo metatranscriptomic assembly, annotation
+and quantification. Usage is similar as when analizing metagenomes, though
+we recommend to also provide the ``--nobins`` to skip binning.  
+
+Regarding the choice of assembler, we have obtained good results with rnaSPAdes
+(``-a rnaspades``) although your mileage may vary.
+
+If you have a pre-existing reference assembly or collection of genomes/bins you can
+use the ``--extassembly`` or ``-extbins`` flags and skip de-novo assembly,
+and instead just map the metatranscriptomic reads back to the reference to
+quantify gene expression.
+
+
+Combined analysis of metagenomes and metatranscriptomes
+=======================================================
+
+SqueezeMeta allows the combined analysis of metagenomes and metatranscriptomes
+in the same run. The recommended way of doing this is to perform de-novo assembly
+and binning using only the metagenomes, and then mapping back the metatranscriptomic
+reads to the assembly for estimating the expression of each contig/gene.
+
+This can be achieved by adding the ``noassembly`` and ``nobinning`` tags to the
+metatranscriptomic samples in your samples file. See :ref`Samples file` for details.
+
+An example would be
+
+::
+
+   Sample1_DNA Sample1_metagenom_R1.fastq.gz	pair1
+   Sample1_DNA Sample1.metagenom_R2.fastq.gz	pair2
+   Sample1_RNA Sample1_metatrans_R1.fastq.gz	pair1	noassebly	nobinning
+   Sample1_RNA Sample1_metatrans_R2.fastq.gz	pair2	noassembly	nobinning
+   Sample2_DNA Sample2_metagenom_R1.fastq.gz	pair1
+   Sample2_DNA Sample2_metagenom_R2.fastq.gz	pair2
+   Sample2_RNA Sample2_metatrans_R1.fastq.gz	pair1	noassembly	nobinning
+   Sample2_RNA Sample2_metatrans_R2.fastq.gz	pair2	noassembly	nobinning
+
+If you have a pre-existing reference assembly or collection of genomes/bins you can use the ``--extassembly`` or ``-extbins`` flags and skip de-novo assembly (but if going for binning, the ``--nobinning`` flag should still be added to the metatranscriptomes in the samples file).
+
 Alternative analysis modes
 ==========================
 
-In addition to the main SqueezeMeta pipeline, we provide two extra modes
-that enable the analysis of individual reads.
+In addition to the main SqueezeMeta pipeline, we provide extra scripts
+that enable the analysis of individual reads and the annotation of sequences
 
 1) :ref:`sqm_reads.pl <sqm_reads>`: This script performs taxonomic and functional
 assignments on individual reads rather than contigs. This can be useful

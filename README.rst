@@ -697,8 +697,8 @@ decompressing) with
 16. Alternative analysis modes
 ==============================
 
-In addition to the main SqueezeMeta pipeline, we provide two extra modes
-that enable the analysis of individual reads.
+In addition to the main SqueezeMeta pipeline, we provide extra scripts
+that enable the analysis of individual reads and the annotation of sequences
 
 1) **sqm_reads.pl**: This script performs taxonomic and functional
 assignments on individual reads rather than contigs. This can be useful
