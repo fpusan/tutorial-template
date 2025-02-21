@@ -78,7 +78,6 @@ file in the input directory as an individual bin.
 
 Analyzing metatranscriptomes
 ============================
-
 SqueezeMeta can be used for de-novo metatranscriptomic assembly, annotation
 and quantification. Usage is similar as when analizing metagenomes, though
 we recommend to also provide the ``--nobins`` to skip binning.  
@@ -91,17 +90,15 @@ use the ``--extassembly`` or ``-extbins`` flags and skip de-novo assembly,
 and instead just map the metatranscriptomic reads back to the reference to
 quantify gene expression.
 
-
 Combined analysis of metagenomes and metatranscriptomes
 =======================================================
-
 SqueezeMeta allows the combined analysis of metagenomes and metatranscriptomes
 in the same run. The recommended way of doing this is to perform de-novo assembly
 and binning using only the metagenomes, and then mapping back the metatranscriptomic
 reads to the assembly for estimating the expression of each contig/gene.
 
 This can be achieved by adding the ``noassembly`` and ``nobinning`` tags to the
-metatranscriptomic samples in your samples file. See :ref`Samples file` for details.
+metatranscriptomic samples in your samples file. See :ref:`Samples file` for details.
 
 An example would be
 
