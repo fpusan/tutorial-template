@@ -82,3 +82,4 @@ Contents
    new_binners
    utils
    alg_details
+   loadSQM
