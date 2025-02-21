@@ -40,3 +40,8 @@ project = loadSQMlite(“<tables_directory>”)
 XXXXX NORMALIZATION / COPY NUMBERS1i
 
 SQM_READS
+
+.. toctree::
+   :glob:
+
+   SQMtools/*

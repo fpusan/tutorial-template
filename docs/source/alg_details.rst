@@ -56,7 +56,7 @@ Rank          Cutoff
 ============  ======
 Superkingdom  40%
 Phylum        42%
-Class         46%
+https://fpusan-doc-tests.readthedocs.io/en/latest/alg_details.htmlClass         46%
 Order         50%
 Family        55%
 Genus         60%
@@ -316,7 +316,7 @@ just one sequence):
 
 ::
 
-  U = f:subscript:`1` / N_OTUs
+  U = f_1 / N_OTUs
 
 Both f_1 and N_OTUs are obtained in the OTU clustering step. Then, we just need to correct
 the value of S by this value:
