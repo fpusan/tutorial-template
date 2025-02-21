@@ -316,7 +316,7 @@ just one sequence):
 
 ::
 
-  U = f_1 / N_OTUs
+  U = f:subscript:`1` / N_OTUs
 
 Both f_1 and N_OTUs are obtained in the OTU clustering step. Then, we just need to correct
 the value of S by this value:
