@@ -10,35 +10,50 @@ This package provides an easy way to expose the different results of SqueezeMeta
 Design philosophy
 =================
 
-SQMtools aims to simplify the analysis of complex metagenomic 
+*SQMtools* aims to simplify the analysis of complex metagenomic datasets by representing them as a single object inside the R environment for statistical analysis. Once a project has been loaded into R with SQMtools the user can:
 
-see :doc:`SQMtools/loadSQM`
+- Make basic plots representing its taxonomical and functional composition
+- Subset it to select only certain taxa, functions or bins/MAGs
+- Access the individual components of the object (e.g. taxonomy tables, contig sequences, bin qualities, etc) in order to perform custom analyses or feed the data to other R packages
 
-One or more SqueezeMeta projects can be r
-Once SqueezeMeta has finished running, just go into R and load the project.
-library(SQMtools)
-project = loadSQM(“<project_directory>”)
+The main idea behind *SQMtools* is to speed up the exploration of metagenomic results by facilitating data inspection and filtering. A standard workflow in *SQMtools* usually involves:
 
-This will also work with a zip file produced by sqm2zip.py.
-project = loadSQM(“<project.zip>”)
+1) Loading your project
+2) Inpecting taxonomic/functional patterns in the whole project (e.g. plotting taxonomic distribution across samples)
+3) Locating certain taxa/functions of interest (based on the results of the preliminary inspection, or on prior knowledge about the study system) and generating a subset containing only those taxa/functions
+4) Inspecting taxonomic/functional patterns in the subset. For example, making a subset containing some functions of interest and then making a taxonomic plot of that subset will inform us of the relative abundance and taxonomic distribution of those functions of interest in our samples
 
 .. figure:: ../resources/Figure_1_SQMtools.svg
-  :alt: Structure of the SQM R object
+  :alt: Basic workflow of the SQMtools package.
 
-  Structure of the SQM R object. If external databases for functional classification were provided to SqueezeMeta via the *-extdb* argument, the corresponding abundance (reads and bases), tpm and copy number profiles will be present in *SQM$functions* (e.g. results for the CAZy database would be present in *SQM$functions$CAZy*. Additionally, the extended names of the features present in the external database will be present in *SQM$misc* (e.g. *SQM$misc$CAZy_names*). The SQMlite object will have a similar structure, but will lack the *SQM$orfs*, *SQM$contigs* and *SQM$bins* section. Additionally, if the results come from a *sqm_reads.pl* or *sqm_longreads.pl* run, the SQMlite object will also be missing TPM, bases and copy numbers for the different functional classification methods.
+  Basic workflow of the SQMtools package. The basic unit used in the package is the SQM object. This object can contain a full SqueezeMeta project or a subset of genes, contigs or bins. The data in the SQM object can be accessed directly (e.g. for using it with other R packages such as vegan for ordination analyses or DESeq2 for differential abundance analysis) but we also provide some utility functions for exploring the most abundant functions or taxa in a SQM object. Alternatively, aggregate tables can be loaded into a SQMlite objects, which supports plot and export functionality. SQMlite objects can not be subsetted, but can be combined.
 
 Loading data into SQMtools
 ==========================
 
+The :doc:`loadSQM` function can be used the output of one or more :doc:`SqueezeMeta.pl <execution>` runs into a single object. In also works directly with compressed zip projects generated with :ref:`sqm2zip.py <sqm2zip>`. 
+
+.. code:: R
+  library(SQMtools)
+  project = loadSQM("/path/to/project/")
+
+Alternatively, the :doc:`loadSQMlite` function can be used to load aggregated taxonomic and functional tables generated with :ref:`sqm2tables.py <sqm2tables>` or :ref:`sqmreads2tables.py`. The resulting `SQMlite` object is much more lightweight, but carries not information on individual ORFs, contigs or bins and does not support subsetting.
+
 The SQM object structure
 ------------------------
 
-The resulting SQM object contains all the relevant information, organized in nested an R lists (see next figure). For example, a matrix with the taxonomic composition of the different samples at the phylum level in percentages can be obtained with ``project$taxa$phylum$percent`` while a matrix with the average copy number per genome of the different PFAMs across samples can be obtained with ``project$functions$PFAM$copy_number``.
+The resulting SQM object contains all the relevant information from a SqueezeMeta project, organized in nested an R lists (figure below). For example, a matrix with the taxonomic composition of the different samples at the phylum level in percentages can be obtained with ``project$taxa$phylum$percent`` while a matrix with the average copy number per genome of the different PFAMs across samples can be obtained with ``project$functions$PFAM$copy_number``.
 
 .. figure:: ../resources/Figure_2_SQMtools.svg
   :alt: Structure of the SQM R object
 
   Structure of the SQM R object. If external databases for functional classification were provided to SqueezeMeta via the *-extdb* argument, the corresponding abundance (reads and bases), tpm and copy number profiles will be present in *SQM$functions* (e.g. results for the CAZy database would be present in *SQM$functions$CAZy*. Additionally, the extended names of the features present in the external database will be present in *SQM$misc* (e.g. *SQM$misc$CAZy_names*). The SQMlite object will have a similar structure, but will lack the *SQM$orfs*, *SQM$contigs* and *SQM$bins* section. Additionally, if the results come from a *sqm_reads.pl* or *sqm_longreads.pl* run, the SQMlite object will also be missing TPM, bases and copy numbers for the different functional classification methods.
+
+The SQMbunch object structure
+-----------------------------
+
+The SQMlite object structure
+----------------------------
 
 Creating subsets of your data
 =============================
@@ -47,6 +62,7 @@ Data renormalization on subsetting
 ----------------------------------
 
 TABLE WITH THE RECALCULATE STUFF
+
 Creating plots and exporting data
 =================================
 

@@ -117,10 +117,10 @@ subsetORFs
    While this function selects the contigs and bins that contain the
    desired orfs, it DOES NOT recalculate contig abundance and statistics
    based on the selected ORFs only. This means that the abundances
-   presented in tables such as 'SQM$contig$abund' will still refer to
+   presented in tables such as ``SQM$contig$abund`` will still refer to
    the complete contigs, regardless of whether only a fraction of their
    ORFs are actually present in the returned SQM object. This is also
-   true for the statistics presented in 'SQM$contigs$table'. Bin
+   true for the statistics presented in ``SQM$contigs$table``. Bin
    statistics may be recalculated if ``rescale_copy_number`` is set to
    ``TRUE``, but recalculation will be based on contigs, not ORFs.
 
