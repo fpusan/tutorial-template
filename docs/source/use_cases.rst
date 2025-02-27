@@ -118,6 +118,7 @@ An example would be
 
 If you have a pre-existing reference assembly or collection of genomes/bins you can use the ``--extassembly`` or ``-extbins`` flags and skip de-novo assembly (but if going for binning, the ``--nobinning`` flag should still be added to the metatranscriptomes in the samples file).
 
+.. _alt modes short:
 Alternative analysis modes
 ==========================
 
