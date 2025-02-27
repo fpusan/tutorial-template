@@ -18,9 +18,9 @@ Design philosophy
 
 The main idea behind *SQMtools* is to speed up the exploration of metagenomic results by facilitating data inspection and filtering. A standard workflow in *SQMtools* usually involves:
 
-1) **:ref:`Loading your project <SQMtools_load>`**
-2) **:ref:`Inpecting taxonomic/functional patterns <SQMtools plot>`** in the whole project (e.g. plotting taxonomic distribution across samples)
-3) Locating certain taxa/functions of interest (based on the results of the preliminary inspection, or on prior knowledge about the study system) and **:ref:`generating a subset <SQMtools subset>`** containing only those taxa/functions
+1) ** :ref:`Loading your project <SQMtools_load>` **
+2) ** :ref:`Inpecting taxonomic/functional patterns <SQMtools plot>` ** in the whole project (e.g. plotting taxonomic distribution across samples)
+3) Locating certain taxa/functions of interest (based on the results of the preliminary inspection, or on prior knowledge about the study system) and ** :ref:`generating a subset <SQMtools subset>` ** containing only those taxa/functions
 4) Inspecting taxonomic/functional patterns in the subset. For example, making a subset containing some functions of interest and then making a taxonomic plot of that subset will inform us of the relative abundance and taxonomic distribution of those functions of interest in our samples
 
 .. figure:: ../resources/Figure_1_SQMtools.svg
