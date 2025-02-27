@@ -16,7 +16,7 @@ Design philosophy
 - Subset it to select only certain taxa, functions or bins/MAGs
 - Access the individual components of the object (e.g. taxonomy tables, contig sequences, bin qualities, etc) in order to perform custom analyses or feed the data to other R packages
 
-**The main idea behind *SQMtools* is to speed up the exploration of metagenomic results by facilitating data inspection and filtering.** A standard workflow in *SQMtools* usually involves:
+**The main idea behind SQMtools is to speed up the exploration of metagenomic results by facilitating data inspection and filtering.** A standard workflow in *SQMtools* usually involves:
 
 1) :ref:`Loading your project <SQMtools load>`
 2) :ref:`Inpecting taxonomic/functional patterns <SQMtools plots>` in the whole project (e.g. plotting taxonomic distribution across samples)
@@ -79,7 +79,9 @@ Creating subsets of your data
 For example, the code
 
 .. code-block:: R
-  project.polynuc = subsetTax(project, "genus", "Polynucleobacter")
+
+  project.poly = subsetTax(project, "genus", "Polynucleobacter")
+
 
 would return a new *SQM* or *SQMbunch* object containing only the information from contigs that belonged to the *Polynucleobacter* genus, the ORFs contained in them, and the bins/MAGs that contain those contigs.
 
