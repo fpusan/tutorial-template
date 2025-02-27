@@ -15,7 +15,9 @@ Execution
 
 The command for running SqueezeMeta has the following syntax:
 
-``SqueezeMeta.pl -m <mode> -p <projectname> -s <equivfile> -f <raw fastq dir> <options>``
+::
+
+   SqueezeMeta.pl -m <mode> -p <projectname> -s <equivfile> -f <raw fastq dir> <options>
 
 Arguments
 =========
@@ -219,7 +221,9 @@ Information
 Example SqueezeMeta call
 ========================
 
-``SqueezeMeta.pl -m coassembly -p test -s test.samples -f mydir --nopfam -miniden 50``
+::
+
+   SqueezeMeta.pl -m coassembly -p test -s test.samples -f mydir --nopfam -miniden 50
 
 This will create a project “test” for co-assembling the samples
 specified in the file “test.samples”, using a minimum identity of 50%
@@ -279,7 +283,9 @@ Restart
 Any interrupted SqueezeMeta run can be restarted using the program the
 flag ``--restart``. It has the syntax:
 
-``SqueezeMeta.pl -p <projectname> --restart``
+::
+
+   SqueezeMeta.pl -p <projectname> --restart
 
 This command will restart the run of that project by reading the
 progress.txt file to find out the point where the run stopped.
@@ -287,13 +293,18 @@ progress.txt file to find out the point where the run stopped.
 Alternatively, the run can be restarted from a specific step by issuing
 the command:
 
-``SqueezeMeta.pl -p <projectname> --restart -step <step_to_restart_from>``
+::
+
+   SqueezeMeta.pl -p <projectname> --restart -step <step_to_restart_from>
 
 By default, already completed steps will not be repeated when
 restarting, even if requested with ``-step``. In order to repeat already
-completed steps you must also provide the flag ``--force_overwrite``.
+completed steps you must also provide the flag ``--force_overwrite``. For example
 
-e.g. ``SqueezeMeta.pl --restart -p <projectname> -step 6 --force_overwrite``
+::
+
+   ``SqueezeMeta.pl --restart -p <projectname> -step 6 --force_overwrite
+
 would restart the pipeline from the taxonomic assignment of genes. The
 different steps of the pipeline are listed in :doc:`scripts`.
 
@@ -310,6 +321,9 @@ Running scripts
 Also, any individual script of the pipeline can be run using the same
 syntax:
 
-``script <projectname>`` (for instance,
-``04.rundiamond.pl <projectname>`` to repeat the DIAMOND run for the
+::
+
+   <script> <projectname>``
+
+(for instance, ``04.rundiamond.pl <projectname>`` to repeat the DIAMOND run for the
 project).
