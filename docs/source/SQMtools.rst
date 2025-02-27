@@ -67,7 +67,7 @@ A *SQMlite* object contains aggregated taxonomic and functional tables. It has a
 .. _SQMtools subset:
 Creating subsets of your data
 =============================
-:ref:`SQM <SQM object>` and :ref:`SQMbunch <SQMbunch>` objects can be subsetted to select only certain features of interest. This can be achieved with the following functions:
+:ref:`SQM <SQM object>` and :ref:`SQMbunch <SQMbunch object>` objects can be subsetted to select only certain features of interest. This can be achieved with the following functions:
 
 - :doc:`SQMtools/subsetSamples`: select the requested samples
 - :doc:`SQMtools/subsetTax`: select data from the requested taxon
@@ -79,8 +79,7 @@ Creating subsets of your data
 For example, the code
 
 .. code-block:: R
-    project.polynuc = subsetTax(project, "genus", "Polynucleobacter")
-    foobar
+  project.polynuc = subsetTax(project, "genus", "Polynucleobacter")
 
 would return a new *SQM* or *SQMbunch* object containing only the information from contigs that belonged to the *Polynucleobacter* genus, the ORFs contained in them, and the bins/MAGs that contain those contigs.
 
