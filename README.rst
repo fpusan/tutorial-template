@@ -135,7 +135,7 @@ from source and format the latest version of the databases.
 
 ``/path/to/SqueezeMeta/utils/install_utils/make_databases.pl /download/path``
 
-Generally, ``donwload_databases.pl`` is the safest choice for getting
+Generally, ``download_databases.pl`` is the safest choice for getting
 your databases set up. When running ``make_databases.pl``, data download
 (e.g. from the NCBI server) can be interrupted, leading to a corrupted
 database. Always run ``test_install.pl`` to check that the database was
