@@ -323,7 +323,7 @@ syntax:
 
 ::
 
-   <script> <projectname>``
+   <script> <projectname>
 
 (for instance, ``04.rundiamond.pl <projectname>`` to repeat the DIAMOND run for the
 project).

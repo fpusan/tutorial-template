@@ -16,7 +16,9 @@ Specifying the taxa between brackets, following an (arbitrary) accession number.
 
 The script make_custom_taxdb.pl must be used to format this database for usage with SqueezeMeta, as follows:
 
-``make_custom_taxdb.pl <directory for new database> <db fasta file>``
+::
+
+ make_custom_taxdb.pl <directory for new database> <db fasta file>
 
 Then, the directory containing the new database must be specified to SqueezeMeta.pl using the ``-db`` option. This will produce taxonomic annotations using the new database.
 
