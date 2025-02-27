@@ -80,6 +80,7 @@ For example, the code
 
 .. code-block:: R
     project.polynuc = subsetTax(project, "genus", "Polynucleobacter")
+    foobar
 
 would return a new *SQM* or *SQMbunch* object containing only the information from contigs that belonged to the *Polynucleobacter* genus, the ORFs contained in them, and the bins/MAGs that contain those contigs.
 
