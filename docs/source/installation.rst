@@ -15,12 +15,16 @@ it’s better to first set up the libmamba solver with
 
 and then use conda to install SqueezeMeta
 
-``conda create -n SqueezeMeta -c conda-forge -c bioconda -c fpusan squeezemeta=1.7 --no-channel-priority --override-channels``
+::
+
+   conda create -n SqueezeMeta -c conda-forge -c bioconda -c fpusan squeezemeta=1.7 --no-channel-priority --override-channels
 
 This will create a new conda environment named SqueezeMeta, which must
 then be activated.
 
-``conda activate SqueezeMeta``
+::
+
+   conda activate SqueezeMeta
 
 When using conda, all the scripts from the SqueezeMeta distribution will
 be available on ``$PATH``.
