@@ -6,30 +6,20 @@
 Welcome to SqueezeMeta's documentation!
 =======================================
 
-**SqueezeMeta** is a full automatic pipeline for
+**SqueezeMeta** is a fully automatic pipeline for
 metagenomics/metatranscriptomics, covering all steps of the analysis.
 SqueezeMeta includes multi-metagenome support allowing the co-assembly
-of related metagenomes and the retrieval of individual genomes via
-binning procedures. Thus, SqueezeMeta features several unique
-characteristics:
+of related metagenomes and the retrieval of individual metagenome-assembled genomes (MAGs)
+via binning procedures. Thus, SqueezeMeta features several characteristics:
 
-1) Co-assembly procedure with read mapping for estimation of the
-   abundances of genes in each metagenome
-2) Co-assembly of a large number of metagenomes via merging of
-   individual metagenomes
-3) Includes binning and bin checking, for retrieving individual genomes
-4) The results are stored in a database, where they can be easily
-   exported and shared, and can be inspected anywhere using a web
-   interface.
-5) Internal checks for the assembly and binning steps inform about the
-   consistency of contigs and bins, allowing to spot potential chimeras.
-6) Metatranscriptomic support via mapping of cDNA reads against
-   reference metagenomes
+1) Several :ref:`assembly and co-assembly algorithms and strategies <Assembly Strategy>` for short and long reads
+2) Several binning algorithms for the recovery of metagenome-assembled genomes (MAGs)
+3) Taxonomic annotation, functional annotation and quantification of genes, contigs, and bins
+4) Support for the annotation and quantification of :ref:`pre-existing assemblies or collections of genomes <extassembly>`
+5) Support for :ref:`de-novo metatranscriptome assembly <metatranscriptomics>`` and :ref:`hybrid metagenomics/metatranscriptomics projects <metag metat>`
+6) An :doc:`R package <SQMtools>` to easily explore your results
 
-SqueezeMeta supports different assembly strategies (co-assembly,
-sequential, assembly merging, and sequential-merging) and different
-assemblers (see below for details), as well as the analysis of pre-existing
-contigs or bins. Check out the :doc:`use_cases` section for more information.
+Check out the :doc:`use_cases` section for more information.
 
 SqueezeMeta uses a combination of custom scripts and external
 software packages for the different steps of the analysis:
