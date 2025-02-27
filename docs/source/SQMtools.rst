@@ -18,10 +18,16 @@ Design philosophy
 
 The main idea behind *SQMtools* is to speed up the exploration of metagenomic results by facilitating data inspection and filtering. A standard workflow in *SQMtools* usually involves:
 
-1) ** :ref:`Loading your project <SQMtools_load>` **
-2) ** :ref:`Inpecting taxonomic/functional patterns <SQMtools plot>` ** in the whole project (e.g. plotting taxonomic distribution across samples)
+1) ** :ref:`Loading your project <SQMtools load>` **
+2) ** :ref:`Inpecting taxonomic/functional patterns <SQMtools plots>` ** in the whole project (e.g. plotting taxonomic distribution across samples)
 3) Locating certain taxa/functions of interest (based on the results of the preliminary inspection, or on prior knowledge about the study system) and ** :ref:`generating a subset <SQMtools subset>` ** containing only those taxa/functions
 4) Inspecting taxonomic/functional patterns in the subset. For example, making a subset containing some functions of interest and then making a taxonomic plot of that subset will inform us of the relative abundance and taxonomic distribution of those functions of interest in our samples
+
+:ref:`Loading your project <SQMtools load>`
+
+:ref:`Inpecting taxonomic/functional patterns <SQMtools plots>`
+
+:ref:`generating a subset <SQMtools subset>`
 
 .. figure:: ../resources/Figure_1_SQMtools.svg
   :alt: Basic workflow of the SQMtools package.
@@ -29,10 +35,10 @@ The main idea behind *SQMtools* is to speed up the exploration of metagenomic re
   Basic workflow of the SQMtools package. The basic unit used in the package is the SQM object. This object can contain a full SqueezeMeta project or a subset of genes, contigs or bins. The data in the SQM object can be accessed directly (e.g. for using it with other R packages such as vegan for ordination analyses or DESeq2 for differential abundance analysis) but we also provide some utility functions for exploring the most abundant functions or taxa in a SQM object. Alternatively, aggregate tables can be loaded into a SQMlite objects, which supports plot and export functionality. SQMlite objects can not be subsetted, but can be combined.
 
 .. _SQMtools load:
-Loading data into SQMtools
+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Loading data into SQMtools
 ==========================
 
-The **:doc:`SQMtools/loadSQM`** function can be used the output of one or more :doc:`SqueezeMeta.pl <execution>` runs into a single object. It also works directly with compressed zip projects generated with :ref:`sqm2zip.py <sqm2zip>`. 
+The ** :doc:`SQMtools/loadSQM` ** function can be used the output of one or more :doc:`SqueezeMeta.pl <execution>` runs into a single object. It also works directly with compressed zip projects generated with :ref:`sqm2zip.py <sqm2zip>`. 
 
 .. code-block:: R
   library(SQMtools)
