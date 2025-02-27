@@ -10,13 +10,13 @@ This package provides an easy way to expose the different results of SqueezeMeta
 Design philosophy
 =================
 
-*SQMtools* aims to simplify the analysis of complex metagenomic datasets by representing them as a single object inside the R environment for statistical analysis. Once a project has been loaded into R with SQMtools the user can:
+**SQMtools aims to simplify the analysis of complex metagenomic datasets** by representing them as a single object inside the R environment for statistical analysis. Once a project has been loaded into R with SQMtools the user can:
 
 - Make basic plots representing its taxonomical and functional composition
 - Subset it to select only certain taxa, functions or bins/MAGs
 - Access the individual components of the object (e.g. taxonomy tables, contig sequences, bin qualities, etc) in order to perform custom analyses or feed the data to other R packages
 
-The main idea behind *SQMtools* is to speed up the exploration of metagenomic results by facilitating data inspection and filtering. A standard workflow in *SQMtools* usually involves:
+**The main idea behind *SQMtools* is to speed up the exploration of metagenomic results by facilitating data inspection and filtering.** A standard workflow in *SQMtools* usually involves:
 
 1) :ref:`Loading your project <SQMtools load>`
 2) :ref:`Inpecting taxonomic/functional patterns <SQMtools plots>` in the whole project (e.g. plotting taxonomic distribution across samples)
@@ -39,7 +39,7 @@ The :doc:`SQMtools/loadSQM` function can be used the output of one or more :doc:
   library(SQMtools)
   project = loadSQM("/path/to/project/")
 
-The code above will generate a single :ref:`SQM object <SQM object>` containing all the information relative to the project. More than one project can be loaded at the same time (e.g. ``loadSQM( c("/path/to/project1", "/path/to/project2") )``. In this case, the call to ``loadSQM`` would return a single :ref:`SQMbunch object <SQMbunch object>` with the combined information from all the input projects, which would otherwise behave similarly.
+The code above will generate a single :ref:`SQM object <SQM object>` containing all the information relative to the project. More than one project can be loaded at the same time (e.g. ``loadSQM( c("/path/to/project1", "/path/to/project2") )``. In this case, the call to *loadSQM* would return a single :ref:`SQMbunch object <SQMbunch object>` with the combined information from all the input projects, which would otherwise behave similarly.
 
 Alternatively, the :doc:`SQMtools/loadSQMlite` function can be used to load aggregated taxonomic and functional tables generated with :ref:`sqm2tables.py <sqm2tables>` or :ref:`sqmreads2tables.py`. The resulting :ref:`SQMlite object <SQMlite object>` is much more lightweight, but carries not information on individual ORFs, contigs or bins and does not support subsetting.
 
@@ -67,9 +67,35 @@ A *SQMlite* object contains aggregated taxonomic and functional tables. It has a
 .. _SQMtools subset:
 Creating subsets of your data
 =============================
+:ref:`SQM <SQM object>` and :ref:`SQMbunch <SQMbunch>` objects can be subsetted to select only certain features of interest. This can be achieved with the following functions:
+
+- :doc:`SQMtools/subsetSamples`: select the requested samples
+- :doc:`SQMtools/subsetTax`: select data from the requested taxon
+- :doc:`SQMtools/subsetFun`: select data from the requested function/s
+- :doc:`SQMtools/subsetBins`: select data from the requested bins
+- :doc:`SQMtools/subsetContigs`: select arbitrary contigs
+- :doc:`SQMtools/subsetORFs`: select arbitrary ORFs
+
+For example, the code
+
+.. code-block:: R
+    project.polynuc = subsetTax(project, "genus", "Polynucleobacter")
+
+would return a new *SQM* or *SQMbunch* object containing only the information from contigs that belonged to the *Polynucleobacter* genus, the ORFs contained in them, and the bins/MAGs that contain those contigs.
+
+Subsetting involves the following steps:
+
+- Determining which ORFs, contigs and bins are to be included in the subsetted object
+- Recalculating aggregated taxonomic and functional tables based on the selected ORFs/contigs
+- If requested, renormalize certain functional abundance metrics to make them relative to the data included in the subset (see below)
+- Recalculate bin abundance metrics based on the selected contigs. If requested, also recalculate bin completeness/contamination
+
+.. note::
+  *SQMlite* objects can not be subsetted. This means that results coming from :ref:`sqm_reads.pl <sqm_reads>` and :ref:`sqm_longreads.pl <sqm_longreads>` can also not be subsetted within SQMtools. However, a similar effect can by first filtering the results with the the ``--query`` parameter of the :ref:`sqmreads2tables.py <sqmreads2tables>` script, and then loading the resulting tables into SQMtools with :doc:`SQMtools/loadSQMlite`.
 
 Data renormalization on subsetting
 ----------------------------------
+
 
 Combining SQM objects
 =====================
