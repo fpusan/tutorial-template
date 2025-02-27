@@ -108,9 +108,9 @@ For example, upon loading a project into *SQMtools*, the copy number of each fun
 
 For further clarification, compare the following two assertions:
 
-- "For each genome in my samples (regardless of its taxonomy) cyanobacteria contributed on average 0.2 toxin production genes"
+- *"For each genome in my samples (regardless of its taxonomy) cyanobacteria contributed on average 0.2 toxin production genes"*
 
-- "In my samples, cyanobacterial genomes had on average 2 toxin production genes"
+- *"In my samples, each cyanobacterial genome had on average 2 toxin production genes"*
 
 In addition to this, when generating a subset the completeness and contamination of bins can be recalculated according to only the contigs present in the subset.
 
@@ -127,7 +127,7 @@ subsetFun        FALSE          FALSE                  FALSE
 subsetBins       TRUE           TRUE                   N/A
 subsetContigs    FALSE          FALSE                  TRUE
 subsetORFs       FALSE          FALSE                  TRUE
-=============    ===========    ===================    ======================
+=============    ===========    ===================    =====================
 
 .. note::
    Completeness and contamination statistics are initially calculated using CheckM2, but upon subsetting they are recalculated using a re-implementation of the CheckM1 algorithm over root marker genes. This can give an idea on how adding/removing certain contigs affects the completeness of a bin, but should be considered as less reliable than manually running CheckM2 again.
