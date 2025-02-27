@@ -35,7 +35,7 @@ Loading data into SQMtools
 
 The :doc:`SQMtools/loadSQM` function can be used the output of one or more :doc:`SqueezeMeta.pl <execution>` runs into a single object. It also works directly with compressed zip projects generated with :ref:`sqm2zip.py <sqm2zip>`. 
 
-.. code-block:: R
+.. code-block:: r
   library(SQMtools)
   project = loadSQM("/path/to/project/")
 
@@ -78,10 +78,8 @@ Creating subsets of your data
 
 For example, the code
 
-.. code-block:: R
-
+.. code-block:: r
   project.poly = subsetTax(project, "genus", "Polynucleobacter")
-
 
 would return a new *SQM* or *SQMbunch* object containing only the information from contigs that belonged to the *Polynucleobacter* genus, the ORFs contained in them, and the bins/MAGs that contain those contigs.
 
