@@ -17,7 +17,8 @@ via binning procedures. Thus, SqueezeMeta features several characteristics:
 3) Taxonomic annotation, functional annotation and quantification of genes, contigs, and bins
 4) Support for the annotation and quantification of :ref:`pre-existing assemblies or collections of genomes <extassembly>`
 5) Support for :ref:`de-novo metatranscriptome assembly <metatranscriptomics>` and :ref:`hybrid metagenomics/metatranscriptomics projects <metag metat>`
-6) An :doc:`R package <SQMtools>` to easily explore your results
+6) Support for the :ref:`annotation of unassembled shotgun metagenomic reads <alt modes>`
+7) An :doc:`R package <SQMtools>` to easily explore your results
 
 .. note::
   Check out the :doc:`use_cases` section for more information.

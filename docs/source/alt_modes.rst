@@ -20,7 +20,7 @@ The usage of ``sqm_reads.pl`` is very similar to that of SqueezeMeta:
 
 ::
 
- sqm_reads.pl -p <project name> -s <equiv file> -f <raw fastq dir> [options]
+ sqm_reads.pl -p <project_name> -s <equiv_file> -f <raw_fastq_dir> [options]
 
 Arguments
 ^^^^^^^^^
@@ -121,7 +121,7 @@ The usage of ``sqm_longreads.pl`` is the same than that of :ref:`sqm_reads.pl <s
 
 ::
 
-  sqm_longreads.pl -p <project name> -s <equiv file> -f <raw fastq dir> [options]
+  sqm_longreads.pl -p <project_name> -s <equiv_file> -f <raw_fastq_dir> [options]
 
 Arguments
 ^^^^^^^^^
@@ -203,7 +203,7 @@ Usage
 ^^^^^
 ::
 
-  sqm_hmm_reads.pl -pfam <PFAM list> -pair1 <pair1 fasta file>  -pair2 <pair2 fasta file> [options]
+  sqm_hmm_reads.pl -pfam <PFAM_list> -pair1 <pair1_fasta_file>  -pair2 <pair2_fasta_file> [options]
 
 Arguments
 ^^^^^^^^^
@@ -261,7 +261,7 @@ Usage
 ^^^^^
 ::
 
-  sqm_mapper.pl -r <reference> -s <sample file> -f <reads directory>  -g <gff file> -o <output directory> [options]
+  sqm_mapper.pl -r <reference> -s <sample_file> -f <reads_directory>  -g <gff_file> -o <output_directory> [options]
 
 Arguments
 ^^^^^^^^^
@@ -348,7 +348,7 @@ Usage
 ^^^^^
 ::
 
-  sqm_annot.pl -s <samples file> -f <sequence file directory> [options]
+  sqm_annot.pl -s <samples_file> -f <sequence_file_directory> [options]
 
 Arguments
 ^^^^^^^^^

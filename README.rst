@@ -30,7 +30,8 @@ via binning procedures. Thus, SqueezeMeta features several characteristics:
 3) Taxonomic annotation, functional annotation and quantification of genes, contigs, and bins
 4) Support for the annotation and quantification of pre-existing assemblies or collections of genomes
 5) Support for de-novo metatranscriptome assembly and hybrid metagenomics/metatranscriptomics projects
-6) An R package to easily explore your results
+6) Support for the annotation of unassembled shotgun metagenomic reads
+7) An R package to easily explore your results
 
 SqueezeMeta uses a combination of custom scripts and external
 software packages for the different steps of the analysis:

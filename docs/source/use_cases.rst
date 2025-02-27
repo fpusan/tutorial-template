@@ -62,7 +62,7 @@ will add no additional flags to the *spades.py* call. This can be used in
 conjunction with ``–assembly options`` when one wants to fully customize
 the call to SPAdes, e.g. for assembling single cell genomes.
 
-:: _extassembly..
+.. _extassembly:
 Analyzing user-supplied assemblies or bins
 ==========================================
 
@@ -77,7 +77,7 @@ SqueezeMeta with the flag ``-extbins <path_to_dir_with_bins>``. This will
 work similarly to ``-extassembly``, but SqueezeMeta will treat each fasta
 file in the input directory as an individual bin.
 
-:: _metatranscriptomics..
+.. _metatranscriptomics:
 Analyzing metatranscriptomes
 ============================
 SqueezeMeta can be used for de-novo metatranscriptomic assembly, annotation
@@ -92,7 +92,7 @@ use the ``-extassembly`` or ``-extbins`` flags and skip de-novo assembly,
 and instead just map the metatranscriptomic reads back to the reference to
 quantify gene expression.
 
-:: _metag metat..
+.. _metag metat:
 Combined analysis of metagenomes and metatranscriptomes
 =======================================================
 SqueezeMeta allows the combined analysis of metagenomes and metatranscriptomes
