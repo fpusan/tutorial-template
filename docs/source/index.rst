@@ -55,10 +55,6 @@ Detailed information about the different steps of the pipeline can be
 found in the :doc:`scripts` section.
 
 
-.. note::
-
-   This project is under active development.
-
 Contents
 --------
 

@@ -14,7 +14,9 @@ This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but i
 
 Usage
 ^^^^^
-``sqm2zip.py <project_path> <output_dir> [options]``
+::
+
+  sqm2zip.py <project_path> <output_dir> [options]
 
 Arguments
 ^^^^^^^^^
@@ -61,7 +63,9 @@ This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but i
 
 Usage
 ^^^^^
-``sqm2tables.py <project_path> <output_dir> [options]``
+::
+
+  sqm2tables.py <project_path> <output_dir> [options]
 
 Arguments
 ^^^^^^^^^
@@ -144,7 +148,10 @@ This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but i
 
 Usage
 ^^^^^
-``sqmreads2tables.py <project_path> <output_dir> [options]``
+
+::
+
+  sqmreads2tables.py <project_path> <output_dir> [options]
 
 Arguments
 ^^^^^^^^^
@@ -227,7 +234,9 @@ This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but i
 
 Usage
 ^^^^^
-``combine-sqm-tables.py <project_paths> [options]``
+::
+
+  combine-sqm-tables.py <project_paths> [options]
 
 Arguments
 ^^^^^^^^^
@@ -291,7 +300,9 @@ This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but i
 
 Usage
 ^^^^^
-``cover.pl -i <input_file> [options]``
+::
+
+  cover.pl -i <input_file> [options]
 
 Arguments
 ^^^^^^^^^
@@ -374,8 +385,9 @@ This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but i
 
 Usage
 ^^^^^
+::
 
-``add_database.pl <project_path> <database_file>``
+  add_database.pl <project_path> <database_file>
 
 Integration with external tools
 ===============================
@@ -390,8 +402,9 @@ This script generates the files for creating a radial plot of abundances using i
 
 Usage
 """""
+::
 
-``sqm2itol.pl <project_path> [options]``
+  sqm2itol.pl <project_path> [options]
 
 Arguments
 """""""""
@@ -434,7 +447,9 @@ This script creates data on  the existence of enzymatic reactions that can be pl
 
 Usage
 """""
-``sqm2ipath.pl <project_path> [options]``
+::
+
+  sqm2ipath.pl <project_path> [options]
 
 Arguments
 """""""""
@@ -488,7 +503,9 @@ the Pavian tool (https://github.com/fbreitwieser/pavian). It works with projects
 
 Usage
 """""
-``sqm2pavian.pl <project_path> [mode]``
+::
+
+  sqm2pavian.pl <project_path> [mode]
 
 Arguments
 """""""""
@@ -520,7 +537,9 @@ This script creates an anvi’o database from a SqueezeMeta project. The databas
 
 Usage
 """""
-``anvi-load-sqm.py -p <project> -o <output> [options]``
+::
+
+  anvi-load-sqm.py -p <project> -o <output> [options]
 
 Arguments
 """""""""
@@ -577,7 +596,9 @@ a simple query syntax.  This script can be found in the ``/path/to/SqueezeMeta/u
 
 Usage
 """""
-``anvi-filter-sqm.py -p <profile db> -c <contigs db> -t <contigs taxonomy file> -q <query> [options]``
+::
+
+  anvi-filter-sqm.py -p <profile_db> -c <contigs_db> -t <contigs_taxonomy_file> -q <query> [options]``
 
 Arguments
 """""""""
@@ -638,7 +659,9 @@ This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but i
 
 Usage
 """""
-``remove_duplicate_markers.pl <project name> [bin name]``
+::
+
+  remove_duplicate_markers.pl <project_name> [bin_name]
 
 If no bin name is provided, the script will run the analysis for ALL bins in the project.
 
@@ -660,7 +683,9 @@ This script can be found in the ``/path/to/SqueezeMeta/utils/`` directory, but i
 
 Usage
 """""
-``find_missing_markers.pl <project name> [bin name]``
+::
+
+  find_missing_markers.pl <project_name> [bin_name]
 
 If no bin name is provided, the script will run the analysis for ALL bins in the project.
 

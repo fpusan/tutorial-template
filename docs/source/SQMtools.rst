@@ -98,6 +98,39 @@ Subsetting involves the following steps:
 Data renormalization on subsetting
 ----------------------------------
 
+When generating a subset, the TPM and copy number of functions can be rescaled so it becomes relative to the reads included in the subset, instead of to the reads included in the original object.
+
+For example, upon loading a project into *SQMtools*, the copy number of each function represents the average number of copies of that function per genome in the whole community. If we then run `subsetTax` to select the contigs belonging to a taxa of interest, the copy numbers in the subsetted object will have a different interpretation depending on whether we rescale or not.
+
+- If no rescaling is performed, the copy numbers in the subset will represent the average number of copies of each function in the full metagenome **that were coming from the taxa of interest**
+
+- If rescaling is performed, the copy numbers in the subset will represent the average number of copies of each function **in the taxa of interest**
+
+For further clarification, compare the following two assertions:
+
+- "For each genome in my samples (regardless of its taxonomy) cyanobacteria contributed on average 0.2 toxin production genes"
+
+- "In my samples, cyanobacterial genomes had on average 2 toxin production genes"
+
+In addition to this, when generating a subset the completeness and contamination of bins can be recalculated according to only the contigs present in the subset.
+
+The different subset functions have different default behaviour. As a rule of thumb, functions that expect to retrieve whole genomes after subsetting (`subsetTax`, `subsetBins`) will perform renormalization, while functions that retreive arbitrary parts of a genome (`subsetTax`, `subsetContigs`, `subsetORFs`) will recalculate bin statistics.
+
+The default behaviour of each subset function is listed in the table below, but it can be controlled manually through the `rescale_tpm`, `rescale_copy_number` and `recalculate_bin_stats` arguments. 
+
+=============    ===========    ===================    =====================
+Method           rescale_tpm    rescale_copy_number    recalculate_bin_stats
+=============    ===========    ===================    =====================
+subsetSamples    N/A            N/A                    N/A
+subsetTax        TRUE           TRUE                   TRUE
+subsetFun        FALSE          FALSE                  FALSE
+subsetBins       TRUE           TRUE                   N/A
+subsetContigs    FALSE          FALSE                  TRUE
+subsetORFs       FALSE          FALSE                  TRUE
+=============    ===========    ===================    ======================
+
+.. note::
+   Completeness and contamination statistics are initially calculated using CheckM2, but upon subsetting they are recalculated using a re-implementation of the CheckM1 algorithm over root marker genes. This can give an idea on how adding/removing certain contigs affects the completeness of a bin, but should be considered as less reliable than manually running CheckM2 again.
 
 Combining SQM objects
 =====================
