@@ -18,16 +18,11 @@ Design philosophy
 
 The main idea behind *SQMtools* is to speed up the exploration of metagenomic results by facilitating data inspection and filtering. A standard workflow in *SQMtools* usually involves:
 
-1) ** :ref:`Loading your project <SQMtools load>` **
-2) ** :ref:`Inpecting taxonomic/functional patterns <SQMtools plots>` ** in the whole project (e.g. plotting taxonomic distribution across samples)
-3) Locating certain taxa/functions of interest (based on the results of the preliminary inspection, or on prior knowledge about the study system) and ** :ref:`generating a subset <SQMtools subset>` ** containing only those taxa/functions
+1) :ref:`Loading your project <SQMtools load>`
+2) :ref:`Inpecting taxonomic/functional patterns <SQMtools plots>` in the whole project (e.g. plotting taxonomic distribution across samples)
+3) Locating certain taxa/functions of interest (based on the results of the preliminary inspection, or on prior knowledge about the study system) and :ref:`generating a subset <SQMtools subset>` containing only those taxa/functions
 4) Inspecting taxonomic/functional patterns in the subset. For example, making a subset containing some functions of interest and then making a taxonomic plot of that subset will inform us of the relative abundance and taxonomic distribution of those functions of interest in our samples
 
-:ref:`Loading your project <SQMtools load>`
-
-:ref:`Inpecting taxonomic/functional patterns <SQMtools plots>`
-
-:ref:`generating a subset <SQMtools subset>`
 
 .. figure:: ../resources/Figure_1_SQMtools.svg
   :alt: Basic workflow of the SQMtools package.
@@ -35,24 +30,24 @@ The main idea behind *SQMtools* is to speed up the exploration of metagenomic re
   Basic workflow of the SQMtools package. The basic unit used in the package is the SQM object. This object can contain a full SqueezeMeta project or a subset of genes, contigs or bins. The data in the SQM object can be accessed directly (e.g. for using it with other R packages such as vegan for ordination analyses or DESeq2 for differential abundance analysis) but we also provide some utility functions for exploring the most abundant functions or taxa in a SQM object. Alternatively, aggregate tables can be loaded into a SQMlite objects, which supports plot and export functionality. SQMlite objects can not be subsetted, but can be combined.
 
 .. _SQMtools load:
-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Loading data into SQMtools
+Loading data into SQMtools
 ==========================
 
-The ** :doc:`SQMtools/loadSQM` ** function can be used the output of one or more :doc:`SqueezeMeta.pl <execution>` runs into a single object. It also works directly with compressed zip projects generated with :ref:`sqm2zip.py <sqm2zip>`. 
+The :doc:`SQMtools/loadSQM` function can be used the output of one or more :doc:`SqueezeMeta.pl <execution>` runs into a single object. It also works directly with compressed zip projects generated with :ref:`sqm2zip.py <sqm2zip>`. 
 
 .. code-block:: R
   library(SQMtools)
   project = loadSQM("/path/to/project/")
 
-The code above will generate a single **:ref:`SQM object <SQM object>`** containing all the information relative to the project. More than one project can be loaded at the same time (e.g. ``loadSQM( c("/path/to/project1", "/path/to/project2") )``. In this case, the call to ``loadSQM`` would return a single **:ref:`SQMbunch object <SQMbunch object>** with the combined information from all the input projects, which would otherwise behave similarly.
+The code above will generate a single :ref:`SQM object <SQM object>` containing all the information relative to the project. More than one project can be loaded at the same time (e.g. ``loadSQM( c("/path/to/project1", "/path/to/project2") )``. In this case, the call to ``loadSQM`` would return a single :ref:`SQMbunch object <SQMbunch object>` with the combined information from all the input projects, which would otherwise behave similarly.
 
-Alternatively, the **:doc:`SQMtools/loadSQMlite`** function can be used to load aggregated taxonomic and functional tables generated with :ref:`sqm2tables.py <sqm2tables>` or :ref:`sqmreads2tables.py`. The resulting **:ref:`SQMlite object <SQMlite object>`** is much more lightweight, but carries not information on individual ORFs, contigs or bins and does not support subsetting.
+Alternatively, the :doc:`SQMtools/loadSQMlite` function can be used to load aggregated taxonomic and functional tables generated with :ref:`sqm2tables.py <sqm2tables>` or :ref:`sqmreads2tables.py`. The resulting :ref:`SQMlite object <SQMlite object>` is much more lightweight, but carries not information on individual ORFs, contigs or bins and does not support subsetting.
 
 .. _SQM object:
 The SQM object structure
 ------------------------
 
-A SQM object contains all the relevant information from a SqueezeMeta project, organized in nested an R lists (figure below). For example, a matrix with the taxonomic composition of the different samples at the phylum level in percentages can be obtained with ``project$taxa$phylum$percent`` while a matrix with the average copy number per genome of the different PFAMs across samples can be obtained with ``project$functions$PFAM$copy_number``.
+A *SQM object* contains all the relevant information from a SqueezeMeta project, organized in nested an R lists (figure below). For example, a matrix with the taxonomic composition of the different samples at the phylum level in percentages can be obtained with ``project$taxa$phylum$percent`` while a matrix with the average copy number per genome of the different PFAMs across samples can be obtained with ``project$functions$PFAM$copy_number``.
 
 .. figure:: ../resources/Figure_2_SQMtools.svg
   :alt: Structure of the SQM R object
@@ -62,10 +57,12 @@ A SQM object contains all the relevant information from a SqueezeMeta project, o
 .. _SQMbunch object:
 The SQMbunch object structure
 -----------------------------
+A *SQMbunch* object contains all the relevant information for several SqueezeMeta projects. It has a similar structure to a :ref:`SQM object <SQM object>`, but it lacks the ``orfs``, ``contigs`` and ``bins`` sections. Instead, it has a separate list named ``projects``, which contains individual *SQM* objects for each of the projects that were loaded.
 
 .. _SQMlite object:
 The SQMlite object structure
 ----------------------------
+A *SQMlite* object contains aggregated taxonomic and functional tables. It has a similar structure to a :ref:`SQM object <SQM object>`, but it lacks the ``orfs``, ``contigs`` and ``bins`` sections.
 
 .. _SQMtools subset:
 Creating subsets of your data
@@ -74,7 +71,8 @@ Creating subsets of your data
 Data renormalization on subsetting
 ----------------------------------
 
-TABLE WITH THE RECALCULATE STUFF
+Combining SQM objects
+=====================
 
 .. _SQMtools plots:
 Creating plots and exporting data
