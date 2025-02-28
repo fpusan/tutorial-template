@@ -102,9 +102,9 @@ When generating a subset, the TPM and copy number of functions can be rescaled s
 
 For example, upon loading a project into *SQMtools*, the copy number of each function represents the average number of copies of that function per genome in the whole community. If we then run `subsetTax` to select the contigs belonging to a taxa of interest, the copy numbers in the subsetted object will have a different interpretation depending on whether we rescale or not.
 
-- If no rescaling is performed, the copy numbers in the subset will represent the average number of copies of each function in the full metagenome **that were coming from the taxa of interest**
+- **If no rescaling is performed**, the copy numbers in the subset will represent the average number of copies of each function in the full metagenome **that were coming from the taxa of interest**
 
-- If rescaling is performed, the copy numbers in the subset will represent the average number of copies of each function **in the taxa of interest**
+- **If rescaling is performed**, the copy numbers in the subset will represent the average number of copies of each function **in the taxa of interest**
 
 For further clarification, compare the following two assertions:
 
