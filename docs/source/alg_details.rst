@@ -129,7 +129,6 @@ In addition to the normal taxon names and the “Unclassified” category, the r
 - ``"Unmapped"``: reads not mapping to any contigs.
 - ``"No CDS"``: features (or reads mapping to features) that contained no protein-coding sequences (e.g. rRNAs).
 
-
 .. _consensus tax:
 Consensus taxonomic annotation for contigs and bins
 ===================================================
@@ -178,6 +177,41 @@ differs from the consensus taxonomy of that contig (see :ref:`consensus tax`).
 
 For calculating the disparity of bins, the procedure is the same, just using the
 annotations for the corresponding contigs.
+
+.. _SQM tax caveats:
+Limitations of taxonomic assignments from shotgun metagenomics data
+===================================================================
+SqueezeMeta generates taxonomy at the contig level (some scripts do it at the read level instead, but the following discussion also applies). Then it aggregates the taxonomic annotations from each contig to produce count tables at different taxonomic levels.
+
+The contigs are taxonomically annotated by comparing the protein sequences of the genes within to proteins with known taxonomic annotation from a reference database (currently NCBI nr). This is conceptually similar to what we do when annotating 16S rRNA amplicons (e.g. by annotating them against SILVA or other databases).
+
+However, 16S rRNA has two features that make it specially good for taxonomic annotation:
+
+1) It is easy to amplify and sequence, so our databases have a broad taxonomic coverage.
+2) It evolves at a slow, steady rate (oversimplifying here, but bear with me) so even if the 16S amplicon from our samples is not present in our (already broad) reference database, it is likely that at least a close relative will be in there, close enough to give us a good taxonomic annotation.
+
+In contrast, the rest of the genes in a genome (the ones we retrieve with shotgun metagenomics, and we are trying to annotate with SqueezeMeta) behave in a different way:
+
+1) In order to build our database we need to sequence full genomes from isolates (so we can associate each gene to a full taxonomy) or at the very least very good quality MAGs (enough to get a good taxonomy e.g. from GTDB-Tk). This is fastidious and expensive so our database will not have such a broad coverage.
+
+2) They can evolve fast as organisms adapt to new niches. Two phylogenetically close organisms can have higher-than-expected differences in certain ortholog genes, if they have been recently subjected to strong selection. So even if our reference database contains a close-enough relative to the environmental organisms in our sample, it may be that the homology of some of our proteins to the ones in the database is not that high.
+
+These two combined mean that the homologies of our genes to the reference database (and thus our ability to derive taxonomic annotations from them) can vary a lot, between samples (which may contain more or less well-represented clades), clades (which may be better or worse represented in the database) and even genes (since they may be more or less variable within a clade and within different clades).
+
+SqueezeMeta uses a conservative approach in which we only annotate a gene at a certain taxonomic level if the homology is above a certain threshold (very high for a species-level assignment, much lower for a superkingdom-level assignment). What this means is that, for a given taxonomic level (e.g. genus) there will be a certain number of reads that weren't classified at that level but were classified at higher levels. In SqueezeMeta, we report the highest classifiaction we were able to achieve, so a hypothetical genus-level count table could look like:
+
+=============================  ======= =======
+Taxon                          Sample1 Sample2
+=============================  ======= =======
+Pseudomonas                    90      60
+Unclassified Pseudomonadaceae  5       28
+Unclassified Pseudomonadota    3       11
+Unclassified                   2       1
+=============================  ======= =======
+
+It is unclear what to do with these "intermediately-classified" counts, and regardless of whether we keep them or remove them we risk introducing biases in our data. For example, the bona-fide Pseudomonas has a lower abundance in Sample2 than in Sample1, but it could be that all the Unclassified Pseudomonadaceae reads in that sample also belonged to the Pseudomonas genus (just to a different species that was not represented in the database and had diverged from the others in some regions of its genome). Or they could belong to a completely different genus from the Pseudomonadaceae family that was also not represented in the database. There is no way to know by just looking at the often small number of genes contained on a single contig. This problem will become smaller as we move to higher taxonomic ranks, since the homology thresholds for taxonomic assignment become lower, but it never fully disappears (and a superkingdom-level differential abundance analysis may not be that informative!).
+
+A solution could be to derive the taxonomy from MAGs instead of contigs (e.g. using GTDB-Tk), if you have produced them in the metagenome, since in this case we can combine the information from many different marker genes and the annotation will be much more robust. But the MAGs themselves may represent only a fraction of your community since normally not everything gets binned into high-quality MAGs. To circunvent this issue, one could limit taxonomic annotation to marker genes (as done e.g. by MetaPhlan, though MetaPhlan's reference database appears to be restricted to the human microbiome and `may not work that well with other environments <https://link.springer.com/article/10.1186/s12864-019-6289-6>`_).
 
 .. _fun3:
 The fun3 algorithm
