@@ -54,6 +54,13 @@ find_redundant_contigs
    |                                 | expense of some completeness.     |
    +---------------------------------+-----------------------------------+
 
+   .. rubric:: Value
+      :name: value
+
+   A character vector with the contigs deemed to be redundant. A heatmap
+   showing how marker genes overlap over different contigs will also be
+   produced.
+
    .. rubric:: See Also
       :name: see-also
 

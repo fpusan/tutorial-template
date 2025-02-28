@@ -36,6 +36,12 @@ remove_contigs_from_bin
    |             | will be removed from the new bin.                     |
    +-------------+-------------------------------------------------------+
 
+   .. rubric:: Value
+      :name: value
+
+   SQM object with the new binning information, including recalculated
+   bin statistics if possible.
+
    .. rubric:: See Also
       :name: see-also
 

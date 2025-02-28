@@ -14,8 +14,8 @@ subsetFun
    .. rubric:: Description
       :name: description
 
-   Create a SQM object containing only the ORFs with a given function,
-   and the contigs and bins that contain them.
+   Create a SQM or SQMbunch object containing only the ORFs with a given
+   function, and the contigs and bins that contain them.
 
    .. rubric:: Usage
       :name: usage
@@ -40,7 +40,8 @@ subsetFun
       :name: arguments
 
    +----------------------------------+----------------------------------+
-   | ``SQM``                          | SQM object to be subsetted.      |
+   | ``SQM``                          | SQM or SQMbunch object to be     |
+   |                                  | subsetted.                       |
    +----------------------------------+----------------------------------+
    | ``fun``                          | character. Pattern to search for |
    |                                  | in the different functional      |
@@ -116,7 +117,7 @@ subsetFun
    .. rubric:: Value
       :name: value
 
-   SQM object containing only the requested function.
+   SQM or SQMbunch object containing only the requested function.
 
    .. rubric:: See Also
       :name: see-also

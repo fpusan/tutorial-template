@@ -5,7 +5,9 @@ The SQMtools R package
 This package provides an easy way to expose the different results of SqueezeMeta (orfs, contigs, bins, taxonomy, functions…) into R, as well as a set of utility functions to filter and display SqueezeMeta results.
 
 .. note::
-  The documentation below aims to describe the philosophy, usage, and internals of the SQMtools package. For detailed (albeit maybe a bit outdated) usage examples see also the `wiki entry <https://github.com/jtamames/SqueezeMeta/wiki/Using-R-to-analyze-your-SQM-results>`_.
+  The documentation below aims to describe the philosophy, usage, and internals of the SQMtools package, initially described in `Puente-Sánchez *et al.*, (2020) <https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-020-03703-2>`_ *BMC bioinformatics* **21**:358.
+  
+  For detailed (albeit maybe a bit outdated) usage examples see also the `wiki entry <https://github.com/jtamames/SqueezeMeta/wiki/Using-R-to-analyze-your-SQM-results>`_.
 
 Design philosophy
 =================
@@ -70,12 +72,15 @@ Creating subsets of your data
 =============================
 :ref:`SQM <SQM object>` and :ref:`SQMbunch <SQMbunch object>` objects can be subsetted to select only certain features of interest. This can be achieved with the following functions:
 
-- :doc:`SQMtools/subsetSamples`: select the requested samples
-- :doc:`SQMtools/subsetTax`: select data from the requested taxon
-- :doc:`SQMtools/subsetFun`: select data from the requested function/s
-- :doc:`SQMtools/subsetBins`: select data from the requested bins
-- :doc:`SQMtools/subsetContigs`: select arbitrary contigs
-- :doc:`SQMtools/subsetORFs`: select arbitrary ORFs
+- Functions working for *SQM* and *SQMbunch* objects:
+    - :doc:`SQMtools/subsetTax`: select data from the requested taxon
+    - :doc:`SQMtools/subsetFun`: select data from the requested function/s
+
+- Functions working for *SQM* objects only:
+    - :doc:`SQMtools/subsetSamples`: select the requested samples
+    - :doc:`SQMtools/subsetBins`: select data from the requested bins
+    - :doc:`SQMtools/subsetContigs`: select arbitrary contigs
+    - :doc:`SQMtools/subsetORFs`: select arbitrary ORFs
 
 For example, the code
 
@@ -160,14 +165,24 @@ The following functions work for *SQM* and *SQMbunch* objects only:
 - :doc:`SQMtools/exportContigs`
 - :doc:`SQMtools/exportBins`
 
-THe following functions work with arbitrary tables/matrices:
+The following functions work with arbitrary tables/matrices:
 
-- doc:`SQMtools/plotBars`
-- doc:`SQMtools/plotHeatmap`
-- doc:`SQMtools/exportTable`
+- :doc:`SQMtools/plotBars`
+- :doc:`SQMtools/plotHeatmap`
+- :doc:`SQMtools/exportTable`
 
 Working with bins
 =================
+*SQMtools* offers some functions for basic bin/MAG curation
+
+- :doc:`SQMtools/find_redundant_contigs`: find redundant contigs within a bin
+- :doc:`SQMtools/remove_contigs_from_bin`: remove the selected contigs from a bin
+- :doc:`SQMtools/create_bin`: create a new bin from the selected contigs
+
+``remove_contigs_from_bin`` and ``create_bin`` will return a new *SQM* object containing the new binning information, including recalculation of bin contamination/completeness using CheckM1 markers.
+
+.. note::
+  While this provides a fast way of removing obviously redundant contigs or creating custom bins within the *SQMtools* package, if you want to perform a more careful bin/MAG curation you should probably consider other tools such as anvi’o. You can always use the ``create_bin`` function to re-create the anvi’o curated bin into SQMtools.
 
 Data normalization strategies
 =============================

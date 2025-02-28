@@ -14,9 +14,9 @@ subsetTax
    .. rubric:: Description
       :name: description
 
-   Create a SQM object containing only the contigs with a given
-   consensus taxonomy, the ORFs contained in them and the bins that
-   contain them.
+   Create a SQM or SQMbunch object containing only the contigs with a
+   given consensus taxonomy, the ORFs contained in them and the bins
+   that contain them.
 
    .. rubric:: Usage
       :name: usage
@@ -105,7 +105,7 @@ subsetTax
    .. rubric:: Value
       :name: value
 
-   SQM object containing only the requested taxon.
+   SQM or SQMbunch object containing only the requested taxon.
 
    .. rubric:: See Also
       :name: see-also

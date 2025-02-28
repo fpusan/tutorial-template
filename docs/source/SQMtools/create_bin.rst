@@ -42,6 +42,12 @@ create_bin
    |                             | the object. Default ``FALSE``.        |
    +-----------------------------+---------------------------------------+
 
+   .. rubric:: Value
+      :name: value
+
+   SQM object with the new binning information, including recalculated
+   bin statistics if possible.
+
    .. rubric:: See Also
       :name: see-also
 
