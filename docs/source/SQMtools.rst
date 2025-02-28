@@ -132,12 +132,39 @@ subsetORFs       FALSE          FALSE                  TRUE
 .. note::
    Completeness and contamination statistics are initially calculated using CheckM2, but upon subsetting they are recalculated using a re-implementation of the CheckM1 algorithm over root marker genes. This can give an idea on how adding/removing certain contigs affects the completeness of a bin, but should be considered as less reliable than manually running CheckM2 again.
 
-Combining SQM objects
-=====================
+Combining SQM and SQMlite objects
+=================================
+*SQMtools* also offers ways to combine several :ref:`SQM <SQM object>` and :ref:`SQMlite <SQMlite object>` objects into a single object: 
+
+- :doc:`SQMtools/combineSQM`: this function combines several *SQM* objects into a single object containing all their information
+
+  - If all the input objects come from the same projects (e.g. because they are different subsets of the same original dataset) this function will also return a *SQM* object
+  - If the input objects come from different projects (i.e. they were generated from different *SqueezeMeta.pl* runs on different samples) then this function will return a *SQMbunch* object
+
+- :doc:`SQMtools/combineSQMlite`: this functions combines several *SQM* and/or *SQMlite* objects into a single :ref:`SQMlite object <SQMlite object>`
 
 .. _SQMtools plots:
 Creating plots and exporting data
 =================================
+*SQMtools* offers the utility functions for creating plots and exporting data. The following work with *SQM*, *SQMbunch* and *SQMlite* objects:
+
+- :doc:`SQMtools/plotTaxonomy`
+- :doc:`SQMtools/plotFunctions`
+- :doc:`SQMtools/plotBins`
+- :doc:`SQMtools/exportKrona`
+- :doc:`SQMtools/exportPathway`
+
+The following functions work for *SQM* and *SQMbunch* objects only:
+
+- :doc:`SQMtools/exportORFs`
+- :doc:`SQMtools/exportContigs`
+- :doc:`SQMtools/exportBins`
+
+THe following functions work with arbitrary tables/matrices:
+
+- doc:`SQMtools/plotBars`
+- doc:`SQMtools/plotHeatmap`
+- doc:`SQMtools/exportTable`
 
 Working with bins
 =================
